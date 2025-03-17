@@ -1,0 +1,21 @@
+{
+  "writings": [
+    {
+      "id": "writing-1",
+      "title": "식인",
+      "summary": "장세일, 신승연",
+      "date": "2024-03-15",
+      "htmlFile": "/writings/writing-1.html"
+    }
+  ],
+  "profile": {
+    "name": "작가 이름",
+    "bio": "소개글...",
+    "image": "/profile.jpg",
+    "socialLinks": {
+      "twitter": "https://twitter.com/yourname",
+      "instagram": "https://instagram.com/yourname",
+      "email": "your.email@example.com"
+    }
+  }
+}
