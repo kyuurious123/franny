@@ -1,13 +1,47 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
-
+# JavaScript 모듈에 대한 올바른 MIME 타입 설정
 <IfModule mod_mime.c>
   AddType application/javascript .js
   AddType application/javascript .mjs
+  AddType text/javascript .js
+  AddType text/javascript .mjs
 </IfModule>
+
+# 추가적인 헤더 설정
+<IfModule mod_headers.c>
+  <FilesMatch "\.js$">
+    Header set Content-Type "application/javascript"
+  </FilesMatch>
+</IfModule>
+
+# HTTP를 HTTPS로 강제 리다이렉트
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# 기본 문서 설정
+DirectoryIndex index.php
+
+# 모든 요청을 index.php로 리다이렉트
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # 실제 파일이나 디렉토리는 그대로 제공
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # 모든 요청을 index.php로 리다이렉트
+  RewriteRule . /index.php [L]
+</IfModule>
+
+# JavaScript 파일용 특정 규칙
+<FilesMatch "^index-[a-zA-Z0-9]+\.js$">
+    ForceType application/javascript
+</FilesMatch>
+
+# 모든 JavaScript 파일에 대한 규칙
+<FilesMatch "\.(js|mjs)$">
+    ForceType application/javascript
+</FilesMatch>

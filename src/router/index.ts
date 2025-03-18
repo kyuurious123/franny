@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
@@ -44,8 +44,8 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  // 배포 환경에 맞는 base 설정 추가
-  history: createWebHistory(base),
+  // history 모드에서 hash 모드로 변경
+  history: createWebHashHistory(base),
   routes,
   scrollBehavior() {
     // 페이지 이동 시 맨 위로 스크롤

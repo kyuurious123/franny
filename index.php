@@ -2,6 +2,28 @@
 // 현재 요청된 URI를 가져옵니다
 $request_uri = $_SERVER['REQUEST_URI'];
 
+// JavaScript 파일 처리 - 더 포괄적인 패턴 매칭
+if (preg_match('/\.(js|mjs)(\?.*)?$/', $request_uri)) {
+    $file_path = $_SERVER['DOCUMENT_ROOT'] . parse_url($request_uri, PHP_URL_PATH);
+    if (file_exists($file_path)) {
+        header('Content-Type: application/javascript');
+        header('Cache-Control: public, max-age=31536000');
+        readfile($file_path);
+        exit();
+    }
+}
+
+// HTTPS 강제 적용
+if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off') {
+    $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $redirect);
+    exit();
+}
+
+// 현재 요청된 URI를 가져옵니다
+$request_uri = $_SERVER['REQUEST_URI'];
+
 // API나 실제 파일에 대한 요청인지 확인
 if (strpos($request_uri, '/api/') === 0 || strpos($request_uri, '/writings/') === 0) {
     // 실제 파일 경로 확인

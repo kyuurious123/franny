@@ -163,4 +163,10 @@ onMounted(() => {
   text-align: center;
   padding: 2rem;
 }
+
+@media (min-width: 768px) {
+  .writing-detail {
+    padding: 2rem;
+  }
+}
 </style>
