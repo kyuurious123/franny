@@ -2,20 +2,19 @@
   "writings": [
     {
       "id": "writing-1",
-      "title": "식인",
-      "summary": "장세일, 신승연",
-      "date": "2024-03-15",
-      "htmlFile": "/writings/writing-1.html"
+      "title": "이규혁",
+      "summary": "이규혁",
+      "date": "2020-08-02",
+      "fileType": "md",
+      "filePath": "/writings/01.md"
+    },
+    {
+      "id": "writing-2",
+      "title": "작은 기쁨",
+      "summary": "민주영",
+      "date": "2020-08-02",
+      "fileType": "md",
+      "filePath": "/writings/02.md"
     }
-  ],
-  "profile": {
-    "name": "작가 이름",
-    "bio": "소개글...",
-    "image": "/profile.jpg",
-    "socialLinks": {
-      "twitter": "https://twitter.com/yourname",
-      "instagram": "https://instagram.com/yourname",
-      "email": "your.email@example.com"
-    }
-  }
+  ]
 }

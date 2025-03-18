@@ -1,21 +1,38 @@
 <template>
   <div class="home">
-    <section class="simple-profile">
-        <img src="" alt="">
-        <p>안녕하떼염<br>프래니라고합니다.<br>아직 이사중이에요</p>
+    <section class="container">
+      <div class="home__title">
+        <h2>2025-3-18</h2>
+      </div>
+      <div>
+        <p class="home__body">안녕하세요? 아직 공사중이에요.<br />그래도 뭐.... 둘러보고 가세요</p>
+      </div>
     </section>
   </div>
 </template>
 
 <style scoped>
+.home {
+  padding: 1rem
+}
+
 .home > section {
   margin-bottom: 3rem;
 }
 
-.simple-profile {
-    font-family: 'DOSGothic';
-    font-size: 1rem;
-    color: var(--text-color);
+.home__title {
+  font-size: 32px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #000;
+}
+
+.container {
+  margin-bottom: 20px;
+}
+
+.home__body {
+  font-size: 15px;
+  line-height: 24px;
 }
 
 .writing-grid {

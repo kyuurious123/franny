@@ -1,22 +1,16 @@
 <template>
-  <div class="writing-detail">
-    <div class="writing-header">
-      <h1 class="writing-title">{{ writing.title }}</h1>
-      <div class="writing-meta">
-        <span class="writing-date">{{ formatDate(writing.date) }}</span>
-      </div>
-    </div>
-
-    <div class="writing-content" v-if="htmlContent" v-html="htmlContent"></div>
-    <div class="loading" v-else>
-      <p>글을 불러오는 중입니다...</p>
-    </div>
-
-    <div class="writing-footer">
-      <router-link to="/writing" class="back-button">
-        ← 목록으로 돌아가기
-      </router-link>
-    </div>
+  <div class="writing-detail" v-if="writing">
+    <h1>{{ writing.title }}</h1>
+    <p class="date">{{ formatDate(writing.date) }}</p>
+    
+    <!-- HTML 파일인 경우 -->
+    <div class="content" v-if="writing.fileType === 'html'" v-html="content"></div>
+    
+    <!-- 마크다운 파일인 경우 -->
+    <div class="content" v-else-if="writing.fileType === 'md'" v-html="renderedMarkdown"></div>
+  </div>
+  <div v-else>
+    <p>글을 찾을 수 없습니다.</p>
   </div>
 </template>
 
@@ -24,107 +18,72 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import writingsData from '../data/writings.json';
+import { marked } from 'marked'; // 마크다운 파싱 라이브러리
 
 const route = useRoute();
-const writing = ref({});
-const htmlContent = ref('');
+const writing = ref(null);
+const content = ref('');
+const renderedMarkdown = ref('');
 
 const formatDate = (dateString) => {
+  if (!dateString) return '';
+  
   const date = new Date(dateString);
-  return date.toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  const year = date.getFullYear() % 100;
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}${month}${day}`;
 };
 
 onMounted(async () => {
-  // 현재 라우트 ID로 글 데이터 찾기
-  const writingId = route.params.id;
-  const foundWriting = writingsData.writings.find(w => w.id === writingId);
+  // 현재 라우트의 id와 일치하는 글 찾기
+  const id = route.params.id;
   
-  if (foundWriting) {
-    writing.value = foundWriting;
-    
-    // HTML 파일 불러오기
-    if (foundWriting.htmlFile) {
-      try {
-        const response = await fetch(foundWriting.htmlFile);
-        if (response.ok) {
-          htmlContent.value = await response.text();
-        } else {
-          console.error('HTML 파일을 불러올 수 없습니다');
-        }
-      } catch (error) {
-        console.error('HTML 파일 로딩 중 오류:', error);
+  // 콘솔에 정보 출력하여 디버깅
+  console.log('Route ID:', id);
+  console.log('Available writings:', writingsData.writings);
+  
+  // ID가 일치하는 글 찾기
+  writing.value = writingsData.writings.find(w => w.id === id);
+  
+  console.log('Found writing:', writing.value);
+  
+  if (writing.value) {
+    try {
+      // fetch API를 사용하여 파일 가져오기
+      const response = await fetch(writing.value.filePath);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+      
+      const data = await response.text();
+      
+      // 파일 타입에 따라 처리
+      if (writing.value.fileType === 'html') {
+        content.value = data;
+      } else if (writing.value.fileType === 'md') {
+        // 마크다운을 HTML로 변환
+        renderedMarkdown.value = marked(data);
+      }
+    } catch (error) {
+      console.error('파일을 불러오는 데 실패했습니다:', error);
     }
+  } else {
+    console.error('해당 ID의 글을 찾을 수 없습니다:', id);
   }
 });
 </script>
 
 <style scoped>
 .writing-detail {
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 1rem;
 }
 
-.writing-header {
-  margin-bottom: 2rem;
-}
-
-.writing-title {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-}
-
-.writing-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  color: #666;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
-}
-
-.writing-content {
+.content :deep(p) {
+  text-indent: 0.75rem;
   line-height: 1.8;
-  margin-bottom: 2rem;
-}
-
-/* HTML 컨텐츠 스타일링을 위한 글로벌 스타일 */
-:deep(h1), :deep(h2), :deep(h3) {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-:deep(p) {
-  margin-bottom: 1rem;
-}
-
-:deep(img) {
-  max-width: 100%;
-  height: auto;
-  margin: 1rem 0;
-}
-
-.writing-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.back-button {
-  display: inline-block;
-  margin-top: 1rem;
   font-weight: 500;
-}
-
-.loading {
-  text-align: center;
-  padding: 2rem 0;
-  color: #666;
+  word-break: break-word;
 }
 </style>

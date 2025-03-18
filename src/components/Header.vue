@@ -45,6 +45,7 @@ export default defineComponent({
   z-index: 100;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #000;
 }
 
 .header-content {
@@ -87,7 +88,6 @@ export default defineComponent({
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
-  font-family: 'DOSMyungjo';
 }
 
 .nav-links a.router-link-active {

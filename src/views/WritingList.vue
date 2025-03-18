@@ -1,18 +1,13 @@
 <template>
   <div class="writing-list">
-    <h1 class="section-title">WRITING</h1>
-    
     <div class="writings">
-      <div class="writing-item card" v-for="writing in writings" :key="writing.id">
-        <h2 class="writing-title">{{ writing.title }}</h2>
-        <p class="writing-summary">{{ writing.summary }}</p>
-        <div class="writing-footer">
-          <span class="writing-date">{{ formatDate(writing.date) }}</span>
-          <router-link :to="`/writing/${writing.id}`" class="read-more">
-            자세히 보기
-          </router-link>
-        </div>
-      </div>
+      <router-link 
+        v-for="writing in writings" 
+        :key="writing.id"
+        :to="`/writing/${writing.id}`" 
+        class="writing-item"
+      ><p class="writing-item-text">{{ writing.title }} <div class="writing-list__sum">{{ writing.summary }}</div>{{ formatDate(writing.date) }}</p>
+      </router-link>
     </div>
   </div>
 </template>
@@ -25,12 +20,18 @@ const writings = ref([]);
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  
+  // 연도의 마지막 두 자리만 가져오기
+  const year = date.getFullYear() % 100;
+  
+  // 월과 일을 가져와서 한 자리인 경우에도 그대로 사용
+  const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더함
+  const day = date.getDate();
+  
+  // 연도, 월, 일을 연결하여 반환
+  return `${year}${month}${day}`;
 };
+
 
 onMounted(() => {
   // 데이터 로드 및 날짜 기준 내림차순 정렬
@@ -42,47 +43,21 @@ onMounted(() => {
 
 <style scoped>
 .writing-list {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.writings {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding: 1rem;
 }
 
 .writing-item {
-  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
 }
 
-.writing-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.writing-item-text {
+  margin-left:0.5rem;
+  margin-bottom: 0px;
 }
 
-.writing-title {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.writing-summary {
-  color: #555;
-  margin-bottom: 1rem;
-}
-
-.writing-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.writing-date {
-  color: #777;
-}
-
-.read-more {
-  font-weight: 500;
+.writing-list__sum {
+  font-style: italic;
+  display: inline;
+  margin-right: 0.5rem;
 }
 </style>
