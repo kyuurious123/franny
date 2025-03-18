@@ -1,45 +1,52 @@
 <template>
-  <div class="app">
-    <MobileHeader v-if="isMobile" />
-    <DesktopHeader v-else />
-    
-    <main class="content">
-      <router-view />
-    </main>
+  <div class="app-flex">
+    <!-- PC에서만 표시되는 Header -->
+    <DesktopHeader v-if="!isMobile" />
+
+    <!-- App 내 콘텐츠 -->
+    <div class="app">
+      <MobileHeader v-if="isMobile" />
+      <main class="content">
+        <router-view />
+      </main>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import MobileHeader from './components/MobileHeader.vue'
 import DesktopHeader from './components/DesktopHeader.vue'
+import MobileHeader from './components/MobileHeader.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    MobileHeader,
     DesktopHeader,
+    MobileHeader
   },
   data() {
     return {
-      isMobile: false,
+      isMobile: false
     };
   },
   mounted() {
-    this.checkScreenSize();  // 화면 크기 체크
-    window.addEventListener('resize', this.checkScreenSize);  // 리사이즈 이벤트 리스너 추가
+    this.checkScreenSize();
+    window.addEventListener('resize', this.checkScreenSize);
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.checkScreenSize);  // 리사이즈 이벤트 리스너 제거
+    window.removeEventListener('resize', this.checkScreenSize);
   },
   methods: {
     checkScreenSize() {
-      this.isMobile = window.innerWidth <= 768;  // 화면 크기가 768px 이하인 경우 모바일로 판단
+      this.isMobile = window.innerWidth <= 768;
     }
   }
 })
 </script>
 
 <style scoped>
-/* App 컴포넌트의 스타일은 여기에 추가 */
+.app-flex {
+  display: flex;
+  gap: 3rem;
+}
 </style>
