@@ -101,6 +101,7 @@ export default defineComponent({
     left: 50%;
     transform: translateX(-50%);
     border-radius: 24px 24px 0 0;
+    top: 16px;
   }
 }
 </style>

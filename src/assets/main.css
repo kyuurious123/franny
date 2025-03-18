@@ -22,13 +22,16 @@
   --border-color: #eaeaea;
   --font-main: 'Pretendard', 'Noto Sans KR', sans-serif;
   --mobile-width: 413px;
-  --mobile-height: 900px;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  height: 100%;
 }
 
 body {
@@ -38,6 +41,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   font-size: 1rem;
+  height: 100%;
 }
 
 /* 모바일 기본 스타일 */
@@ -113,18 +117,18 @@ button:hover, .btn:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     padding: 20px;
   }
   
   .app {
     width: var(--mobile-width);
-    max-height: 50vh;
     overflow-y: auto;
-    border-radius: 20px;
     margin: 0 auto;
     background-color: white;
     position: relative;
+    height: 85vh;
+    overflow: scroll;
+    min-height: 0;
   }
 
   /* 스크롤바 스타일링 */

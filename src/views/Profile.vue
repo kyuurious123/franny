@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <img src="https://blog.kakaocdn.net/dn/bALfgk/btsMOdLUnBU/XWIkJKdKc2KpTK03MPMQLk/img.png" alt="">
+    <!-- <img src="https://blog.kakaocdn.net/dn/bALfgk/btsMOdLUnBU/XWIkJKdKc2KpTK03MPMQLk/img.png" alt=""> -->
     <h3 class="name">프래니 / 파프리카</h3>
     <div class="desc">
       <p>신승연 주간</p>
