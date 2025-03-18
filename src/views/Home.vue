@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="img-wrapper">
+      <img class="main-img" src="/src/assets/main.svg" alt="">
+    </div>
     <section class="container">
       <div class="home__title">
         <h2>2025-3-18</h2>
@@ -8,12 +11,20 @@
         <p class="home__body">안녕하세요? 아직 공사중이에요.<br />그래도 뭐.... 둘러보고 가세요</p>
       </div>
     </section>
+    <section class="container">
+      <div class="home__title">
+        <h2>공지</h2>
+      </div>
+      <div>
+        <p class="home__body">공지 테스트</p>
+      </div>
+    </section>
   </div>
 </template>
 
 <style scoped>
 .home {
-  padding: 1rem
+  padding: 2rem;
 }
 
 .home > section {
@@ -24,6 +35,11 @@
   font-size: 32px;
   margin-bottom: 12px;
   border-bottom: 1px solid #000;
+}
+
+.img-wrapper {
+  text-align: center;
+  margin: 1rem 0 3rem 0;
 }
 
 .container {
