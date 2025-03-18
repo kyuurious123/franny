@@ -61,8 +61,9 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
-p {
-  margin-bottom: 1rem;
+.novel p {
+    text-indent: 0.5rem;
+    line-height: 1.8;
 }
 
 button, .btn {
@@ -121,28 +122,26 @@ button:hover, .btn:hover {
   }
 
   .app {
-    width: var(--mobile-width);
+    width: 540px;
     overflow-y: auto;
     margin: 0 auto;
     background-color: white;
     position: relative;
     height: 85vh;
-    overflow: scroll;
+    overflow-y: auto;
     min-height: 0;
     border-radius: 20px;
   }
+}
 
-  /* 스크롤바 스타일링 */
-  .app::-webkit-scrollbar {
+::-webkit-scrollbar {
+    display: block;
     width: 6px;
-  }
-  
-  .app::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  .app::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-  }
+}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-button {
+    display: none;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
 }

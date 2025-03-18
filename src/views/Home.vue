@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="img-wrapper">
-      <img class="main-img" src="/src/assets/main.svg" alt="">
+        <img class="main-img" :src="mainSvg" alt="">
     </div>
     <section class="container">
       <div class="home__title">
@@ -12,15 +12,19 @@
       </div>
     </section>
     <section class="container">
-      <div class="home__title">
+      <div class="notice__title">
         <h2>공지</h2>
       </div>
       <div>
-        <p class="home__body">공지 테스트</p>
+        <p class="notice__body">공지 테스트</p>
       </div>
     </section>
   </div>
 </template>
+
+<script setup>
+import mainSvg from '/src/assets/main.svg'
+</script>
 
 <style scoped>
 .home {
@@ -32,7 +36,7 @@
 }
 
 .home__title {
-  font-size: 32px;
+  font-size: 2rem;
   margin-bottom: 12px;
   border-bottom: 1px solid #000;
 }
@@ -49,6 +53,12 @@
 .home__body {
   font-size: 15px;
   line-height: 24px;
+}
+
+.notice__title {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #000;
 }
 
 .writing-grid {

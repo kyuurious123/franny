@@ -49,4 +49,8 @@ export default defineComponent({
   display: flex;
   gap: 3rem;
 }
+
+::-webkit-scrollbar-track {
+    display: none;
+}
 </style>

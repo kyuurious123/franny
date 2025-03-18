@@ -6,7 +6,13 @@
         :key="writing.id"
         :to="`/writing/${writing.id}`" 
         class="writing-item"
-      ><p class="writing-item-text">{{ writing.title }} <div class="writing-list__sum">{{ writing.summary }}</div>{{ formatDate(writing.date) }}</p>
+      >
+      <span class="writing-item-text">
+        <span class="writing-item-number">{{ writing.number }}</span>
+        <span class="writing-item-title">{{ writing.title }}</span>
+        <span class="writing-list-sum">{{ writing.summary }}</span>
+        <span class="writing-list-date">{{ formatDate(writing.date) }}</span>
+        </span>
       </router-link>
     </div>
   </div>
@@ -53,11 +59,35 @@ onMounted(() => {
 .writing-item-text {
   margin-left:0.5rem;
   margin-bottom: 0px;
+  color: #000;
 }
 
-.writing-list__sum {
+.writing-item-number {
+  background-color: yellow;
+  border-radius: 50px;
+  border: 1px solid #000;
+  padding: 0 4px;
+  margin-right: 0.25rem;
+}
+
+.writing-item-title {
+  font-size: 1.5rem;
+  margin-right: 0.25rem;
+  font-weight: 500;
+}
+
+.writing-item-date {
+  margin-right: 0.75rem;
+}
+
+.writing-list-sum {
   font-style: italic;
-  display: inline;
-  margin-right: 0.5rem;
+  margin-right: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .writing-list {
+    padding: 2rem;
+  }
 }
 </style>

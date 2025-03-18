@@ -6,8 +6,11 @@
       <p>{{ error }}</p>
     </div>
     <div v-else>
-      <h1>{{ writing.title }}</h1>
-      <div v-html="writing.content" class="content"></div>
+      <div class="top">
+        <h1 class="title">{{ writing.title }}</h1>
+        <p>{{ writing.summary }}</p>
+      </div>
+      <div v-html="writing.content" class="novel"></div>
     </div>
   </div>
 </template>
@@ -70,7 +73,8 @@ const loadWriting = async () => {
     }
     
     writing.value.title = writingData.title;
-    
+    writing.value.summary = writingData.summary;
+
     // 파일 경로 준비
     let filePath = writingData.filePath;
     if (!filePath.startsWith('/')) {
@@ -133,23 +137,20 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.top {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
 .writing-detail {
   padding: 1rem;
   max-width: 800px;
   margin: 0 auto;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.content p {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1rem; 
-  white-space: pre-wrap;
-  text-indent: 0.5rem;
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .loading {
