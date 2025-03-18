@@ -1,4 +1,3 @@
-
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import Home from '../views/Home.vue'
@@ -6,6 +5,9 @@ import Profile from '../views/Profile.vue'
 import WritingList from '../views/WritingList.vue'
 import WritingDetail from '../views/WritingDetail.vue'
 import Guest from '../views/Guest.vue'
+
+// 배포 환경에 맞는 base URL 설정
+const base = import.meta.env.BASE_URL || '/';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -42,7 +44,8 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  // 배포 환경에 맞는 base 설정 추가
+  history: createWebHistory(base),
   routes,
   scrollBehavior() {
     // 페이지 이동 시 맨 위로 스크롤
