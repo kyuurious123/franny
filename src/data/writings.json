@@ -1,7 +1,7 @@
 {
   "writings": [
     {
-      "id": "writing-1",
+      "id": "01",
       "title": "이규혁",
       "summary": "이규혁",
       "date": "2020-08-02",
@@ -9,7 +9,7 @@
       "filePath": "/writings/01.md"
     },
     {
-      "id": "writing-2",
+      "id": "02",
       "title": "작은 기쁨",
       "summary": "민주영",
       "date": "2020-08-02",

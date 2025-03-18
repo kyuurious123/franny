@@ -1,77 +1,45 @@
 <template>
-  <div class="writing-detail" v-if="writing">
+  <div class="writing-detail">
     <h1>{{ writing.title }}</h1>
-    <p class="date">{{ formatDate(writing.date) }}</p>
-    
-    <!-- HTML 파일인 경우 -->
-    <div class="content" v-if="writing.fileType === 'html'" v-html="content"></div>
-    
-    <!-- 마크다운 파일인 경우 -->
-    <div class="content" v-else-if="writing.fileType === 'md'" v-html="renderedMarkdown"></div>
-  </div>
-  <div v-else>
-    <p>글을 찾을 수 없습니다.</p>
+    <div v-html="writing.content" class="content"></div> <!-- 마크다운을 HTML로 변환하여 표시 -->
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import writingsData from '../data/writings.json';
-import { marked } from 'marked'; // 마크다운 파싱 라이브러리
+import { useRoute } from 'vue-router'; // URL 파라미터를 가져오기 위해 useRoute 사용
+import writingsData from '../data/writings.json'; // JSON 데이터 가져오기
+
+const writing = ref({
+  title: '',
+  content: ''
+});
 
 const route = useRoute();
-const writing = ref(null);
-const content = ref('');
-const renderedMarkdown = ref('');
+const writingId = route.params.id;
 
-const formatDate = (dateString) => {
-  if (!dateString) return '';
-  
-  const date = new Date(dateString);
-  const year = date.getFullYear() % 100;
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${year}${month}${day}`;
+// 마크다운 파일을 HTML로 변환하는 함수
+const convertMarkdownToHtml = (mdText) => {
+  // 줄바꿈을 <p>로 감싸서 변환
+  const paragraphs = mdText.split('\n').map(paragraph => {
+    return `<p>${paragraph}</p>`; // 각 줄을 <p>로 감싸기
+  }).join(''); // 줄들을 <p>로 감싸서 합침
+
+  return paragraphs;
 };
 
-onMounted(async () => {
-  // 현재 라우트의 id와 일치하는 글 찾기
-  const id = route.params.id;
-  
-  // 콘솔에 정보 출력하여 디버깅
-  console.log('Route ID:', id);
-  console.log('Available writings:', writingsData.writings);
-  
-  // ID가 일치하는 글 찾기
-  writing.value = writingsData.writings.find(w => w.id === id);
-  
-  console.log('Found writing:', writing.value);
-  
-  if (writing.value) {
-    try {
-      // fetch API를 사용하여 파일 가져오기
-      const response = await fetch(writing.value.filePath);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.text();
-      
-      // 파일 타입에 따라 처리
-      if (writing.value.fileType === 'html') {
-        content.value = data;
-      } else if (writing.value.fileType === 'md') {
-        // 마크다운을 HTML로 변환
-        renderedMarkdown.value = marked(data);
-      }
-    } catch (error) {
-      console.error('파일을 불러오는 데 실패했습니다:', error);
-    }
-  } else {
-    console.error('해당 ID의 글을 찾을 수 없습니다:', id);
+const loadWriting = async () => {
+  const writingData = writingsData.writings.find(writing => writing.id === writingId); // ID에 맞는 글 찾기
+  if (writingData) {
+    writing.value.title = writingData.title;
+    const response = await fetch(writingData.filePath); // JSON에서 가져온 filePath를 사용하여 마크다운 파일 로드
+    const text = await response.text();
+    writing.value.content = convertMarkdownToHtml(text); // 마크다운을 HTML로 변환
   }
+};
+
+onMounted(() => {
+  loadWriting();
 });
 </script>
 
@@ -80,10 +48,16 @@ onMounted(async () => {
   padding: 1rem;
 }
 
-.content :deep(p) {
-  text-indent: 0.75rem;
-  line-height: 1.8;
-  font-weight: 500;
-  word-break: break-word;
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem; 
+  white-space: pre-wrap;
+  text-indent: 0.5rem;
 }
 </style>
