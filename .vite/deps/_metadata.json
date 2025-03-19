@@ -1,0 +1,34 @@
+{
+  "hash": "bd3064e5",
+  "configHash": "fcd3a11e",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "d2fed606",
+  "optimized": {
+    "marked": {
+      "src": "../../항목을 포함하는 새로운 폴더/node_modules/marked/lib/marked.esm.js",
+      "file": "marked.js",
+      "fileHash": "4bf52ec7",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../항목을 포함하는 새로운 폴더/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "b8c9793d",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../항목을 포함하는 새로운 폴더/node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "e160be45",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-OCORBD53": {
+      "file": "chunk-OCORBD53.js"
+    },
+    "chunk-V6TY7KAL": {
+      "file": "chunk-V6TY7KAL.js"
+    }
+  }
+}
