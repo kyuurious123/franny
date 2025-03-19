@@ -3,6 +3,7 @@ import type { RouteRecordRaw } from "vue-router";
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import BestarWritingList from '../views/BestarWritingList.vue'
+import EnstarWritingList from '../views/EnstarWritingList.vue'
 import WritingDetail from '../views/WritingDetail.vue'
 import Guest from '../views/Guest.vue'
 
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'WritingDetail',
     component: WritingDetail,
     props: true
+  },
+  {
+    path: '/enstar',
+    name: 'EnstarWritingList',
+    component: EnstarWritingList
   },
   {
     path: '/guest',

@@ -55,7 +55,17 @@ const formatDate = (dateString) => {
 
 <style scoped>
 .home {
-  padding: 2rem;
+  padding: 1rem;
+}
+
+.main-img {
+  width: 100%;
+}
+
+@media (min-width: 768;) {
+  .home {
+    padding: 2rem;
+  }
 }
 
 .main-img__title {

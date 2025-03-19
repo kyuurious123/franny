@@ -21,7 +21,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/ensstar">
+          <router-link to="/enstar">
             <img src="/src/assets/ensemble-stars.png" alt="">
             <span class="text">ENSTAR</span>
           </router-link>

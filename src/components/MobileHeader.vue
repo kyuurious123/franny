@@ -13,8 +13,13 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/writing">
-            <span class="text">WRITING</span>
+          <router-link to="/bestar">
+            <span class="text">BESTAR</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/enstar">
+            <span class="text">ENSTAR</span>
           </router-link>
         </li>
         <li>
@@ -87,7 +92,7 @@ export default defineComponent({
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .nav-links a.router-link-active {

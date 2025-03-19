@@ -4,18 +4,20 @@
       <router-link 
         v-for="bestarwriting in bestarwritings" 
         :key="bestarwriting.id"
-        :to="`/writing/bestar/${bestarwriting.id}`" 
+        :to="`/bestar/${String(bestarwriting.id)}`" 
         class="writing-item"
       >
-      <span class="writing-item-text">
-        <span class="writing-item-number">{{ bestarwriting.number }}</span>
-        <span class="writing-item-title">{{ bestarwriting.title }}</span>
-        <span class="writing-list-sum">{{ bestarwriting.summary }}</span>
-        <span class="writing-list-date">{{ formatDate(bestarwriting.date) }}</span>
+        <span class="writing-item-text">
+          <span class="writing-item-number">{{ bestarwriting.number }}</span>
+          <span class="writing-item-title">{{ bestarwriting.title }}</span>
+          <span class="writing-list-sum">{{ bestarwriting.summary }}</span>
+          <span class="writing-list-date">{{ formatDate(bestarwriting.date) }}</span>
         </span>
       </router-link>
     </div>
   </div>
+
+  
 </template>
 
 <script setup>
