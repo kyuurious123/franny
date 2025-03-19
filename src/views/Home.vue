@@ -10,7 +10,7 @@
         <span>개저미소녀피디를 사랑합니다.</span>
         <span class="line-green">베스타 최신글</span>
         <span v-for="writing in latestBestarWritings" :key="writing.id" class="lts-writing">
-            <router-link :to="`/writing/bestar/${writing.id}`">
+            <router-link :to="`/bestar/${writing.id}`">
             <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
             </router-link>
         </span>
