@@ -1,6 +1,5 @@
 <template>
   <div class="profile">
-    <img src="https://blog.kakaocdn.net/dn/bALfgk/btsMOdLUnBU/XWIkJKdKc2KpTK03MPMQLk/img.png" alt="">
     <h3 class="name">프래니 / 파프리카</h3>
     <div class="desc">
       <p>신승연 주간</p>
@@ -11,8 +10,31 @@
       <a class="link-text" href="https://x.com/ange2205ccb">@ange2205ccb</a>
     </div>
     <div class="banner"></div>
+    <div class="twitter">
+      <a
+        class="twitter-timeline"
+        data-width="400"
+        data-height="600"
+        href="https://twitter.com/franny1220?ref_src=twsrc%5Etfw"
+      >
+      </a>
+    </div>
   </div>
 </template>
+
+
+
+<script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  // 트위터 위젯 스크립트를 동적으로 추가
+  const script = document.createElement("script");
+  script.setAttribute("src", "https://platform.twitter.com/widgets.js");
+  script.setAttribute("async", "true");
+  document.body.appendChild(script);
+});
+</script>
 
 
 <style scoped>
@@ -40,6 +62,12 @@
 
 .desc {
   font-weight: 400;
+}
+
+.twitter {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 </style>

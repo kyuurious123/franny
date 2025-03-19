@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
-import WritingList from '../views/WritingList.vue'
+import BestarWritingList from '../views/BestarWritingList.vue'
 import WritingDetail from '../views/WritingDetail.vue'
 import Guest from '../views/Guest.vue'
 
@@ -21,12 +21,12 @@ const routes: Array<RouteRecordRaw> = [
     component: Profile
   },
   {
-    path: '/writing',
-    name: 'WritingList',
-    component: WritingList
+    path: '/bestar',
+    name: 'BestarWritingList',
+    component: BestarWritingList
   },
   {
-    path: '/writing/:id',
+    path: '/bestar/:id',
     name: 'WritingDetail',
     component: WritingDetail,
     props: true

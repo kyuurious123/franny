@@ -2,16 +2,16 @@
   <div class="writing-list">
     <div class="writings">
       <router-link 
-        v-for="writing in writings" 
-        :key="writing.id"
-        :to="`/writing/${writing.id}`" 
+        v-for="bestarwriting in bestarwritings" 
+        :key="bestarwriting.id"
+        :to="`/writing/bestar/${bestarwriting.id}`" 
         class="writing-item"
       >
       <span class="writing-item-text">
-        <span class="writing-item-number">{{ writing.number }}</span>
-        <span class="writing-item-title">{{ writing.title }}</span>
-        <span class="writing-list-sum">{{ writing.summary }}</span>
-        <span class="writing-list-date">{{ formatDate(writing.date) }}</span>
+        <span class="writing-item-number">{{ bestarwriting.number }}</span>
+        <span class="writing-item-title">{{ bestarwriting.title }}</span>
+        <span class="writing-list-sum">{{ bestarwriting.summary }}</span>
+        <span class="writing-list-date">{{ formatDate(bestarwriting.date) }}</span>
         </span>
       </router-link>
     </div>
@@ -20,9 +20,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import writingsData from '../data/writings.json';
+import bestarWritingsData from '../data/bestarwritings.json';
 
-const writings = ref([]);
+const bestarwritings = ref([]);
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -38,10 +38,9 @@ const formatDate = (dateString) => {
   return `${year}${month}${day}`;
 };
 
-
 onMounted(() => {
   // 데이터 로드 및 날짜 기준 내림차순 정렬
-  writings.value = [...writingsData.writings].sort((a, b) => 
+  bestarwritings.value = [...bestarWritingsData.bestarwritings].sort((a, b) => 
     new Date(b.date) - new Date(a.date)
   );
 });

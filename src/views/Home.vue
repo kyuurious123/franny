@@ -2,43 +2,115 @@
   <div class="home">
     <div class="img-wrapper">
         <img class="main-img" :src="mainSvg" alt="">
+        <p class="main-img__title">이게아냐 2025 신간 준비중 🚧</p>
     </div>
-    <section class="container">
-      <div class="home__title">
-        <h2>2025-3-18</h2>
-      </div>
-      <div>
-        <p class="home__body">안녕하세요? 아직 공사중이에요.<br />그래도 뭐.... 둘러보고 가세요</p>
-      </div>
-    </section>
-    <section class="container">
-      <div class="notice__title">
-        <h2>공지</h2>
-      </div>
-      <div>
-        <p class="notice__body">공지 테스트</p>
-      </div>
+    <section class="home__desc">
+        <span>안녕하세요. 방문을 환영합니다. 저는</span><span class="bg-dark">프래니 / 파프리카</span><span>어느쪽이든 편하신대로 불러주시면 댑니다. 여기 아직 공사중이긴 한데</span>
+        <span class="bg-yellow">2025-3-19 기준</span><img src="/src/assets/progress.svg" class="progress" alt=""><span>80%정도 완성된 거 같아요. 4 디페 어나스테 / 베스타 배포전 <span class="bg-yellow"> 신간 인포는 아직 준비중입니다.</span></span>
+        <span>개저미소녀피디를 사랑합니다.</span>
+        <span class="line-green">베스타 최신글</span>
+        <span v-for="writing in latestBestarWritings" :key="writing.id" class="lts-writing">
+            <router-link :to="`/writing/bestar/${writing.id}`">
+            <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
+            </router-link>
+        </span>
+        <span class="line-green">앙스타 최신글</span>
+        <span>준비중</span>
     </section>
   </div>
 </template>
 
 <script setup>
 import mainSvg from '/src/assets/main.svg'
+import { ref, computed } from "vue";
+import bestarWritingsData from '../data/bestarwritings.json'; // JSON 파일 import
+
+const bestarwritings = ref([...bestarWritingsData.bestarwritings]); // JSON 데이터 로드
+
+// 최신 5개만 가져오기
+const latestBestarWritings = computed(() => {
+  return bestarwritings.value
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date)) // 날짜 내림차순 정렬
+    .slice(0, 5);
+});
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  
+  // 연도의 마지막 두 자리만 가져오기
+  const year = date.getFullYear() % 100;
+  
+  // 월과 일을 가져와서 한 자리인 경우에도 그대로 사용
+  const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더함
+  const day = date.getDate();
+  
+  // 연도, 월, 일을 연결하여 반환
+  return `${year}${month}${day}`;
+};
+
+
 </script>
+
 
 <style scoped>
 .home {
   padding: 2rem;
 }
 
+.main-img__title {
+    font-family: 'DOSGothic';
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.progress {
+    height: 16px;
+}
+
+.lts-writing__title {
+    font-weight: 700;
+}
+
+.lts-writing__sum {
+    font-style: italic;
+}
+
+.lts-writing a {
+    text-decoration: none;
+}
+
+.bg-dark {
+  color: #fff;
+  background-color: #000;
+  font-weight: 700;
+}
+
+.bg-yellow {
+    background-color:#FFFD79;
+}
+
+.bg-green {
+    background-color: #3DFF7E;
+}
+
+.line-green {
+    text-decoration: underline;
+    text-decoration-color: #3DFF7E;
+}
+
 .home > section {
   margin-bottom: 3rem;
 }
 
-.home__title {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  border-bottom: 1px solid #000;
+.home__desc {
+    line-height: 1.8;
+    font-weight: 400;
+    margin-top: 1rem;
+}
+
+.home__desc span {
+    margin-right: 0.25rem;
 }
 
 .img-wrapper {
@@ -46,67 +118,4 @@ import mainSvg from '/src/assets/main.svg'
   margin: 1rem 0 3rem 0;
 }
 
-.container {
-  margin-bottom: 20px;
-}
-
-.home__body {
-  font-size: 15px;
-  line-height: 24px;
-}
-
-.notice__title {
-  font-size: 1rem;
-  margin-bottom: 12px;
-  border-bottom: 1px solid #000;
-}
-
-.writing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.writing-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.writing-summary {
-  flex-grow: 1;
-  margin-bottom: 1rem;
-  color: #555;
-}
-
-.writing-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-}
-
-.read-more {
-  font-weight: 500;
-}
-
-.view-all-link {
-  margin-top: 1.5rem;
-  text-align: right;
-}
-
-.view-all-link a {
-  font-weight: 500;
-}
-
-.announcement-section .card {
-  background-color: #f8f9fa;
-  border-left: 4px solid var(--accent-color);
-}
-
-@media (max-width: 768px) {
-  .writing-grid {
-    grid-template-columns: 1fr;
-  }
-}
 </style>

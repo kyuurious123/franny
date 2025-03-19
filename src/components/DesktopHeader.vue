@@ -15,9 +15,15 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/writing">
-            <img src="/src/assets/writing.png" alt="">
-            <span class="text">WRITING</span>
+          <router-link to="/bestar">
+            <img src="/src/assets/buried-stars.png" alt="">
+            <span class="text">BESTAR</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/ensstar">
+            <img src="/src/assets/ensemble-stars.png" alt="">
+            <span class="text">ENSTAR</span>
           </router-link>
         </li>
         <li>

@@ -18,7 +18,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import writingsData from '../data/writings.json';
+import writingsData from '../data/bestarwritings.json';
 
 const route = useRoute();
 const writing = ref({ title: '', content: '' });
