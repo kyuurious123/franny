@@ -109,7 +109,7 @@ const addComment = async () => {
   }
 };
 
-const promptDelete = async (comment) => {
+const promptDelete = async (comment: { id: string; password?: string }) => {
   const inputPassword = prompt("비밀번호를 입력하세요.");
 
   if (!inputPassword) return;
@@ -139,7 +139,7 @@ const promptDelete = async (comment) => {
 };
 
 // 🔹 실제 삭제 함수 (Firebase에서 댓글 삭제)
-const deleteComment = async (commentId) => {
+const deleteComment = async (commentId: string) => {
   try {
     await remove(dbRef(db, `comments/${commentId}`));
     alertModal.value?.showModal("댓글이 삭제되었습니다.");

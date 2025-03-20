@@ -5,7 +5,7 @@
         <input class="textfield" v-model="newGuest.nickname" placeholder="닉네임" />
         <input class="textfield " v-model="newGuest.password" type="password" placeholder="비밀번호" />
       </div>
-      <textarea class="textarea" v-model="newGuest.content" placeholder="저에 대한 객관적인 비평 또는 피드백? 그런 거 원하지 않습니다. 무조건 박수갈채. 일방적이고 편향적인 칭찬 부탁드립니다."></textarea>
+      <textarea class="textarea" v-model="newGuest.message" placeholder="저에 대한 객관적인 비평 또는 피드백? 그런 거 원하지 않습니다. 무조건 박수갈채. 일방적이고 편향적인 칭찬 부탁드립니다."></textarea>
       <button class="button-primary" @click="addGuest">방명록 작성</button>
     </div>
     
@@ -16,10 +16,11 @@
         <span class="guest-nickname">{{ guest.nickname }}</span>
         <span class="guest-time">{{ formatDateTime(guest.createdAt) }}</span>
         <button class="delete-btn" @click="promptDelete(guest)">삭제</button>
-        <p class="guest-content">{{ guest.content }}</p>
+        <p class="guest-content">{{ guest.message }}</p>
       </div>
     </div>
   </div>
+  <AlertModal ref="alertModal" />
 </template>
 
 <script setup lang="ts">
@@ -27,6 +28,13 @@ import { ref, onMounted } from "vue";
 import { db } from "../firebaseConfig";
 import { ref as dbRef, push, remove, onValue, set, get } from "firebase/database";
 import AlertModal from "./AlertModal.vue";
+
+const alertModal = ref<InstanceType<typeof AlertModal> | null>(null);
+
+const formatDateTime = (timestamp: number): string => {
+  const date = new Date(timestamp);
+  return date.toLocaleString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+};
 
 // ✅ 환경 변수에서 최고 관리자 비밀번호 불러오기
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
@@ -85,7 +93,7 @@ const addGuest = async () => {
 };
 
 // ✅ 방명록 삭제 로직 (최고 관리자 또는 작성자만 삭제 가능)
-const promptDelete = async (guest) => {
+const promptDelete = async (guest: { id: string; password?: string }) => {
   const inputPassword = prompt("비밀번호를 입력하세요.:");
 
   if (!inputPassword) return;
@@ -115,7 +123,7 @@ const promptDelete = async (guest) => {
 };
 
 // ✅ 실제 삭제 함수 (Firebase에서 방명록 삭제)
-const deleteGuest = async (guestId) => {
+const deleteGuest = async (guestId: string) => {
   try {
     await remove(dbRef(db, `guests/${guestId}`));
     alertModal.value?.showModal("방명록이 삭제되었습니다.");
