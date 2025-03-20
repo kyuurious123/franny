@@ -9,53 +9,63 @@
     <CommentSection :postId="postId" />
   </div>
 </template>
-
+  
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { marked } from 'marked';
-import bestarWritingsData from '../data/bestarwritings.json'; // ✅ JSON 데이터 가져오기
-import CommentSection from '../components/CommentSection.vue'
+import enstarWritingsData from '../data/enstarwritings.json';
+import CommentSection from '../components/CommentSection.vue';
 
 const route = useRoute();
-const postId = route.params.id; // URL에서 id 가져오기
+const postId = route.params.id || ''; // ✅ 기본값 추가
+
+console.log("현재 페이지 postId:", postId); // ✅ postId 값 확인
 
 const markdownContent = ref('');
 const writingTitle = ref('');
 const writingSummary = ref('');
 
+const writing = enstarWritingsData.enstarwritings[postId] || null; // ✅ 데이터 없을 경우 대비
 
-// ✅ JSON 데이터에서 해당하는 글 찾기
-const bestarwriting = bestarWritingsData.bestarwritings.find(w => w.id === route.params.id);
-
-if (bestarwriting) {
-  writingTitle.value = bestarwriting.title; // ✅ 해당 글의 제목 가져오기
-  writingSummary.value = bestarwriting.summary; // ✅ 해당 글의 상세 가져오기
-
+if (writing) {
+  writingTitle.value = writing.title;
+  writingSummary.value = writing.summary;
+} else {
+  console.error("데이터를 찾을 수 없음:", postId);
 }
 
-// Markdown 파일 가져오기
-const fetchMarkdown = async () => {
-  try {
-    const filePath = `/writing/bestar/${route.params.id}.md`; // ✅ Markdown 파일 경로 설정
-    const response = await fetch(filePath);
+console.log("현재 postId:", postId);
+console.log("현재 writing 객체:", writing);
+console.log("현재 writing.filePath:", writing?.filePath);
 
-    if (!response.ok) {
-      throw new Error("파일을 찾을 수 없습니다.");
-    }
 
-    markdownContent.value = await response.text();
-  } catch (error) {
-    markdownContent.value = "Markdown 파일을 불러오는 중 오류가 발생했습니다.";
-    console.error(error);
-  }
-};
+if (writing && writing.filePath) {
+  const mdFilePath = `/writing/enstar/${postId}.md`; // ✅ 파일 경로를 보장
+  console.log("MD 파일 경로:", mdFilePath); // ✅ 확인용 로그
 
-// ✅ Markdown을 HTML로 변환 (개행 및 스타일 적용)
-const renderedMarkdown = computed(() => marked(markdownContent.value));
+  fetch(mdFilePath)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Markdown 파일을 찾을 수 없습니다.");
+      }
+      return response.text();
+    })
+    .then(data => {
+      markdownContent.value = marked(data);
+    })
+    .catch(error => console.error("Markdown 로드 실패:", error));
+}
 
-onMounted(fetchMarkdown);
+const renderedMarkdown = computed(() => {
+  console.log("Markdown 변환 결과:", marked(markdownContent.value)); // ✅ 변환된 HTML 확인
+  return marked(markdownContent.value);
+});
+
+
 </script>
+
+  
 
 <style scoped>
 .writing-detail {

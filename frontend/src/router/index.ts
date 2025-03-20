@@ -4,7 +4,8 @@ import Home from '../views/Home.vue'
 import Profile from '../views/Profile.vue'
 import BestarWritingList from '../views/BestarWritingList.vue'
 import EnstarWritingList from '../views/EnstarWritingList.vue'
-import WritingDetail from '../views/WritingDetail.vue'
+import BestarWritingDetail from '../views/BestarWritingDetail.vue'
+import EnstarWritingDetail from '../views/EnstarWritingDetail.vue'
 import Guest from '../views/Guest.vue'
 
 // 배포 환경에 맞는 base URL 설정
@@ -28,14 +29,20 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/bestar/:id',
-    name: 'WritingDetail',
-    component: WritingDetail,
+    name: 'BestarWritingDetail',
+    component: BestarWritingDetail,
     props: true
   },
   {
     path: '/enstar',
     name: 'EnstarWritingList',
     component: EnstarWritingList
+  },
+  {
+    path: '/enstar/:id',
+    name: 'EnstarWritingDetail',
+    component: EnstarWritingDetail,
+    props: true
   },
   {
     path: '/guest',
@@ -50,11 +57,9 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  // history 모드에서 hash 모드로 변경
   history: createWebHashHistory(base),
   routes,
   scrollBehavior() {
-    // 페이지 이동 시 맨 위로 스크롤
     return { top: 0 }
   }
 })
