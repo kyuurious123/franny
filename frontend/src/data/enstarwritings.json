@@ -35,6 +35,42 @@
       "date": "2022-02-14",
       "fileType": "md",
       "filePath": "/writing/enstar/zombie-04.md"
+    },
+    "short-dream-01": {
+      "id": "zombie-01",
+      "number": "1",
+      "title": "Colline du Château의 마녀",
+      "summary": "이츠키 슈",
+      "date": "2022-05-01",
+      "fileType": "md",
+      "filePath": "/writing/enstar/short-dream-01.md"
+    },
+    "short-dream-02": {
+      "id": "short-dream-02",
+      "number": "2",
+      "title": "제목 없음",
+      "summary": "사쿠마 레이",
+      "date": "2021-12-09",
+      "fileType": "md",
+      "filePath": "/writing/enstar/short-dream-02.md"
+    },
+    "short-dream-03": {
+      "id": "short-dream-03",
+      "number": "3",
+      "title": "굳어버리는 것",
+      "summary": "하카제 카오루",
+      "date": "2021-07-05",
+      "fileType": "md",
+      "filePath": "/writing/enstar/short-dream-03.md"
+    },
+    "short-dream-04": {
+      "id": "short-dream-04",
+      "number": "4",
+      "title": "표류",
+      "summary": "텐쇼인 에이치",
+      "date": "2022-01-12",
+      "fileType": "md",
+      "filePath": "/writing/enstar/short-dream-04.md"
     }
   }
 }

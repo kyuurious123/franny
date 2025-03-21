@@ -15,7 +15,11 @@
             </router-link>
         </span>
         <span class="line-green">앙스타 최신글</span>
-        <span>준비중</span>
+        <span v-for="writing in latestEnstarWritings" :key="writing.id" class="lts-writing">
+            <router-link :to="`/enstar/${writing.id}`">
+            <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
+            </router-link>
+        </span>
     </section>
   </div>
 </template>
@@ -24,14 +28,25 @@
 import mainSvg from '/src/assets/main.svg'
 import { ref, computed } from "vue";
 import bestarWritingsData from '../data/bestarwritings.json';
+import enstarWritingsData from '../data/enstarwritings.json';
 
-const bestarwritings = ref([...bestarWritingsData.bestarwritings]); // JSON 데이터 로드
+// JSON 데이터를 객체에서 배열로 변환
+const bestarwritings = ref(Object.values(bestarWritingsData.bestarwritings || {}));
+const enstarwritings = ref(Object.values(enstarWritingsData.enstarwritings || {}));
 
 // 최신 5개만 가져오기
 const latestBestarWritings = computed(() => {
   return bestarwritings.value
     .slice()
-    .sort((a, b) => b.date.localeCompare(a.date)) // 날짜 내림차순 정렬
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) // 날짜 내림차순 정렬
+    .slice(0, 5);
+});
+
+// 최신 5개만 가져오기
+const latestEnstarWritings = computed(() => {
+  return enstarwritings.value
+    .slice()
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) // 날짜 내림차순 정렬
     .slice(0, 5);
 });
 
@@ -48,10 +63,7 @@ const formatDate = (dateString) => {
   // 연도, 월, 일을 연결하여 반환
   return `${year}${month}${day}`;
 };
-
-
 </script>
-
 
 <style scoped>
 .home {
@@ -62,7 +74,7 @@ const formatDate = (dateString) => {
   width: 100%;
 }
 
-@media (min-width: 768;) {
+@media (min-width: 768px) {
   .home {
     padding: 2rem;
   }
@@ -127,5 +139,4 @@ const formatDate = (dateString) => {
   text-align: center;
   margin: 1rem 0 3rem 0;
 }
-
 </style>

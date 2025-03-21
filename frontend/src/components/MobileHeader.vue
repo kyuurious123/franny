@@ -8,11 +8,6 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/profile">
-            <span class="text">PROFILE</span>
-          </router-link>
-        </li>
-        <li>
           <router-link to="/bestar">
             <span class="text">BESTAR</span>
           </router-link>

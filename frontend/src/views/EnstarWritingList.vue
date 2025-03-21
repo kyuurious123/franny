@@ -44,28 +44,36 @@
       <div class="flex flex--center">
         <p>1</p>
         <div class="dream__wrapper flex--center">
-          <p class="dream-title">Colline du Château의 마녀</p>
+          <router-link :to="`/enstar/short-dream-01`" class="dream-title">
+            {{ enstarwritings?.["short-dream-01"]?.title }}
+          </router-link>
           <p class="dream-name">이츠키 슈</p>
         </div>
       </div>
       <div class="flex flex--center">
         <p>2</p>
         <div class="dream__wrapper flex--center">
-          <p class="dream-title">제목 없음</p>
+          <router-link :to="`/enstar/short-dream-02`" class="dream-title">
+            {{ enstarwritings?.["short-dream-02"]?.title }}
+          </router-link>
           <p class="dream-name">사쿠마 레이</p>
         </div>
       </div>
       <div class="flex flex--center">
         <p>3</p>
         <div class="dream__wrapper flex--center">
-          <p class="dream-title">굳어버리는 것</p>
+          <router-link :to="`/enstar/short-dream-03`" class="dream-title">
+            {{ enstarwritings?.["short-dream-03"]?.title }}
+          </router-link>
           <p class="dream-name">하카제 카오루</p>
         </div>
       </div>
       <div class="flex flex--center">
         <p>4</p>
         <div class="dream__wrapper flex--center">
-          <p class="dream-title">표류</p>
+          <router-link :to="`/enstar/short-dream-04`" class="dream-title">
+            {{ enstarwritings?.["short-dream-04"]?.title }}
+          </router-link>
           <p class="dream-name">텐쇼인 에이치</p>
         </div>
       </div>
@@ -114,6 +122,17 @@ const formatDate = (dateString) => {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .zombie {
+    padding: 2rem 3rem;
+  }
+
+  .short-dream {
+    padding: 2rem 3rem;
+    margin: 3rem 0;
+  }
 }
 
 .zombie-number {
@@ -169,6 +188,7 @@ const formatDate = (dateString) => {
   font-size: 1.2rem;
   width: 100%;
   text-align: right;
+  text-decoration: none;
 }
 
 .dream-name{

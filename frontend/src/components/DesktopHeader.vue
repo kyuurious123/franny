@@ -9,12 +9,6 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/profile">
-            <img src="/src/assets/profile.png" alt="">
-            <span class="text">PROFILE</span>
-          </router-link>
-        </li>
-        <li>
           <router-link to="/bestar">
             <img src="/src/assets/buried-stars.png" alt="">
             <span class="text">BESTAR</span>
