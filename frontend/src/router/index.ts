@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 import Home from '../views/Home.vue'
-import Profile from '../views/Profile.vue'
 import BestarWritingList from '../views/BestarWritingList.vue'
 import EnstarWritingList from '../views/EnstarWritingList.vue'
 import BestarWritingDetail from '../views/BestarWritingDetail.vue'
@@ -18,14 +17,17 @@ const routes: Array<RouteRecordRaw> = [
     component: Home
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile
-  },
-  {
     path: '/bestar',
     name: 'BestarWritingList',
-    component: BestarWritingList
+    component: BestarWritingList,
+    // BestarWritingList 페이지에서는 기본적으로 id:1인 글을 보여줌
+    children: [
+      {
+        path: '',
+        component: BestarWritingDetail,
+        props: { id: '01' }
+      }
+    ]
   },
   {
     path: '/bestar/:id',
@@ -36,7 +38,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/enstar',
     name: 'EnstarWritingList',
-    component: EnstarWritingList
+    component: EnstarWritingList,
+    // EnstarWritingList 페이지에서는 기본적으로 id:zombie-01인 글을 보여줌
+    children: [
+      {
+        path: '',
+        component: EnstarWritingDetail,
+        props: { id: 'zombie-01' }
+      }
+    ]
   },
   {
     path: '/enstar/:id',

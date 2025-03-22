@@ -6,66 +6,92 @@
     </div>
     <div v-if="markdownContent" v-html="renderedMarkdown" class="markdown-body"></div>
     <p v-else>Loading...</p>
-    <CommentSection :postId="postId" />
+    <CommentSection :postId="String(currentPostId)" />
   </div>
 </template>
   
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { marked } from 'marked';
 import enstarWritingsData from '../data/enstarwritings.json';
 import CommentSection from '../components/CommentSection.vue';
 
+// Props 정의
+const props = defineProps({
+  id: {
+    type: String,
+    required: false
+  }
+});
+
 const route = useRoute();
-const postId = route.params.id || ''; // ✅ 기본값 추가
-
-console.log("현재 페이지 postId:", postId); // ✅ postId 값 확인
-
 const markdownContent = ref('');
 const writingTitle = ref('');
 const writingSummary = ref('');
 
-const writing = enstarWritingsData.enstarwritings[postId] || null; // ✅ 데이터 없을 경우 대비
-
-if (writing) {
-  writingTitle.value = writing.title;
-  writingSummary.value = writing.summary;
-} else {
-  console.error("데이터를 찾을 수 없음:", postId);
-}
-
-console.log("현재 postId:", postId);
-console.log("현재 writing 객체:", writing);
-console.log("현재 writing.filePath:", writing?.filePath);
-
-
-if (writing && writing.filePath) {
-  const mdFilePath = `/writing/enstar/${postId}.md`; // ✅ 파일 경로를 보장
-  console.log("MD 파일 경로:", mdFilePath); // ✅ 확인용 로그
-
-  fetch(mdFilePath)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Markdown 파일을 찾을 수 없습니다.");
-      }
-      return response.text();
-    })
-    .then(data => {
-      markdownContent.value = marked(data);
-    })
-    .catch(error => console.error("Markdown 로드 실패:", error));
-}
-
-const renderedMarkdown = computed(() => {
-  console.log("Markdown 변환 결과:", marked(markdownContent.value)); // ✅ 변환된 HTML 확인
-  return marked(markdownContent.value);
+// props.id 또는 route.params.id에서 가져옴
+const currentPostId = computed(() => {
+  console.log("Props ID:", props.id);
+  console.log("Route params ID:", route.params.id);
+  return props.id || route.params.id || ''; // 빈 문자열 기본값 추가
 });
 
-
-</script>
-
+// 글 데이터 로드 함수
+const loadWritingData = () => {
+  const postId = currentPostId.value;
+  console.log("로드할 postId:", postId);
   
+  if (!postId) {
+    console.error("postId가 없습니다");
+    return;
+  }
+  
+  const writing = enstarWritingsData.enstarwritings[postId] || null;
+  console.log("현재 postId:", postId);
+  console.log("현재 writing 객체:", writing);
+
+  if (writing) {
+    writingTitle.value = writing.title;
+    writingSummary.value = writing.summary;
+    
+    if (writing.filePath) {
+      const mdFilePath = `/writing/enstar/${postId}.md`;
+      console.log("MD 파일 경로:", mdFilePath);
+
+      fetch(mdFilePath)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Markdown 파일을 찾을 수 없습니다.");
+          }
+          return response.text();
+        })
+        .then(data => {
+          markdownContent.value = data;
+        })
+        .catch(error => console.error("Markdown 로드 실패:", error));
+    }
+  } else {
+    console.error("데이터를 찾을 수 없음:", postId);
+  }
+};
+
+// 컴포넌트 마운트 시 데이터 로드
+onMounted(() => {
+  loadWritingData();
+});
+
+// currentPostId가 변경될 때마다 데이터 다시 로드
+watch(currentPostId, (newId) => {
+  if (newId) {
+    loadWritingData();
+  }
+});
+
+const renderedMarkdown = computed(() => {
+  return marked(markdownContent.value);
+});
+</script>
 
 <style scoped>
 .writing-detail {
@@ -90,7 +116,8 @@ const renderedMarkdown = computed(() => {
 
 @media (min-width: 768px) {
   .writing-detail {
-    padding: 1.5rem;
+    padding: 0;
+    padding-top: 2rem;
   }
 }
 

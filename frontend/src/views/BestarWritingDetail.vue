@@ -6,58 +6,93 @@
     </div>
     <div v-if="markdownContent" v-html="renderedMarkdown" class="markdown-body"></div>
     <p v-else>Loading...</p>
-    <CommentSection :postId="postId" />
+    <CommentSection :postId="String(currentPostId)" />
   </div>
 </template>
   
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { marked } from 'marked';
 import bestarWritingsData from '../data/bestarwritings.json';
 import CommentSection from '../components/CommentSection.vue';
 
-const route = useRoute();
-const postId = route.params.id;
+// Props 정의
+const props = defineProps({
+  id: {
+    type: String,
+    required: false
+  }
+});
 
+const route = useRoute();
 const markdownContent = ref('');
 const writingTitle = ref('');
 const writingSummary = ref('');
 
-const writing = bestarWritingsData.bestarwritings.find(w => w.id === postId);
-
-if (writing) {
-writingTitle.value = writing.title;
-writingSummary.value = writing.summary;
-}
-
-if (writing && writing.filePath) {
-  const mdFilePath = `${writing.filePath}?t=${new Date().getTime()}`; // 캐시 무효화
-  console.log("Markdown 요청 경로:", mdFilePath);
-
-  fetch(mdFilePath, { cache: "no-store" })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Markdown 파일을 찾을 수 없습니다: ${mdFilePath} (HTTP ${response.status})`);
-      }
-      return response.text();
-    })
-    .then(data => {
-      console.log("Markdown 파일 로드 성공");
-      markdownContent.value = marked(data);
-    })
-    .catch(error => console.error("Markdown 로드 실패:", error));
-}
-
-const renderedMarkdown = computed(() => {
-  console.log("Markdown 변환 결과:", marked(markdownContent.value)); // ✅ 변환된 HTML 확인
-  return marked(markdownContent.value);
+// props.id 또는 route.params.id에서 가져옴
+const currentPostId = computed(() => {
+  console.log("Props ID:", props.id);
+  console.log("Route params ID:", route.params.id);
+  return props.id || route.params.id || ''; // 빈 문자열 기본값 추가
 });
 
+// 글 데이터 로드 함수
+const loadWritingData = () => {
+  const postId = currentPostId.value;
+  console.log("로드할 postId:", postId);
+  
+  if (!postId) {
+    console.error("postId가 없습니다");
+    return;
+  }
+  
+  const writing = bestarWritingsData.bestarwritings.find(w => w.id === postId);
+  console.log("찾은 writing 데이터:", writing);
 
+  if (writing) {
+    writingTitle.value = writing.title;
+    writingSummary.value = writing.summary;
+    
+    if (writing.filePath) {
+      const mdFilePath = `${writing.filePath}?t=${new Date().getTime()}`; // 캐시 무효화
+      console.log("Markdown 요청 경로:", mdFilePath);
+
+      fetch(mdFilePath, { cache: "no-store" })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Markdown 파일을 찾을 수 없습니다: ${mdFilePath} (HTTP ${response.status})`);
+          }
+          return response.text();
+        })
+        .then(data => {
+          console.log("Markdown 파일 로드 성공");
+          markdownContent.value = data;
+        })
+        .catch(error => console.error("Markdown 로드 실패:", error));
+    }
+  } else {
+    console.error("글을 찾을 수 없음:", postId);
+  }
+};
+
+// 컴포넌트 마운트 시 데이터 로드
+onMounted(() => {
+  loadWritingData();
+});
+
+// currentPostId가 변경될 때마다 데이터 다시 로드
+watch(currentPostId, (newId) => {
+  if (newId) {
+    loadWritingData();
+  }
+});
+
+const renderedMarkdown = computed(() => {
+  return marked(markdownContent.value);
+});
 </script>
   
-
 <style scoped>
 .writing-detail {
   padding: 1rem;
@@ -81,7 +116,8 @@ const renderedMarkdown = computed(() => {
 
 @media (min-width: 768px) {
   .writing-detail {
-    padding: 1.5rem;
+    padding: 0;
+    padding-top: 2rem;
   }
 }
 

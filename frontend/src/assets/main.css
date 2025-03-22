@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
     font-family: 'DOSGothic';
@@ -109,6 +112,10 @@ button:hover, .btn:hover {
   display: inline-block;
 }
 
+#app {
+  width: 100%;
+}
+
 /* 모바일 레이아웃 (기본) */
 .app {
   display: flex;
@@ -126,11 +133,9 @@ button:hover, .btn:hover {
 /* PC 화면에서 모바일 시뮬레이션 */
 @media (min-width: 768px) {
   body {
-    background-color: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
   }
 
   .app {

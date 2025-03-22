@@ -1,91 +1,126 @@
+<!-- DesktopHeader.vue -->
 <template>
-  <header class="header">
-    <nav class="nav-menu">
-      <ul class="nav-links">
+  <div class="desktop-header">
+    <!-- 메인 내비게이션 -->
+    <nav class="main-nav mb-8">
+      <ul class="space-y-4">
         <li>
-          <router-link to="/">
-            <img src="/src/assets/home.png" alt="">
-            <span class="text">HOME</span>
+          <router-link 
+            to="/" 
+            class="nav-link"
+            :class="{ 'active': currentRoute === '/' }"
+          >
+            MAIN
           </router-link>
         </li>
         <li>
-          <router-link to="/bestar">
-            <img src="/src/assets/buried-stars.png" alt="">
-            <span class="text">BESTAR</span>
+          <router-link 
+            to="/bestar" 
+            class="nav-link"
+            :class="{ 'active': currentRoute.includes('/bestar') }"
+          >
+            BURRIED STARS
           </router-link>
         </li>
         <li>
-          <router-link to="/enstar">
-            <img src="/src/assets/ensemble-stars.png" alt="">
-            <span class="text">ENSTAR</span>
+          <router-link 
+            to="/enstar" 
+            class="nav-link"
+            :class="{ 'active': currentRoute.includes('/enstar') }"
+          >
+            ENSEMBLE STARS
           </router-link>
         </li>
         <li>
-          <router-link to="/guest">
-            <img src="/src/assets/guest.png" alt="">
-            <span class="text">GUEST</span>
+          <router-link 
+            to="/guest" 
+            class="nav-link"
+            :class="{ 'active': currentRoute.includes('/guest') }"
+          >
+            GUEST
           </router-link>
         </li>
       </ul>
     </nav>
-  </header>
+    <div class="sub-nav">
+      <p class="event-text">다음 참가 행사</p>
+      <p class="event-date">25</p><p class="event-date">5</p><p class="event-date">17</p>
+      <p class="event-name">이게아냐 2025</p>
+      <p class="copyright">copyright (c) 프래니</p>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
-  name: 'Header'
-})
+  setup() {
+    const route = useRoute();
+    // 현재 경로 계산
+    const currentRoute = computed(() => route.path);
+    
+    return {
+      currentRoute
+    };
+  }
+});
 </script>
 
 <style scoped>
-
-.header-content {
-  padding: 0.75rem 1rem;
-  text-align: center;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.logo a {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.nav-menu {
-  width: 100%;
-}
-
-.nav-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-links li {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.nav-links a {
-  padding: 0.5rem 0;
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.75rem;
+.desktop-header {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  height: 100%;
+  min-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  justify-content: space-between;
 }
 
-.nav-links a.router-link-active {
-    text-decoration: underline;
+.nav-link {
+  display: block;
+  border-radius: 0.25rem;
+  text-align: right;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 0;
 }
 
-img {
-  width: 48px;
+.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
+.sub-nav {
+  text-align: right;
+}
+
+.event-text {
+  margin-bottom: 0.5rem;
+}
+
+.event-date {
+  width: 32px;
+  height: 32px;
+  background: #3DFF7E;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 100px;
+  font-size: 15px;
+  color: #000;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.event-name {
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.copyright {
+  font-size: 0.75rem;
+  color: var(--text-gray)
+}
 </style>

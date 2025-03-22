@@ -1,31 +1,47 @@
 <template>
   <div class="home">
-    <div class="img-wrapper">
+    <!-- 이미지 래퍼에 mobile-only 클래스 추가 -->
+    <div class="img-wrapper mobile-only">
         <img class="main-img" :src="mainSvg" alt="">
         <p class="main-img__title">이게아냐 2025 신간 준비중 🚧</p>
     </div>
+    <section>
+      <h2 class="big-title">SHOW MUST GO ON</h2>
+      <div class="flex">
+        <div>
+          <h3>프래니 / 파프리카</h3>
+          <div>
+            <p>last updated 25-3-23</p>
+            <p>베리드 스타즈 주력 <br> 가끔 앙스타 얘기 합니다. </p>
+          </div>
+          <div class="banner">
+            <p>banner 뿌립니다</p>
+            <img class="banner-img" :src="bannerImg" alt="">
+          </div>
+        </div>
+        <img class="turtle" src="https://blog.kakaocdn.net/dn/n9a8S/btsMUy2wn0Y/V4Iib3gYLCkRbXZpdWOLkk/img.png" alt="">
+      </div>
+    </section>
     <section class="home__desc">
-        <span>안녕하세요. 방문을 환영합니다. 저는</span><span class="bg-dark">프래니 / 파프리카</span><span>어느쪽이든 편하신대로 불러주시면 댑니다. 여기 아직 공사중이긴 한데</span>
-        <span class="bg-yellow">2025-3-19 기준</span><img src="/src/assets/progress.svg" class="progress" alt=""><span>80%정도 완성된 거 같아요. 4 디페 어나스테 / 베스타 배포전 <span class="bg-yellow"> 신간 인포는 아직 준비중입니다.</span></span>
-        <span>개저미소녀피디를 사랑합니다.</span>
-        <span class="line-green">베스타 최신글</span>
-        <span v-for="writing in latestBestarWritings" :key="writing.id" class="lts-writing">
-            <router-link :to="`/bestar/${writing.id}`">
-            <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
-            </router-link>
-        </span>
-        <span class="line-green">앙스타 최신글</span>
-        <span v-for="writing in latestEnstarWritings" :key="writing.id" class="lts-writing">
-            <router-link :to="`/enstar/${writing.id}`">
-            <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
-            </router-link>
-        </span>
+      <span class="line-green">베스타 최신글</span>
+      <span v-for="writing in latestBestarWritings" :key="writing.id" class="lts-writing">
+          <router-link :to="`/bestar/${writing.id}`">
+          <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
+          </router-link>
+      </span>
+      <span class="line-green">앙스타 최신글</span>
+      <span v-for="writing in latestEnstarWritings" :key="writing.id" class="lts-writing">
+          <router-link :to="`/enstar/${writing.id}`">
+          <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
+          </router-link>
+      </span>
     </section>
   </div>
 </template>
 
 <script setup>
 import mainSvg from '/src/assets/main.svg'
+import bannerImg from '/src/assets/franny-banner.png'
 import { ref, computed } from "vue";
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
@@ -66,6 +82,43 @@ const formatDate = (dateString) => {
 </script>
 
 <style scoped>
+.banner {
+  margin-top: 1rem;
+}
+
+.banner-img {
+  width: 200px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #000;
+}
+
+.big-title {
+  font-size: 3.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .big-title {
+    font-size: 2rem;
+  }
+
+  .flex {
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.turtle {
+  width: 45%;
+  height: 100%;
+}
+
 .home {
   padding: 1rem;
 }
@@ -74,16 +127,20 @@ const formatDate = (dateString) => {
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  .home {
-    padding: 2rem;
-  }
+/* 모바일 전용 클래스 */
+.mobile-only {
+  display: block;
 }
 
-.main-img__title {
-    font-family: 'DOSGothic';
-    margin-top: 1rem;
-    font-weight: 500;
+/* PC 레이아웃에서는 모바일 전용 요소 숨기기 */
+@media (min-width: 768px) {  
+  .mobile-only {
+    display: none;
+  }
+
+  .home {
+    padding: 0;
+  }
 }
 
 .progress {

@@ -126,7 +126,7 @@ const formatDate = (dateString) => {
 
 @media (min-width: 768px) {
   .zombie {
-    padding: 2rem 3rem;
+    padding: 2rem 1.5rem;
   }
 
   .short-dream {
@@ -146,7 +146,7 @@ const formatDate = (dateString) => {
 }
 
 .zombie-title {
-  font-size: 20px;
+  font-size: 1.2rem;
   font-family: 'BookkMyungjo-Bd';
   font-weight: 700;
   text-decoration: none;
@@ -165,13 +165,13 @@ const formatDate = (dateString) => {
   width: 100%;
 }
 
-.flex--center {
+.flex--top {
   align-items: center;
 }
 
 .short-dream {
   padding: 1rem;
-  margin: 5rem 0;
+  margin: 4rem 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -185,7 +185,7 @@ const formatDate = (dateString) => {
 
 .dream-title {
   font-family: 'BookkMyungjo-Bd';
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   width: 100%;
   text-align: right;
   text-decoration: none;

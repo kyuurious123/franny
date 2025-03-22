@@ -16,8 +16,6 @@
       </router-link>
     </div>
   </div>
-
-  
 </template>
 
 <script setup>
@@ -48,6 +46,7 @@ onMounted(() => {
 });
 </script>
 
+
 <style scoped>
 .writing-list {
   padding: 1rem;
@@ -75,6 +74,7 @@ onMounted(() => {
   font-size: 1.5rem;
   margin-right: 0.25rem;
   font-weight: 500;
+  line-height: 1.8;
 }
 
 .writing-item-date {
