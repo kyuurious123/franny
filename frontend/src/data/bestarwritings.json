@@ -107,6 +107,15 @@
         "date": "2024-11-20",
         "fileType": "md",
         "filePath": "/writing/bestar/12.md"
+    },
+    {
+        "id": "13",
+        "number": "13",
+        "title": "그리고 각자가 그 진실을 (1)",
+        "summary": "시작",
+        "date": "2025-03-28",
+        "fileType": "md",
+        "filePath": "/writing/bestar/13.md"
     }
   ]
 }

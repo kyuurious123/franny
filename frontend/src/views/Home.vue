@@ -1,10 +1,13 @@
 <template>
   <div class="home">
-    <!-- 이미지 래퍼에 mobile-only 클래스 추가 -->
-    <div class="img-wrapper mobile-only">
-        <img class="main-img" :src="mainSvg" alt="">
-        <p class="main-img__title">이게아냐 2025 신간 준비중 🚧</p>
-    </div>
+    <a
+      class="hover-div mobile-only"
+      href="#/bestar/13"
+    >
+      <span>배우로 활동하던 강민호는 최근 들어 활발하게 예능 활동을 하면서 제2의 전성기를 맞이하고 있었다. 그러니 SCOOP의 기획 회의에 이름이 거론되는 건 당연한 수순이었다. 물론 강민호, 이름 세 글자에서 </span>
+      <span class="span-fixed focused-span">시작</span>
+      <span>해 그의 아내 서연희가 운영하는 장학 재단과 재단의 각종 횡령, 사기 행각까지 뽑아낸 건 승연의 작품이었다.</span>
+    </a>
     <section>
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">
@@ -196,4 +199,30 @@ const formatDate = (dateString) => {
   text-align: center;
   margin: 1rem 0 3rem 0;
 }
+
+.hover-div {
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #FF16B7;
+  min-height: 32px;
+  color: white;
+  transform: rotate(15deg);
+  width: 260px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.span-fixed {
+  min-width: 3ch; /* span마다 글자 수에 따라 조절 */
+  text-align: center;
+}
+
+.focused-span {
+  font-weight: bold;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 </style>
