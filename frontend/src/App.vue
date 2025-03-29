@@ -14,7 +14,7 @@
           mode="out-in"
         >
           <!-- 목록 페이지에서는 기본 글을 보여주고, 다른 페이지에서는 router-view -->
-          <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="01" />
+          <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="13" />
           <EnstarWritingDetail v-else-if="currentPath === '/enstar'" key="enstar-default" id="zombie-01" />
           <router-view v-else :key="$route.fullPath" />
         </Transition>
@@ -120,7 +120,7 @@ export default defineComponent({
 
 .header-area {
   width: 15%;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   overflow-y: auto;
   height: 100vh;
   border-right: 1px solid #000;

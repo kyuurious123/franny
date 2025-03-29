@@ -123,7 +123,6 @@ const renderedMarkdown = computed(() => {
 
 .markdown-body {
   line-height: 1.8;
-  white-space: pre-wrap; /* ✅ 개행 유지 */
   word-wrap: break-word;
 }
 
@@ -133,7 +132,7 @@ const renderedMarkdown = computed(() => {
 }
 
 ::v-deep(.markdown-body p) {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
   text-indent: 0.5rem;
 }
 .markdown-body pre {
