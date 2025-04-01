@@ -4,9 +4,18 @@
       class="hover-div mobile-only"
       href="#/bestar/13"
     >
-      <span>배우로 활동하던 강민호는 최근 활발하게 예능 활동을 하면서 제2의 전성기를 맞이했다. 그러니 SCOOP의 기획 회의에 이름이 거론되는 건 당연한 수순이었다. 물론 강민호, 이름 세 글자에서 </span>
+      <span>그러니 SCOOP의 기획 회의에 이름이 거론되는 건 당연한 수순이었다. 물론 강민호, 이름 세 글자에서 </span>
       <span class="span-fixed focused-span">시작</span>
       <span>해 그의 아내 서연희가 운영하는 장학 재단과 재단의 각종 횡령, 사기 행각까지 뽑아낸 건 승연의 작품이다.</span>
+    </a>
+
+    <a
+      class="hover-div id-14 mobile-only"
+      href="#/bestar/14"
+    >
+      <span>되새길 이유가 없어 그 마음을 잊히게 두었지만 이따금 </span>
+      <span class="span-fixed focused-span">잊지 않았다면</span>
+      <span> 어디로 흘러갔을까 세일은 궁금하기도 했다.</span>
     </a>
     <section>
       <h2 class="big-title">SHOW MUST GO ON</h2>
@@ -133,9 +142,8 @@ const formatDate = (dateString) => {
 /* 모바일 전용 클래스 */
 .mobile-only {
   display: block;
-  margin: 2rem 2rem 3rem;
   font-size: 14px;
-  width: 300px !important;
+  width: 260px !important;
 }
 
 /* PC 레이아웃에서는 모바일 전용 요소 숨기기 */
@@ -213,6 +221,7 @@ const formatDate = (dateString) => {
   width: 260px;
   display: inline-block;
   text-decoration: none;
+  margin: 2rem 2rem 0 3rem;
 }
 
 .span-fixed {
@@ -226,6 +235,19 @@ const formatDate = (dateString) => {
 
 .invisible {
   visibility: hidden;
+}
+
+.id-14 {
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #00B985;
+  min-height: 32px;
+  color: white;
+  transform: rotate(-5deg);
+  width: 280px;
+  display: inline-block;
+  text-decoration: none;
+  margin: 0 2rem 2rem;
 }
 
 </style>
