@@ -17,6 +17,14 @@
       <span class="span-fixed focused-span">잊지 않았다면</span>
       <span> 어디로 흘러갔을까 세일은 궁금하기도 했다.</span>
     </a>
+    <a
+      class="hover-div id-15 mobile-only"
+      href="#/bestar/15"
+    >
+      <span>"근데 얼마 전에 발견됐잖아요. 테트라포드 사이에서." </span>
+      <span class="span-fixed focused-span">"협박을 길게도 하네?"</span>
+      <span> "시체 없이 장례식 하는 거… 되게 끔찍할 텐데…”</span>
+    </a>
     <section>
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">
@@ -247,7 +255,15 @@ const formatDate = (dateString) => {
   width: 280px;
   display: inline-block;
   text-decoration: none;
-  margin: 0 2rem 2rem;
+  margin: 0;
+  margin-left: 1rem;
+}
+
+.id-15 {
+  background-color: #0F1013;
+  transform: rotate(2deg);
+  width: 300px;
+  margin: 0 2rem 2rem 4rem;
 }
 
 </style>

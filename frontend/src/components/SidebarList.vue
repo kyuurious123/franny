@@ -37,6 +37,17 @@
         <span class="span-fixed focused-span">잊지 않았다면</span>
         <span :class="getSpanClass(3)"> 어디로 흘러갔을까 세일은 궁금하기도 했다.</span>
       </a>
+
+      <a
+        class="hover-div id-15"
+        href="/bestar/15"
+        @mouseenter="isHovered = true"
+        @mouseleave="isHovered = false"
+      >
+        <span :class="getSpanClass(4)">"근데 얼마 전에 발견됐잖아요. 테트라포드 사이에서." </span>
+        <span class="span-fixed focused-span">"협박을 길게도 하네?"</span>
+        <span :class="getSpanClass(5)"> "시체 없이 장례식 하는 거… 되게 끔찍할 텐데…”.</span>
+      </a>
     </div>
 
 
@@ -174,6 +185,13 @@ export default defineComponent({
   display: inline-block;
   text-decoration: none;
   margin-left: 2.5rem;
+}
+
+.id-15 {
+  background-color: #0F1013;
+  transform: rotate(2deg);
+  margin-left: -2rem;
+  width: 300px;
 }
 
 .span-fixed {

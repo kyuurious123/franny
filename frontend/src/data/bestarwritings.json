@@ -125,6 +125,15 @@
         "date": "2025-04-01",
         "fileType": "md",
         "filePath": "/writing/bestar/14.md"
+    },
+    {
+        "id": "15",
+        "number": "15",
+        "title": "그리고 각자가 그 진실을 (3)",
+        "summary": "",
+        "date": "2025-04-07",
+        "fileType": "md",
+        "filePath": "/writing/bestar/15.md"
     }
   ]
 }
