@@ -6,6 +6,7 @@ import EnstarWritingList from '../views/EnstarWritingList.vue'
 import BestarWritingDetail from '../views/BestarWritingDetail.vue'
 import EnstarWritingDetail from '../views/EnstarWritingDetail.vue'
 import Guest from '../views/Guest.vue'
+import Igeanya2025 from '../views/Igeanya2025.vue'; // 새로 만들 파일
 
 // 배포 환경에 맞는 base URL 설정
 const base = import.meta.env.BASE_URL || '/';
@@ -58,6 +59,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/guest',
     name: 'Guest',
     component: Guest
+  },
+
+  {
+    path: '/igeanya2025',
+    component: Igeanya2025
   },
   // 404 페이지
   {

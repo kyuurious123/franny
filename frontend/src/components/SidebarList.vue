@@ -17,6 +17,8 @@
       </div>
     </div> -->
     <div v-else-if="currentRoute === '/'" class="home">
+      <button @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
+
       <a
         class="hover-div"
         href="/bestar/13"

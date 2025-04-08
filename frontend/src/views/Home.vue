@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <button @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
+
     <a
       class="hover-div mobile-only"
       href="#/bestar/13"
