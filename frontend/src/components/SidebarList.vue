@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-list p-4">
+  <div class="sidebar-list h-full">
     <!-- 현재 페이지가 BestarWritingDetail 또는 BestarWritingList인 경우 -->
     <div v-if="currentRoute.includes('bestar')">
       <BestarWritingList @click.native.prevent="captureLinks" />
@@ -11,45 +11,8 @@
     </div>
 
     <!-- Home 페이지인 경우 -->
-    <!-- <div v-else-if="currentRoute === '/'">
-      <div>
-        <img class="main-img" :src="mainSvg" alt="">
-      </div>
-    </div> -->
-    <div v-else-if="currentRoute === '/'" class="home">
-      <button @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
-
-      <a
-        class="hover-div"
-        href="/bestar/13"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
-      >
-        <span :class="getSpanClass(0)">그러니 SCOOP의 기획 회의에 이름이 거론되는 건 당연한 수순이었다. 물론 강민호, 이름 세 글자에서 </span>
-        <span class="span-fixed focused-span">시작</span>
-        <span :class="getSpanClass(1)">해 그의 아내 서연희가 운영하는 장학 재단과 재단의 각종 횡령, 사기 행각까지 뽑아낸 건 승연의 작품이었다.</span>
-      </a>
-      <a
-        class="hover-div id-14"
-        href="/bestar/14"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
-      >
-        <span :class="getSpanClass(2)">되새길 이유가 없어 그 마음을 잊히게 두었지만 이따금 </span>
-        <span class="span-fixed focused-span">잊지 않았다면</span>
-        <span :class="getSpanClass(3)"> 어디로 흘러갔을까 세일은 궁금하기도 했다.</span>
-      </a>
-
-      <a
-        class="hover-div id-15"
-        href="/bestar/15"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
-      >
-        <span :class="getSpanClass(4)">"근데 얼마 전에 발견됐잖아요. 테트라포드 사이에서." </span>
-        <span class="span-fixed focused-span">"협박을 길게도 하네?"</span>
-        <span :class="getSpanClass(5)"> "시체 없이 장례식 하는 거… 되게 끔찍할 텐데…”.</span>
-      </a>
+    <div v-else-if="currentRoute === '/'" class="home h-full flex justify-center items-center">
+      <button class="w-[150px] h-[150px] bg-[#3DFF7E] rounded-full text-black font-normal pt-4" @click="$router.push('/igeanya2025')">이게아냐 2025 <br>신간 샘플은 <br> 이쪽에서 </button>
     </div>
 
 
@@ -158,42 +121,6 @@ export default defineComponent({
   padding: 2rem;
   width: 100%;
 }
-}
-
-.home {
-  padding: 3rem 5rem;
-}
-
-.hover-div {
-  padding: 1rem;
-  cursor: pointer;
-  background-color: #FF16B7;
-  min-height: 32px;
-  color: white;
-  transform: rotate(15deg);
-  width: 260px;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.id-14 {
-  padding: 1rem;
-  cursor: pointer;
-  background-color: #00B985;
-  min-height: 32px;
-  color: white;
-  transform: rotate(-5deg);
-  width: 280px;
-  display: inline-block;
-  text-decoration: none;
-  margin-left: 2.5rem;
-}
-
-.id-15 {
-  background-color: #0F1013;
-  transform: rotate(2deg);
-  margin-left: -2rem;
-  width: 300px;
 }
 
 .span-fixed {

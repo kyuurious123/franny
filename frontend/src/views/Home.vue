@@ -1,32 +1,6 @@
 <template>
   <div class="home">
-    <button @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
-
-    <a
-      class="hover-div mobile-only"
-      href="#/bestar/13"
-    >
-      <span>그러니 SCOOP의 기획 회의에 이름이 거론되는 건 당연한 수순이었다. 물론 강민호, 이름 세 글자에서 </span>
-      <span class="span-fixed focused-span">시작</span>
-      <span>해 그의 아내 서연희가 운영하는 장학 재단과 재단의 각종 횡령, 사기 행각까지 뽑아낸 건 승연의 작품이다.</span>
-    </a>
-
-    <a
-      class="hover-div id-14 mobile-only"
-      href="#/bestar/14"
-    >
-      <span>되새길 이유가 없어 그 마음을 잊히게 두었지만 이따금 </span>
-      <span class="span-fixed focused-span">잊지 않았다면</span>
-      <span> 어디로 흘러갔을까 세일은 궁금하기도 했다.</span>
-    </a>
-    <a
-      class="hover-div id-15 mobile-only"
-      href="#/bestar/15"
-    >
-      <span>"근데 얼마 전에 발견됐잖아요. 테트라포드 사이에서." </span>
-      <span class="span-fixed focused-span">"협박을 길게도 하네?"</span>
-      <span> "시체 없이 장례식 하는 거… 되게 끔찍할 텐데…”</span>
-    </a>
+    <button class="mobile-only" @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
     <section>
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">

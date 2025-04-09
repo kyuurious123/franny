@@ -88,7 +88,7 @@ onMounted(() => {
 
 @media (min-width: 768px) {
   .writing-list {
-    padding: 2rem;
+    padding: 0rem;
   }
 }
 </style>

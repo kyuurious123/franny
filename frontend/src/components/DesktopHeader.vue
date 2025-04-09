@@ -2,7 +2,7 @@
 <template>
   <div class="desktop-header">
     <!-- 메인 내비게이션 -->
-    <nav class="main-nav mb-8">
+    <nav class="main-nav mb-8 p-4">
       <ul class="space-y-4">
         <li>
           <router-link 
@@ -42,7 +42,7 @@
         </li>
       </ul>
     </nav>
-    <div class="sub-nav">
+    <div class="sub-nav p-4">
       <p class="event-text">다음 참가 행사</p>
       <p class="event-date">25</p><p class="event-date">5</p><p class="event-date">17</p>
       <p class="event-name">이게아냐 2025</p>
@@ -85,7 +85,6 @@ export default defineComponent({
   transition: all 0.2s ease;
   text-decoration: none;
   font-size: 1rem;
-  padding: 0.5rem 0;
 }
 
 .nav-link.active {
