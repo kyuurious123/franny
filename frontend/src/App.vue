@@ -39,9 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import DesktopHeader from './components/DesktopHeader.vue'
 import MobileHeader from './components/MobileHeader.vue'
 import SidebarList from './components/SidebarList.vue'
@@ -54,9 +53,22 @@ const isMobile = ref(false)
 const currentPath = computed(() => route.path)
 const isIgeanyaPage = computed(() => route.path.startsWith('/igeanya2025'))
 
-onMounted(() => {
+const handleResize = () => {
   isMobile.value = window.innerWidth <= 768
+}
+
+onMounted(() => {
+  // 초기 설정
+  handleResize()
+  
+  // resize 이벤트 리스너 추가
+  window.addEventListener('resize', handleResize)
 })
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
 </script>
 
 <style scoped>

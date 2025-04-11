@@ -2,17 +2,17 @@
 <template>
     <div class="memo-container" @click.stop>
       <div 
-        v-for="(memo, index) in memos" 
+      v-for="(memo, index) in memos" 
         :key="memo.id"
         class="memo text-sm"
         :style="{
-          left: `${memo.position.x}px`, 
-          top: `${memo.position.y}px`,
-          zIndex: memo.position.zIndex,
-          backgroundColor: memo.color,
-          color: memo.color_text || '#000000',
-          transform: `rotate(${memo.rotation}deg)`,
-          width: `${memo.width}px`
+            left: `${getMemoPosition(memo).x}px`, 
+            top: `${getMemoPosition(memo).y}px`,
+            zIndex: getMemoPosition(memo).zIndex,
+            backgroundColor: memo.color,
+            color: memo.color_text || '#000000',
+            transform: `rotate(${memo.rotation}deg)`,
+            width: isMobile ? `${memo.width * 0.8}px` : `${memo.width}px`
         }"
         @mousedown="startDrag($event, memo, index)"
         @click.stop="bringToFront(memo)"
@@ -23,8 +23,35 @@
     </div>
   </template>
   
-  <script setup>
-  import { ref, reactive, onMounted, onUnmounted } from 'vue';
+<script setup>
+import { ref, reactive, onMounted, onUnmounted, computed } from 'vue';
+const isMobile = ref(false);
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
+onMounted(() => {
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile);
+});
+
+// 메모 위치 계산
+const getMemoPosition = (memo) => {
+  if (isMobile.value) {
+    return {
+      y: Math.min(memo.position.y * 0.2, 150), // 최대 높이 제한
+      zIndex: memo.position.zIndex
+    };
+  } else {
+    // PC용 위치 (원래 위치)
+    return memo.position;
+  }
+};
   
   // 샘플 메모 데이터
   const memos = reactive([

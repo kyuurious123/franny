@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <button class="mobile-only" @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
+    <button class="mobile-only text-sm block mt-10" @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
+    <Memo class="mobile-only" />
     <section>
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">
@@ -41,6 +42,7 @@ import bannerImg from '/src/assets/franny-banner.png'
 import { ref, computed } from "vue";
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
+import Memo from '../views/Memo.vue'
 
 // JSON 데이터를 객체에서 배열로 변환
 const bestarwritings = ref(Object.values(bestarWritingsData.bestarwritings || {}));
@@ -121,13 +123,6 @@ const formatDate = (dateString) => {
 
 .main-img {
   width: 100%;
-}
-
-/* 모바일 전용 클래스 */
-.mobile-only {
-  display: block;
-  font-size: 14px;
-  width: 260px !important;
 }
 
 /* PC 레이아웃에서는 모바일 전용 요소 숨기기 */
