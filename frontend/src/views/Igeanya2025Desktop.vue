@@ -54,9 +54,9 @@
   
   // public/bestar 폴더에 있는 마크다운 파일들
   const posts = ref([
-    { title: '시작', number: '01', path: '/bestar/12.md' },
-    { title: '견착', number: '02', path: '/bestar/13.md' },
-    { title: '침투', number: '03', path: '/bestar/14.md' }
+    { title: '시작', number: '01', path: '/public/writing/bestar/12.md' },
+    { title: '견착', number: '02', path: '/public/writing/bestar/13.md' },
+    { title: '침투', number: '03', path: '/public/writing/bestar/14.md' }
   ]);
   
   const selected = ref(posts.value[0]);
