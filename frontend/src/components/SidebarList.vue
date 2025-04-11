@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar-list h-full">
     <!-- 현재 페이지가 BestarWritingDetail 또는 BestarWritingList인 경우 -->
-    <div v-if="currentRoute.includes('bestar')">
+    <div v-if="currentRoute.includes('bestar')" class="p-6">
       <BestarWritingList @click.native.prevent="captureLinks" />
     </div>
     
@@ -12,7 +12,8 @@
 
     <!-- Home 페이지인 경우 -->
     <div v-else-if="currentRoute === '/'" class="home h-full flex justify-center items-center">
-      <button class="w-[150px] h-[150px] bg-[#3DFF7E] rounded-full text-black font-normal pt-4" @click="$router.push('/igeanya2025')">이게아냐 2025 <br>신간 샘플은 <br> 이쪽에서 </button>
+      <Memo />
+      <!-- <button class="w-[150px] h-[150px] bg-[#3DFF7E] rounded-full text-black font-normal pt-4" @click="$router.push('/igeanya2025')">이게아냐 2025 <br>신간 샘플은 <br> 이쪽에서 </button> -->
     </div>
 
 
@@ -45,11 +46,13 @@ import { useRoute, useRouter } from 'vue-router';
 import BestarWritingList from '../views/BestarWritingList.vue';
 import EnstarWritingList from '../views/EnstarWritingList.vue';
 import mainSvg from '/src/assets/main.svg';
+import Memo from '../views/Memo.vue'
 
 export default defineComponent({
   components: {
     BestarWritingList,
-    EnstarWritingList
+    EnstarWritingList,
+    Memo
   },
   setup() {
     const route = useRoute();
