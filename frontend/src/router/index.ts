@@ -83,7 +83,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         // 기본 리다이렉트 - 모바일에서는 sample로 이동
         path: '',
-        redirect: to => {
+        redirect: _ => {
           // 모바일 체크는 컴포넌트에서 처리
           return { path: '/igeanya2025/sample' }
         }

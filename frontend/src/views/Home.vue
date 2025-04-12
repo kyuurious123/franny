@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <button class="mobile-only text-sm block mt-10" @click="$router.push('/igeanya2025')">igeanya2025로 가기</button>
-    <Memo class="mobile-only" />
+    <div class="mobile-only">
+      <Memo />
+    </div>
     <section>
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">

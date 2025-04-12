@@ -11,7 +11,7 @@
     </div>
 
     <!-- Home 페이지인 경우 -->
-    <div v-else-if="currentRoute === '/'" class="home h-full flex justify-center items-center">
+    <div v-else-if="currentRoute === '/'" class="home h-full">
       <Memo />
       <!-- <button class="w-[150px] h-[150px] bg-[#3DFF7E] rounded-full text-black font-normal pt-4" @click="$router.push('/igeanya2025')">이게아냐 2025 <br>신간 샘플은 <br> 이쪽에서 </button> -->
     </div>

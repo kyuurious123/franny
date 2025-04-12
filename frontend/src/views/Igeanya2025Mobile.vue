@@ -1,21 +1,21 @@
 <template>
-  <div class="p-4">
+  <div class="fixed-gradient"></div>
+  <div class="relative z-1 text-neutral-900">
     <!-- 헤더 영역 -->
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-xl font-bold">글 목록</h2>
-      <button @click="goToSample" class="text-blue-500 flex items-center">
-        <span class="mr-1">←</span> 소개 페이지
-      </button>
+    <div class="p-4">
+      <a @click="goToSample" class="no-underlin font-normal text-base hover:bg-transparent">
+        <span class="mr-1">←</span>뒤로
+      </a>
     </div>
     
     <!-- 글 목록 -->
-    <div>
-      <ul class="space-y-2 mb-6">
+    <div class="px-8 py-4 mt-4 mb-10">
+      <ul class="text-2xl">
         <li
           v-for="(post, index) in posts"
           :key="index"
           @click="viewDetail(post)"
-          class="cursor-pointer border-b pb-2 hover:bg-gray-100 p-2"
+          class="cursor-pointer sample-title mb-4"
           :class="{ 'line-through': selected?.title === post.title }"
         >
           {{ post.number }}
@@ -25,38 +25,37 @@
     </div>
 
     <!-- 글 상세 (목록 아래에 표시) -->
-    <div v-if="selected" class="mt-8 border-t pt-4">
-      <h3 class="text-xl font-bold mb-4">{{ selected.title }}</h3>
+    <div v-if="selected" class="mt-8 p-4 text-neutral-900">
       <div v-if="loading" class="text-center py-4">
         불러오는 중...
       </div>
       <div v-else-if="error" class="text-red-500 py-4">
         {{ error }}
       </div>
-      <div v-else-if="htmlContent" v-html="htmlContent" class="prose max-w-none text-[15px] leading-[1.8] indent-3" />
-      <div v-else class="text-gray-500 py-4">
+      <div v-else-if="htmlContent" v-html="htmlContent" class="prose max-w-none text-[15px] leading-[1.8] indent-3 sample-content" />
+      <div v-else class="text-neutral-500 py-4">
         글을 선택하면 내용이 여기에 표시됩니다.
       </div>
       
       <!-- 이전/다음 글 네비게이션 -->
-      <div class="flex justify-between mt-8 pt-4 border-t">
-        <button 
+      <div class="flex justify-between mt-8">
+        <a 
           @click="navigateToPrevious" 
-          class="px-3 py-2 bg-gray-100 rounded hover:bg-gray-200 flex items-center"
+          class="px-3 py-2 rounded flex items-center no-underline"
           :disabled="!hasPrevious"
           :class="{ 'opacity-50 cursor-not-allowed': !hasPrevious }"
         >
           <span class="mr-1">←</span> 이전 글
-        </button>
+      </a>
         
-        <button 
+        <a 
           @click="navigateToNext" 
-          class="px-3 py-2 bg-gray-100 rounded hover:bg-gray-200 flex items-center"
+          class="px-3 py-2 rounded flex items-center no-underline"
           :disabled="!hasNext"
           :class="{ 'opacity-50 cursor-not-allowed': !hasNext }"
         >
           다음 글 <span class="ml-1">→</span>
-        </button>
+    </a>
       </div>
     </div>
   </div>
@@ -66,8 +65,11 @@
 import { ref, onMounted, computed } from 'vue';
 import { marked } from 'marked';
 import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const router = useRouter();
+const route = useRoute();
+
 
 const posts = ref([
     { title: '시작', number: '01', path: '/public/writing/bestar/13.md' },
@@ -90,10 +92,25 @@ const currentIndex = computed(() => {
 const hasPrevious = computed(() => currentIndex.value > 0);
 const hasNext = computed(() => currentIndex.value < posts.value.length - 1);
 
-// 페이지 로드 시 첫 번째 글 미리 로드
 onMounted(() => {
-  // 첫 번째 글 자동 로드
-  viewDetail(posts.value[0]);
+  // URL 파라미터에서 id를 가져옴
+  const postId = route.params.id;
+  
+  if (postId) {
+    // id가 숫자인 경우(01, 02, 03 등) 해당 포스트 찾기
+    const post = posts.value.find(p => p.number === postId);
+    
+    if (post) {
+      // 찾은 포스트 불러오기
+      viewDetail(post);
+    } else {
+      // id를 찾지 못한 경우 첫 번째 글 로드
+      viewDetail(posts.value[0]);
+    }
+  } else {
+    // id가 없는 경우 첫 번째 글 로드
+    viewDetail(posts.value[0]);
+  }
 });
 
 // fetch로 md 파일 내용 불러오고 marked로 변환
@@ -175,4 +192,26 @@ function goToSample() {
   color: #3182ce;
   text-decoration: underline;
 }
+
+
+.sample-title {
+  font-family: 'BookkMyungjo-Bd';
+}
+
+.sample-content :deep(p) {
+  margin-bottom: 0.5rem;
+}
+
+.fixed-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #D9E3E2, #FFFFFF);
+  z-index: -1; /* 내용보다 뒤에 배치 */
+  pointer-events: none; /* 클릭 이벤트가 배경을 통과하게 함 */
+}
+
+
 </style>

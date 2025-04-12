@@ -1,85 +1,58 @@
 <template>
-    <div class="p-4">
-      <header class="mb-6">
-        <h1 class="text-2xl font-bold mb-2">이게아냐 2025</h1>
-        <p class="text-gray-600">새로운 시리즈를 소개합니다</p>
-      </header>
-      
-      <!-- 소개 섹션 -->
-      <section class="mb-8">
-        <div class="bg-blue-50 p-4 rounded-lg mb-6">
-          <h2 class="text-lg font-semibold mb-2">소개</h2>
-          <p>이게아냐 2025는 일상에서 마주하는 다양한 사건과 생각들을 담은 새로운 시리즈입니다. 현대 사회의 모순과 아이러니를 담백하게 풀어냅니다.</p>
-        </div>
-        
-        <div class="bg-amber-50 p-4 rounded-lg">
-          <h2 class="text-lg font-semibold mb-2">작가의 말</h2>
-          <p>이 시리즈는 2025년을 살아가는 우리의 모습을 관찰하고 기록한 작품들입니다. 여러분의 일상에 작은 위로와 공감이 되었으면 합니다.</p>
-        </div>
-      </section>
-      
-      <!-- 최신 글 목록으로 이동 버튼 -->
-      <section class="mb-8">
-        <button 
-          @click="navigateToList" 
-          class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 flex items-center justify-center"
+<div class="bg-book text-neutral-900">
+  <!-- 책 표지 -->
+  <div class="border-b border-black pb-8">
+
+  <header class="p-4">
+    <a @click="$router.push('/')" class="no-underline font-normal text-base">← 홈으로</a>
+  </header>
+    <img src="https://blog.kakaocdn.net/dn/cjprU5/btsNi3IVkz9/K6TwmJd2YcIBbypbP3IzS0/img.png" alt="" class="w-[70%] m-auto">
+    <p class="text-center mt-2 text-neutral-500 italic text-sm">표지 계란님(@egg_bst)</p>
+
+    <div class="text-center mt-4">
+      <a 
+        @click="navigateToList"
         >
-          <span>글 목록 보기</span>
-          <span class="ml-2">→</span>
-        </button>
-      </section>
-      
-      <!-- 샘플 글 미리보기 -->
-      <section>
-        <h2 class="text-xl font-semibold mb-4">미리보기</h2>
-        
-        <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
-          <h3 class="font-medium mb-2">이게아냐 - 첫 번째 이야기</h3>
-          <p class="text-sm text-gray-600 mb-2">2025년 3월 15일</p>
-          <p class="line-clamp-3">오늘도 버스를 기다리며 스마트폰을 들여다보는 사람들. 모두가 연결되어 있지만, 어쩌면 그 어느 때보다 단절되어 있는 것 같다. 이게 우리가 꿈꾸던 미래였을까...</p>
-          <button @click="navigateToDetail('01')" class="text-blue-500 mt-2 hover:underline">더 읽기</button>
-        </div>
-        
-        <div class="bg-white p-4 rounded-lg shadow-sm">
-          <h3 class="font-medium mb-2">이게아냐 - 두 번째 이야기</h3>
-          <p class="text-sm text-gray-600 mb-2">2025년 3월 30일</p>
-          <p class="line-clamp-3">인공지능이 그려준 그림으로 SNS에서 유명해진 화가의 이야기. 기술이 예술을 대체하는 시대, 우리는 어떤 가치를 지켜야 할까...</p>
-          <button @click="navigateToDetail('02')" class="text-blue-500 mt-2 hover:underline">더 읽기</button>
-        </div>
-      </section>
-      
-      <!-- 홈으로 돌아가기 -->
-      <div class="mt-8 text-center">
-        <button @click="goHome" class="text-gray-600 hover:text-blue-500">
-          홈으로 돌아가기
-        </button>
-      </div>
+        <span>샘플 보기</span>
+      </a>
     </div>
-  </template>
+    
+  </div>
+  <!-- 책 정보 -->
+  <div class="px-4 py-8">
+      <img :src="book1Title" alt="" class="w-[80%] m-auto">
+  </div>
   
-  <script setup lang="ts">
-  import { useRouter } from 'vue-router';
+  <div class="space-y-2 px-4">
+    <p class="mb-4 text-sm text-gray-500">무선제본, B6, 150p↑ (변동O)</p>
+    <p class="text-[15px] leading-7">SCOOP의 새로운 기획으로 여배우 배이현과 얽힌 사이비 종교 ‘영명교’의 취재를 이어가던 승연과 세일. 그러던 어느 날, 두 사람에게 예기치 못한 일이 일어나는데...</p>
+
+    <!-- <p class="text-lg leading-8">SCOOP의 새로운 기획으로 여배우 배이현과 얽힌 사이비 종교 ‘영명교’의 취재를 이어가던 승연과 세일. 그러던 어느 날, 승연은 싸늘한 주검으로 돌아온다. 경찰은 자살이라 단정하지만, 세일은 수사에 석연치 않은 점을 느낀다. 이에 세일은 규혁과 함께 승연의 죽음에 얽힌 비밀을 파헤치기 시작한다. <br>그러나 파고들수록, 자신이 알지 못했던 승연의 또 다른 얼굴과 마주하게 되고, 세일은 진실에서 점점 더 멀어지는 느낌에 사로잡히는데…</p> -->
+  </div>
+</div>
+
+</template>
   
-  const router = useRouter();
-  
-  function navigateToList() {
-    router.push('/igeanya2025/list');
-  }
-  
-  function navigateToDetail(id: string) {
-    router.push(`/igeanya2025/${id}`);
-  }
-  
-  function goHome() {
-    router.push('/');
-  }
-  </script>
-  
-  <style scoped>
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  </style>
+<script setup lang="ts">
+import book1Title from '/src/assets/book1title.svg'
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function navigateToList() {
+  router.push('/igeanya2025/list');
+}
+</script>
+
+<style scoped>
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bg-book {
+  background: linear-gradient(to bottom, #D9E3E2, #FFFFFF);
+}
+</style>
