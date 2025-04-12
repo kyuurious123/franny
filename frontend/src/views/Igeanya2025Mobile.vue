@@ -32,9 +32,20 @@
       <div v-else-if="error" class="text-red-500 py-4">
         {{ error }}
       </div>
-      <div v-else-if="htmlContent" v-html="htmlContent" class="prose max-w-none text-[15px] leading-[1.8] indent-3 sample-content" />
+      <div 
+        v-else-if="renderedMarkdown" 
+        v-html="renderedMarkdown" 
+        class="prose max-w-none text-[15px] leading-[1.8] indent-3 markdown-body"
+      ></div>
       <div v-else class="text-neutral-500 py-4">
         글을 선택하면 내용이 여기에 표시됩니다.
+      </div>
+      
+      <!-- 디버깅 정보 - 간소화 -->
+      <div v-if="isDev" class="mt-4 p-2 bg-gray-100 text-xs">
+        <p>선택된 글: {{ selected?.title || '없음' }}</p>
+        <p>원본 길이: {{ markdownContent.length }}</p>
+        <p>변환 길이: {{ renderedMarkdown ? renderedMarkdown.length : 0 }}</p>
       </div>
       
       <!-- 이전/다음 글 네비게이션 -->
@@ -46,7 +57,7 @@
           :class="{ 'opacity-50 cursor-not-allowed': !hasPrevious }"
         >
           <span class="mr-1">←</span> 이전 글
-      </a>
+        </a>
         
         <a 
           @click="navigateToNext" 
@@ -55,42 +66,75 @@
           :class="{ 'opacity-50 cursor-not-allowed': !hasNext }"
         >
           다음 글 <span class="ml-1">→</span>
-    </a>
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { marked } from 'marked';
-import { useRouter } from 'vue-router';
-import { useRoute } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
 const route = useRoute();
 
+// 타입 정의
+interface Post {
+  title: string;
+  number: string;
+  path: string;
+}
 
-const posts = ref([
-    { title: '시작', number: '01', path: '/public/writing/bestar/13.md' },
-    { title: '견착', number: '02', path: '/public/writing/bestar/14.md' },
-    { title: '침투', number: '03', path: '/public/writing/bestar/15.md' }
-  ]);
+// 개발 모드 체크를 위한 변수
+const isDev = ref(false);
 
-const selected = ref(posts.value[0]);
-const htmlContent = ref('');
+// NODE_ENV 확인을 위한 방법 변경
+try {
+  // @ts-ignore - Vite 환경에서는 import.meta.env를 사용
+  isDev.value = import.meta.env?.MODE === 'development';
+} catch (e) {
+  // 예외 발생 시 기본값은 false
+  console.error('환경 변수 확인 오류:', e);
+}
+
+const posts = ref<Post[]>([
+  { title: '시작', number: '01', path: './writing/bestar/13.md' },
+  { title: '견착', number: '02', path: './writing/bestar/14.md' },
+  { title: '침투', number: '03', path: './writing/bestar/15.md' }
+]);
+
+const selected = ref<Post | null>(null);
+const markdownContent = ref('');
 const loading = ref(false);
 const error = ref('');
+
+// 마크다운을 렌더링하는 computed 속성
+const renderedMarkdown = computed((): string => {
+  return markdownContent.value ? (marked.parse(markdownContent.value) as string) : '';
+});
 
 // 현재 선택된 글의 인덱스
 const currentIndex = computed(() => {
   if (!selected.value) return -1;
-  return posts.value.findIndex(post => post.title === selected.value.title);
+  const selectedPost = selected.value as Post;
+  return posts.value.findIndex(post => post.title === selectedPost.title);
 });
 
 // 이전/다음 글 존재 여부
 const hasPrevious = computed(() => currentIndex.value > 0);
 const hasNext = computed(() => currentIndex.value < posts.value.length - 1);
+
+// URL 변경 감지
+watch(() => route.params.id, (newId) => {
+  if (newId) {
+    const post = posts.value.find(p => p.number === newId);
+    if (post) {
+      viewDetail(post);
+    }
+  }
+});
 
 onMounted(() => {
   // URL 파라미터에서 id를 가져옴
@@ -113,26 +157,35 @@ onMounted(() => {
   }
 });
 
-// fetch로 md 파일 내용 불러오고 marked로 변환
-async function viewDetail(post: { title: string; path: string; number: string }) {
+// 마크다운 로드 및 표시 함수
+async function viewDetail(post: Post): Promise<void> {
   // 같은 글을 다시 클릭하면 아무것도 하지 않음
-  if (selected.value?.title === post.title && htmlContent.value) {
+  if (selected.value?.title === post.title && markdownContent.value) {
     return;
   }
   
   selected.value = post;
   loading.value = true;
   error.value = '';
+  markdownContent.value = ''; // 기존 내용 초기화
   
   try {
-    const res = await fetch(post.path);
+    console.log('파일 경로:', post.path);
+    // 캐시 방지를 위한 타임스탬프 추가
+    const res = await fetch(`${post.path}?t=${new Date().getTime()}`, { cache: "no-store" });
     
     if (!res.ok) {
       throw new Error(`파일을 불러올 수 없습니다. (상태 코드: ${res.status})`);
     }
     
     const rawText = await res.text();
-    htmlContent.value = marked.parse(rawText);
+    console.log('마크다운 내용 길이:', rawText.length);
+    
+    if (rawText.trim() === '') {
+      throw new Error('마크다운 내용이 비어있습니다.');
+    }
+    
+    markdownContent.value = rawText;
   } catch (err) {
     console.error('파일 로딩 오류:', err);
     error.value = `콘텐츠를 불러오는 데 실패했습니다: ${err instanceof Error ? err.message : '알 수 없는 오류'}`;
@@ -142,21 +195,21 @@ async function viewDetail(post: { title: string; path: string; number: string })
 }
 
 // 이전 글로 이동
-function navigateToPrevious() {
+function navigateToPrevious(): void {
   if (hasPrevious.value) {
     viewDetail(posts.value[currentIndex.value - 1]);
   }
 }
 
 // 다음 글로 이동
-function navigateToNext() {
+function navigateToNext(): void {
   if (hasNext.value) {
     viewDetail(posts.value[currentIndex.value + 1]);
   }
 }
 
 // 소개 페이지로 이동
-function goToSample() {
+function goToSample(): void {
   router.push('/igeanya2025/sample');
 }
 </script>
@@ -166,6 +219,37 @@ function goToSample() {
   line-height: 1.8;
   font-size: 15px;
   text-indent: 0.5rem;
+}
+
+.markdown-body {
+  line-height: 1.8;
+  word-wrap: break-word;
+}
+
+.markdown-body :deep(h1), 
+.markdown-body :deep(h2), 
+.markdown-body :deep(h3) {
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-body :deep(p) {
+  margin-bottom: 0.75rem;
+  text-indent: 0.5rem;
+}
+
+.markdown-body :deep(pre) {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.markdown-body :deep(blockquote) {
+  border-left: 4px solid #ddd;
+  padding-left: 10px;
+  color: #666;
 }
 
 /* Vue 3에서는 :deep() 문법 사용 */
@@ -212,6 +296,4 @@ function goToSample() {
   z-index: -1; /* 내용보다 뒤에 배치 */
   pointer-events: none; /* 클릭 이벤트가 배경을 통과하게 함 */
 }
-
-
 </style>
