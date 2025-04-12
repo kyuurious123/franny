@@ -58,7 +58,8 @@
   const posts = ref([
     { title: '시작', number: '01', path: './writing/bestar/13.md' },
     { title: '견착', number: '02', path: './writing/bestar/14.md' },
-    { title: '침투', number: '03', path: './writing/bestar/15.md' }
+    { title: '침투', number: '03', path: './writing/bestar/15.md' },
+    { title: '인정', number: '04', path: './writing/bestar/16.md' }
   ]);
   
   const selected = ref(posts.value[0]);
