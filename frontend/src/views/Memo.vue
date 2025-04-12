@@ -22,7 +22,7 @@
       <div class="memo-content">{{ memo.content }}</div>
     </div>
   </div>
-  <a class="text-sm block md:mt-10 mt-0 mb-6 text-center" @click="$router.push('/igeanya2025')">이게아냐 2025 인포</a>
+  <a class="text-sm block md:mt-10 mt-0 mb-6 text-center cursor-pointer" @click="$router.push('/igeanya2025')">이게아냐 2025 인포</a>
 </template>
 
 <script setup>

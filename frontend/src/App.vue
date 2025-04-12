@@ -6,16 +6,16 @@
     </div>
 
     <!-- 일반 페이지 (PC/모바일 분기) -->
-    <div v-else>
+    <div v-else class="h-full">
       <!-- PC용 레이아웃 -->
-      <div v-if="!isMobile" class="pc-layout-container">
+      <div v-if="!isMobile" class="pc-layout-container h-full">
         <!-- PC 헤더 영역 (좌측 15%) -->
         <aside class="header-area">
           <DesktopHeader />
         </aside>
 
         <!-- 주요 콘텐츠 영역 (중앙 55%) -->
-        <main class="content-area">
+        <main class="content-area h-full overflow-scroll">
           <Transition name="fade-up" mode="out-in">
             <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="15" />
             <EnstarWritingDetail v-else-if="currentPath === '/enstar'" key="enstar-default" id="zombie-01" />
@@ -24,7 +24,7 @@
         </main>
 
         <!-- 사이드바 (우측 30%) -->
-        <aside class="sidebar-area">
+        <aside class="sidebar-area h-full overflow-scroll">
           <SidebarList />
         </aside>
       </div>
@@ -84,7 +84,7 @@ onUnmounted(() => {
 
 .header-area {
   width: 15%;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #000;
 }
 
 .content-area {
@@ -94,7 +94,7 @@ onUnmounted(() => {
 
 .sidebar-area {
   width: 30%;
-  border-left: 1px solid #ddd;
+  border-left: 1px solid #000;
 }
 
 .mobile-layout-container {
