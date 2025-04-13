@@ -18,7 +18,7 @@
           </div>
           <div class="space-y-2 px-10">
             <p class="mb-4 text-sm text-gray-500">무선제본, B6, 150p↑ (변동O)</p>
-            <p class="text-[15px] leading-7">SCOOP의 새로운 기획으로 여배우 배이현과 얽힌 사이비 종교 ‘영명교’의 취재를 이어가던 승연과 세일. 그러던 어느 날, 두 사람에게 예기치 못한 일이 일어나는데...</p>
+            <p class="text-base leading-7">SCOOP의 새로운 기획으로 여배우 배이현과 얽힌 사이비 종교 ‘영명교’의 취재를 이어가던 승연과 세일. 그러던 어느 날, 두 사람에게 예기치 못한 일이 일어나는데...</p>
 
             <!-- <p class="text-lg leading-8">SCOOP의 새로운 기획으로 여배우 배이현과 얽힌 사이비 종교 ‘영명교’의 취재를 이어가던 승연과 세일. 그러던 어느 날, 승연은 싸늘한 주검으로 돌아온다. 경찰은 자살이라 단정하지만, 세일은 수사에 석연치 않은 점을 느낀다. 이에 세일은 규혁과 함께 승연의 죽음에 얽힌 비밀을 파헤치기 시작한다. <br>그러나 파고들수록, 자신이 알지 못했던 승연의 또 다른 얼굴과 마주하게 되고, 세일은 진실에서 점점 더 멀어지는 느낌에 사로잡히는데…</p> -->
           </div>
@@ -40,7 +40,7 @@
           </li>
         </ul>
   
-        <div v-html="htmlContent" class="prose max-w-none indent-2 leading-6 text-[15px] sample-content text-neutral-800" />
+        <div v-html="htmlContent" class="prose max-w-none indent-2 leading-6 text-base sample-content text-neutral-800" />
         
       </div>
     </div>

@@ -35,7 +35,7 @@
       <div 
         v-else-if="renderedMarkdown" 
         v-html="renderedMarkdown" 
-        class="prose max-w-none text-[15px] leading-[1.8] indent-3 markdown-body"
+        class="prose max-w-none text-base leading-[1.8] indent-3 markdown-body"
       ></div>
       <div v-else class="text-neutral-500 py-4">
         글을 선택하면 내용이 여기에 표시됩니다.
@@ -218,7 +218,6 @@ function goToSample(): void {
 <style scoped>
 .prose {
   line-height: 1.8;
-  font-size: 15px;
   text-indent: 0.5rem;
 }
 

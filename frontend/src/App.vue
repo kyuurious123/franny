@@ -24,7 +24,7 @@
         </main>
 
         <!-- 사이드바 (우측 30%) -->
-        <aside class="sidebar-area h-full overflow-scroll">
+        <aside class="sidebar-area h-full">
           <SidebarList />
         </aside>
       </div>
