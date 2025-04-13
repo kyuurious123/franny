@@ -1,5 +1,5 @@
 <template>
-  <div class="writing-list">
+  <div class="writing-list mt-10 md:mt-0">
     <div class="writings">
       <router-link 
         v-for="bestarwriting in bestarwritings" 

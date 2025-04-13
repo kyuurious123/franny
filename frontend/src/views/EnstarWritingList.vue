@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-10 md:mt-0">
     <section class="zombie">
       <div>
         <div>
