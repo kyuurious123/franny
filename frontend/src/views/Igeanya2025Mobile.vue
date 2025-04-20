@@ -9,14 +9,17 @@
     </div>
     
     <!-- 글 목록 -->
-    <div class="px-8 py-4 mt-4 mb-10">
+    <div class="px-8 py-4 mt-2 mb-10">
       <ul class="text-2xl">
         <li
           v-for="(post, index) in posts"
           :key="index"
           @click="viewDetail(post)"
           class="cursor-pointer sample-title mb-4"
-          :class="{ 'line-through': selected?.title === post.title }"
+          :class="{ 
+              'line-through': selected?.title === post.title,
+              'ml-20': index >= 4
+            }"
         >
           {{ post.number }}
           {{ post.title }}
@@ -25,7 +28,7 @@
     </div>
 
     <!-- 글 상세 (목록 아래에 표시) -->
-    <div v-if="selected" class="mt-8 p-4 text-neutral-900">
+    <div v-if="selected" class="mt-8 pb-10 p-4 text-neutral-900">
       <div v-if="loading" class="text-center py-4">
         불러오는 중...
       </div>
@@ -39,13 +42,6 @@
       ></div>
       <div v-else class="text-neutral-500 py-4">
         글을 선택하면 내용이 여기에 표시됩니다.
-      </div>
-      
-      <!-- 디버깅 정보 - 간소화 -->
-      <div v-if="isDev" class="mt-4 p-2 bg-gray-100 text-xs">
-        <p>선택된 글: {{ selected?.title || '없음' }}</p>
-        <p>원본 길이: {{ markdownContent.length }}</p>
-        <p>변환 길이: {{ renderedMarkdown ? renderedMarkdown.length : 0 }}</p>
       </div>
       
       <!-- 이전/다음 글 네비게이션 -->
@@ -103,7 +99,9 @@ const posts = ref<Post[]>([
   { title: '시작', number: '01', path: './writing/bestar/13.md' },
   { title: '견착', number: '02', path: './writing/bestar/14.md' },
   { title: '침투', number: '03', path: './writing/bestar/15.md' },
-  { title: '인정', number: '04', path: './writing/bestar/16.md' }
+  { title: '인정', number: '04', path: './writing/bestar/16.md' },
+  { title: '죽음', number: '05', path: './writing/bestar/17.md' }
+
 ]);
 
 const selected = ref<Post | null>(null);

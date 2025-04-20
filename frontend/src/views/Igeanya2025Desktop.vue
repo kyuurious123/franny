@@ -27,13 +27,16 @@
   
       <!-- 우측 영역 -->
       <div class="w-1/2 overflow-y-auto p-10">
-        <ul class="text-3xl mb-20">
+        <ul class="text-2xl mb-20">
           <li
             v-for="(post, index) in posts"
             :key="index"
             @click="updateContent(post)"
             class="cursor-pointer sample-title mb-4"
-            :class="{ 'line-through': selected?.title === post.title }"
+            :class="{ 
+              'line-through': selected?.title === post.title,
+              'ml-40': index >= 4
+            }"
           >
             {{ post.number }}.
             {{ post.title }}
@@ -59,7 +62,8 @@
     { title: '시작', number: '01', path: './writing/bestar/13.md' },
     { title: '견착', number: '02', path: './writing/bestar/14.md' },
     { title: '침투', number: '03', path: './writing/bestar/15.md' },
-    { title: '인정', number: '04', path: './writing/bestar/16.md' }
+    { title: '인정', number: '04', path: './writing/bestar/16.md' },
+    { title: '죽음', number: '05', path: './writing/bestar/17.md' }
   ]);
   
   const selected = ref(posts.value[0]);

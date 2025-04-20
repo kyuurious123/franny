@@ -23,7 +23,7 @@
       <img :src="book1Title" alt="" class="w-[80%] m-auto">
   </div>
   
-  <div class="space-y-2 px-4">
+  <div class="space-y-2 px-4 pb-10">
     <p class="mb-4 text-sm text-gray-500">무선제본, B6, 150p↑ (변동O)</p>
     <p class="text-base leading-7">SCOOP의 새로운 기획으로 여배우 배이현과 얽힌 사이비 종교 ‘영명교’의 취재를 이어가던 승연과 세일. 그러던 어느 날, 두 사람에게 예기치 못한 일이 일어나는데...</p>
 
