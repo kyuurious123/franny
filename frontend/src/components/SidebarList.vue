@@ -41,12 +41,33 @@
   </div>
 </template>
 
-<script lang="ts">import { defineComponent, computed, onMounted, ref } from 'vue';
+<script lang="ts">
+import { defineComponent, computed, onMounted, ref, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BestarWritingList from '../views/BestarWritingList.vue';
 import EnstarWritingList from '../views/EnstarWritingList.vue';
 import mainSvg from '/src/assets/main.svg';
 import Memo from '../views/Memo.vue'
+
+// const showModal = ref(false)
+
+// const closeModal = () => {
+//   showModal.value = false
+// }
+
+// const handleEsc = (e: KeyboardEvent) => {
+//   if (e.key === 'Escape') {
+//     closeModal()
+//   }
+// }
+
+// onMounted(() => {
+//   window.addEventListener('keydown', handleEsc)
+// })
+
+// onUnmounted(() => {
+//   window.removeEventListener('keydown', handleEsc)
+// })
 
 export default defineComponent({
   components: {

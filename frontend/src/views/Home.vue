@@ -37,10 +37,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import mainSvg from '/src/assets/main.svg'
 import bannerImg from '/src/assets/franny-banner.png'
-import { ref, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
 import Memo from '../views/Memo.vue'
@@ -78,6 +78,28 @@ const formatDate = (dateString) => {
   // 연도, 월, 일을 연결하여 반환
   return `${year}${month}${day}`;
 };
+
+// //모달
+// const showModal = ref(false)
+
+// const closeModal = () => {
+//   showModal.value = false
+// }
+
+// const handleEsc = (e: KeyboardEvent) => {
+//   if (e.key === 'Escape') {
+//     closeModal()
+//   }
+// }
+
+// onMounted(() => {
+//   window.addEventListener('keydown', handleEsc)
+// })
+
+// onUnmounted(() => {
+//   window.removeEventListener('keydown', handleEsc)
+// })
+
 </script>
 
 <style scoped>
