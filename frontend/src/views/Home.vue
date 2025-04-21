@@ -7,9 +7,8 @@
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">
         <div>
-          <h3>프래니 / 파프리카</h3>
+          <h3>프래니 @franny1220 / 파프리카 @ange2205ccb</h3>
           <div>
-            <p>last updated 25-3-23</p>
             <p>베리드 스타즈 주력 <br> 가끔 앙스타 얘기 합니다. </p>
           </div>
           <div class="banner">
@@ -37,8 +36,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import mainSvg from '/src/assets/main.svg'
+<script setup>
 import bannerImg from '/src/assets/franny-banner.png'
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import bestarWritingsData from '../data/bestarwritings.json';

@@ -45,7 +45,8 @@
     <div class="sub-nav p-4">
       <p class="event-text">다음 참가 행사</p>
       <p class="event-date">25</p><p class="event-date">5</p><p class="event-date">17</p>
-      <p class="event-name">이게아냐 2025</p>
+      <p class="event-name mb-4">이게아냐 2025</p>
+      <p class="copyright">last updated 25-4-21</p>
       <p class="copyright">copyright (c) 프래니</p>
     </div>
   </div>
