@@ -25,7 +25,7 @@
 
         <!-- 사이드바 (우측 30%) -->
         <aside class="sidebar-area h-full">
-          <SidebarList />
+          <SidebarList @open-info-modal="showModal = true" />
         </aside>
       </div>
 
@@ -35,6 +35,9 @@
         <router-view />
       </div>
     </div>
+
+    <InfoModal v-if="showModal" @close="showModal = false" />
+
   </div>
 </template>
 
@@ -46,6 +49,9 @@ import MobileHeader from './components/MobileHeader.vue'
 import SidebarList from './components/SidebarList.vue'
 import BestarWritingDetail from './views/BestarWritingDetail.vue'
 import EnstarWritingDetail from './views/EnstarWritingDetail.vue'
+import InfoModal from './components/InfoModal.vue' // 실제 경로에 맞게 조정
+
+const showModal = ref(false)
 
 const route = useRoute()
 

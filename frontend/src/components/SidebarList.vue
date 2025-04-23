@@ -12,8 +12,21 @@
 
     <!-- Home 페이지인 경우 -->
     <div v-else-if="currentRoute === '/'" class="home h-full">
+
+      <!-- 모달 열기 버튼 -->
+      <div class="border-t mt-8 border-black">
+        <div class="py-3 border-b border-black text-center">
+          <a @click="$emit('open-info-modal')" class="no-underline cursor-pointer">
+            이게아냐2025 켜3a 부스 인포 →
+          </a>
+        </div>
+        
+        <div class="py-3 border-b border-black text-center">
+          <a class="no-underline cursor-pointer" @click="$router.push('/igeanya2025')"><그리고 각자가 그 진실을> 샘플 →</a>
+        </div>
+      </div>
+     
       <Memo />
-      <!-- <button class="w-[150px] h-[150px] bg-[#3DFF7E] rounded-full text-black font-normal pt-4" @click="$router.push('/igeanya2025')">이게아냐 2025 <br>신간 샘플은 <br> 이쪽에서 </button> -->
     </div>
 
 
