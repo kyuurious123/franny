@@ -9,6 +9,10 @@ import Guest from '../views/Guest.vue'
 import Igeanya2025 from '../views/Igeanya2025.vue';
 import SampleMobile from '../views/SampleMobile.vue';
 import Igeanya2025Mobile from '../views/Igeanya2025Mobile.vue';
+// 리뷰 게시판 컴포넌트 import
+import ReviewBoard from '../views/ReviewBoard.vue';
+import WritePost from '../views/WritePost.vue';
+import ViewPost from '../views/ViewPost.vue';
 
 // 배포 환경에 맞는 base URL 설정
 const base = import.meta.env.BASE_URL || '/';
@@ -89,6 +93,24 @@ const routes: Array<RouteRecordRaw> = [
         }
       }
     ]
+  },
+  
+  // 리뷰 게시판 라우트 추가
+  {
+    path: '/review',
+    name: 'ReviewBoard',
+    component: ReviewBoard
+  },
+  {
+    path: '/review/write',
+    name: 'WritePost',
+    component: WritePost
+  },
+  {
+    path: '/review/post/:id',
+    name: 'ViewPost',
+    component: ViewPost,
+    props: true
   },
   
   // 404 페이지

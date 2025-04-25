@@ -15,7 +15,10 @@
         </aside>
 
         <!-- 주요 콘텐츠 영역 (중앙 55%) -->
-        <main class="content-area h-full overflow-scroll">
+        <main :class="[
+          'content-area h-full overflow-scroll', 
+          { '!w-[85%]': isReviewPage }
+        ]">
           <Transition name="fade-up" mode="out-in">
             <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="15" />
             <EnstarWritingDetail v-else-if="currentPath === '/enstar'" key="enstar-default" id="zombie-01" />
@@ -24,7 +27,7 @@
         </main>
 
         <!-- 사이드바 (우측 30%) -->
-        <aside class="sidebar-area h-full">
+        <aside v-if="!isReviewPage" class="sidebar-area h-full">
           <SidebarList />
         </aside>
       </div>
@@ -52,6 +55,8 @@ const route = useRoute()
 const isMobile = ref(false)
 const currentPath = computed(() => route.path)
 const isIgeanyaPage = computed(() => route.path.startsWith('/igeanya2025'))
+const isReviewPage = computed(() => route.path.startsWith('/review'))
+
 
 const handleResize = () => {
   isMobile.value = window.innerWidth <= 768

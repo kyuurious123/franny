@@ -33,6 +33,15 @@
         </li>
         <li>
           <router-link 
+            to="/review" 
+            class="nav-link"
+            :class="{ 'active': currentRoute.includes('/review') }"
+          >
+            REVIEWS
+          </router-link>
+        </li>
+        <li>
+          <router-link 
             to="/guest" 
             class="nav-link"
             :class="{ 'active': currentRoute.includes('/guest') }"
