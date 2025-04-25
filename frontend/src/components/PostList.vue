@@ -42,7 +42,8 @@ export default defineComponent({
     const router = useRouter();
     
     const goToPost = (id: number) => {
-      router.push(`/post/${id}`);
+      // 수정된 부분: 올바른 라우트 경로 사용
+      router.push(`/review/post/${id}`);
     };
     
     const formatDate = (dateString: string) => {
