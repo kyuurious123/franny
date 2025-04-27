@@ -1,7 +1,21 @@
 <template>
   <div class="home">
     <div class="mobile-only">
-      <Memo />
+      <div class="border-t mt-8 border-black">
+        <div class="py-3 bg-black text-white text-center">
+          <a @click="$emit('open-info-modal')" class="no-underline cursor-pointer text-white">
+            🏡 이게아냐2025 켜3a 부스 인포 →
+          </a>
+        </div>
+        
+        <div class="py-3 border-b border-black text-center">
+          <a class="no-underline cursor-pointer" @click="$router.push('/igeanya2025')"><그리고 각자가 그 진실을> 샘플 →</a>
+        </div>
+
+        <div class="py-3 border-b border-black text-center">
+          <a class="no-underline cursor-pointer" @click="$router.push('/igeanya2025')"><다만 파도를 기다렸네> 샘플 →</a>
+        </div>
+      </div>
     </div>
     <section>
       <h2 class="big-title">SHOW MUST GO ON</h2>

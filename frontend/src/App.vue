@@ -32,7 +32,13 @@
       <!-- 모바일 레이아웃 (기존과 동일) -->
       <div v-else class="mobile-layout-container">
         <MobileHeader />
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <component
+            :is="Component"
+            @open-info-modal="showModal = true"
+          />
+        </router-view>
+
       </div>
     </div>
 
