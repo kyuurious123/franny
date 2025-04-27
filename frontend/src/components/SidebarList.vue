@@ -1,12 +1,12 @@
 <template>
   <div class="sidebar-list h-full">
     <!-- 현재 페이지가 BestarWritingDetail 또는 BestarWritingList인 경우 -->
-    <div v-if="currentRoute.includes('bestar')" class="p-6">
+    <div v-if="currentRoute.includes('bestar')" class="p-6 overflow-x-scroll h-full">
       <BestarWritingList @click.native.prevent="captureLinks" />
     </div>
     
     <!-- 현재 페이지가 EnstarWritingDetail 또는 EnstarWritingList인 경우 -->
-    <div v-else-if="currentRoute.includes('enstar')">
+    <div v-else-if="currentRoute.includes('enstar')" class="overflow-x-scroll h-full">
       <EnstarWritingList @click.native.prevent="captureLinks" />
     </div>
 
