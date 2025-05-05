@@ -1,9 +1,23 @@
 <template>
-  <div class="home">
+  <div class="home md:p-4">
     <div class="mobile-only">
-      <Memo />
+      <div class="border-t mt-10 border-black mb-8">
+        <div class="py-3 bg-black text-white text-center">
+          <a @click="$emit('open-info-modal')" class="no-underline cursor-pointer text-white">
+            🏡 이게아냐2025 켜3a 부스 인포 →
+          </a>
+        </div>
+        
+        <div class="py-3 border-b border-black text-center">
+          <a class="no-underline cursor-pointer" @click="$router.push('/igeanya2025')"><그리고 각자가 그 진실을> 샘플 →</a>
+        </div>
+
+        <div class="py-3 border-b border-black text-center">
+          <a class="no-underline cursor-pointer" @click="$router.push('/Wave')"><다만 파도를 기다렸네> 샘플 →</a>
+        </div>
+      </div>
     </div>
-    <section>
+    <section class="p-4 md:p-0">
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">
         <div>
@@ -19,7 +33,7 @@
         <img class="turtle" src="https://blog.kakaocdn.net/dn/n9a8S/btsMUy2wn0Y/V4Iib3gYLCkRbXZpdWOLkk/img.png" alt="">
       </div>
     </section>
-    <section class="home__desc">
+    <section class="home__desc p-4 md:p-0">
       <span class="line-green">베스타 최신글</span>
       <span v-for="writing in latestBestarWritings" :key="writing.id" class="lts-writing">
           <router-link :to="`/bestar/${writing.id}`">
@@ -136,10 +150,6 @@ const formatDate = (dateString) => {
 .turtle {
   width: 45%;
   height: 100%;
-}
-
-.home {
-  padding: 1rem;
 }
 
 .main-img {

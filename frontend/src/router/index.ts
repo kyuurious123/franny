@@ -7,8 +7,12 @@ import BestarWritingDetail from '../views/BestarWritingDetail.vue'
 import EnstarWritingDetail from '../views/EnstarWritingDetail.vue'
 import Guest from '../views/Guest.vue'
 import Igeanya2025 from '../views/Igeanya2025.vue';
-import SampleMobile from '../views/SampleMobile.vue';
+import IgeanyaSampleMobile from '../views/SampleMobile.vue';
 import Igeanya2025Mobile from '../views/Igeanya2025Mobile.vue';
+import Wave from '../views/Wave.vue';
+import WaveSampleMobile from '../views/WaveSampleMobile.vue';
+import WaveMobile from '../views/WaveMobile.vue';
+
 
 // 배포 환경에 맞는 base URL 설정
 const base = import.meta.env.BASE_URL || '/';
@@ -63,14 +67,14 @@ const routes: Array<RouteRecordRaw> = [
     component: Guest
   },
 
-  // 이게아냐 2025 관련 라우터 설정
+  // 그리고 각자가 진실 관련 라우터 설정
   {
     path: '/igeanya2025',
     component: Igeanya2025,
     children: [
       {
         path: 'sample',
-        component: SampleMobile
+        component: IgeanyaSampleMobile
       },
       {
         path: 'list',
@@ -90,7 +94,34 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
-  
+ 
+  // 파도 관련 라우터 설정
+  {
+    path: '/Wave',
+    component: Wave,
+    children: [
+      {
+        path: 'sample',
+        component: WaveSampleMobile
+      },
+      {
+        path: 'list',
+        component: WaveMobile
+      },
+      {
+        path: ':id',
+        component: WaveMobile
+      },
+      {
+        // 기본 리다이렉트 - 모바일에서는 sample로 이동
+        path: '',
+        redirect: _ => {
+          // 모바일 체크는 컴포넌트에서 처리
+          return { path: '/Wave/sample' }
+        }
+      }
+    ]
+  },
   // 404 페이지
   {
     path: '/:pathMatch(.*)*',

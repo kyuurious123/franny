@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- /igeanya2025 경로일 땐 전체 layout 생략 -->
-    <div v-if="isIgeanyaPage">
+    <div v-if="isIgeanyaPage || isWavePage">
       <router-view />
     </div>
 
@@ -25,16 +25,25 @@
 
         <!-- 사이드바 (우측 30%) -->
         <aside class="sidebar-area h-full">
-          <SidebarList />
+          <SidebarList @open-info-modal="showModal = true" />
         </aside>
       </div>
 
       <!-- 모바일 레이아웃 (기존과 동일) -->
       <div v-else class="mobile-layout-container">
         <MobileHeader />
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <component
+            :is="Component"
+            @open-info-modal="showModal = true"
+          />
+        </router-view>
+
       </div>
     </div>
+
+    <InfoModal v-if="showModal" @close="showModal = false" />
+
   </div>
 </template>
 
@@ -46,12 +55,17 @@ import MobileHeader from './components/MobileHeader.vue'
 import SidebarList from './components/SidebarList.vue'
 import BestarWritingDetail from './views/BestarWritingDetail.vue'
 import EnstarWritingDetail from './views/EnstarWritingDetail.vue'
+import InfoModal from './components/InfoModal.vue' // 실제 경로에 맞게 조정
+
+const showModal = ref(false)
 
 const route = useRoute()
 
 const isMobile = ref(false)
 const currentPath = computed(() => route.path)
 const isIgeanyaPage = computed(() => route.path.startsWith('/igeanya2025'))
+const isWavePage = computed(() => route.path.startsWith('/Wave'))
+
 
 const handleResize = () => {
   isMobile.value = window.innerWidth <= 768
