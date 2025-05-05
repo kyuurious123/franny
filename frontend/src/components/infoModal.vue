@@ -4,14 +4,14 @@
       @click.self="$emit('close')"
     >
       <div class="bg-white max-w-4xl p-5 md:border border-t border-black
-             h-[90%] md:h-auto
+             h-[80%] md:h-auto
              overflow-y-auto
              absolute md:relative
              bottom-0 md:bottom-auto
              animate-slide-up md:animate-none">
-        <button @click="$emit('close')" class="md:absolute -top-12 right-0 text-gray-500 bg-white rounded-none !border border-black">✕</button>
+        <!-- <button @click="$emit('close')" class="md:absolute -top-12 right-0 text-gray-500 bg-white rounded-none !border border-black">✕</button> -->
 
-        <div class="flex justify-between w-full md:px-6 md:text-2xl text-lg font-bold mb-8">
+        <div class="flex justify-between w-full md:px-6 md:text-2xl font-bold mb-8">
             <div>켜3a</div>
             <p>미친여자와비정상남자들</p>
             <p>이게아냐 2025</p>
@@ -50,7 +50,7 @@
                         <p class="text-lg font-bold">다만 파도를 기다렸네</p>
                         <p class="text-gray-500 text-xs mt-1">이규혁, 한도윤</p>
                     </div>
-                    <p class="text-lg font-bold">6,000원</p>
+                    <p class="text-lg font-bold">4,000원</p>
                 </div>
                 <div class="flex py-2 md:py-1 border-t border-b border-black justify-between mb-5 md:text-[13px]">
                     <p>무선제본</p>

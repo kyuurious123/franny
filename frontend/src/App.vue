@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- /igeanya2025 경로일 땐 전체 layout 생략 -->
-    <div v-if="isIgeanyaPage">
+    <div v-if="isIgeanyaPage || isWavePage">
       <router-view />
     </div>
 
@@ -64,6 +64,8 @@ const route = useRoute()
 const isMobile = ref(false)
 const currentPath = computed(() => route.path)
 const isIgeanyaPage = computed(() => route.path.startsWith('/igeanya2025'))
+const isWavePage = computed(() => route.path.startsWith('/Wave'))
+
 
 const handleResize = () => {
   isMobile.value = window.innerWidth <= 768

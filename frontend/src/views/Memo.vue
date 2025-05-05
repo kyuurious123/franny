@@ -1,4 +1,3 @@
-<!-- Memo.vue -->
 <template>
   <div class="memo-container" @click.stop>
     <div 

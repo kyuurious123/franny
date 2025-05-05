@@ -26,7 +26,7 @@
         </div>
 
         <div class="py-3 border-b border-black text-center">
-          <a class="no-underline cursor-pointer" @click="$router.push('/igeanya2025')"><다만 파도를 기다렸네> 샘플 →</a>
+          <a class="no-underline cursor-pointer" @click="$router.push('/Wave')"><다만 파도를 기다렸네> 샘플 →</a>
         </div>
       </div>
      
