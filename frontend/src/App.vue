@@ -55,7 +55,8 @@ import MobileHeader from './components/MobileHeader.vue'
 import SidebarList from './components/SidebarList.vue'
 import BestarWritingDetail from './views/BestarWritingDetail.vue'
 import EnstarWritingDetail from './views/EnstarWritingDetail.vue'
-import InfoModal from './components/InfoModal.vue' // 실제 경로에 맞게 조정
+import InfoModal from './components/InfoModal.vue'
+
 
 const showModal = ref(false)
 

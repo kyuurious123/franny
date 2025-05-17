@@ -14,7 +14,7 @@
           </div>
           <!-- 선입금 -->
           <div class="border-b border-black py-2 text-center">
-            <a href="https://tmm.im/p/44730" target="_blank" class="no-underline text-lg">선입금 / 통판 폼 (TMM) 5.5 14:00 ~ 5.12 12:00 →</a>
+            <a href="https://tmm.im/p/45544" target="_blank" class="no-underline text-lg">선입금 / 통판 폼 (TMM) 5.5 14:00 ~ 5.12 12:00 →</a>
           </div>
           <!-- 책 정보 -->
           <div class="space-y-2 px-10 py-8">
@@ -33,45 +33,44 @@
     </div>
   </template>
   
-  <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
-  import { marked } from 'marked';
-  import book2Title from '/src/assets/book2title.svg'
-  import { useRoute } from 'vue-router';
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { marked } from 'marked';
+import { useRoute } from 'vue-router';
 
-  const route = useRoute();
-  
-  // public/bestar 폴더에 있는 마크다운 파일들
-  const posts = ref([
-    { path: './writing/bestar/19.md' }
-  ]);
-  
-  const selected = ref(posts.value[0]);
-  const htmlContent = ref('');
+const route = useRoute();
 
-  async function updateContent(post: { title: string; number: string; path: string }) {
+const posts = ref([
+  { path: './writing/bestar/19.md' }
+]);
+
+const selected = ref(posts.value[0]);
+const htmlContent = ref('');
+
+async function updateContent(post: { path: string }) {
   selected.value = post;
   const res = await fetch(post.path);
   const rawText = await res.text();
-  // 타입 단언 추가
   htmlContent.value = marked.parse(rawText) as string;
 }
-  onMounted(() => {
+
+onMounted(() => {
   const postId = route.params.id;
-  // post 타입 문제 수정
+
   if (postId) {
-    const post = posts.value.find(p => p.number === postId);
+    const post = posts.value.find(p => p.path.includes(`${postId}.md`));
     if (post) {
-      selected.value = post;  // 이제 타입이 일치함
+      updateContent(post);
+      return;
     }
   }
 
-  
-  // 선택된 글 로드
+  // fallback: 첫 번째 글 표시
   updateContent(selected.value);
 });
+
   
-  </script>
+</script>
   
   <style scoped>
   .prose {

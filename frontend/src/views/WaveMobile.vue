@@ -49,28 +49,22 @@ import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
 
-// 타입 정의
+// Post 타입: path만 사용
 interface Post {
-  title: string;
-  number: string;
   path: string;
 }
 
-// 개발 모드 체크를 위한 변수
+// 개발 모드 체크 (선택적)
 const isDev = ref(false);
-
-// NODE_ENV 확인을 위한 방법 변경
 try {
-  // @ts-ignore - Vite 환경에서는 import.meta.env를 사용
   isDev.value = import.meta.env?.MODE === 'development';
 } catch (e) {
-  // 예외 발생 시 기본값은 false
   console.error('환경 변수 확인 오류:', e);
 }
 
+// 포스트 목록 (path만 포함)
 const posts = ref<Post[]>([
   { path: './writing/bestar/19.md' }
-
 ]);
 
 const selected = ref<Post | null>(null);
@@ -78,77 +72,60 @@ const markdownContent = ref('');
 const loading = ref(false);
 const error = ref('');
 
-// 마크다운을 렌더링하는 computed 속성
+// 렌더링된 마크다운
 const renderedMarkdown = computed((): string => {
   return markdownContent.value ? (marked.parse(markdownContent.value) as string) : '';
 });
 
-// // 현재 선택된 글의 인덱스
-// const currentIndex = computed(() => {
-//   if (!selected.value) return -1;
-//   const selectedPost = selected.value as Post;
-//   return posts.value.findIndex(post => post.title === selectedPost.title);
-// });
-
-// URL 변경 감지
+// URL 파라미터 변경 감지
 watch(() => route.params.id, (newId) => {
   if (newId) {
-    const post = posts.value.find(p => p.number === newId);
+    const post = posts.value.find(p => p.path.includes(`${newId}.md`));
     if (post) {
       viewDetail(post);
     }
   }
 });
 
+// 최초 마운트 시 처리
 onMounted(() => {
-  // URL 파라미터에서 id를 가져옴
   const postId = route.params.id;
-  
+
   if (postId) {
-    // id가 숫자인 경우(01, 02, 03 등) 해당 포스트 찾기
-    const post = posts.value.find(p => p.number === postId);
-    
+    const post = posts.value.find(p => p.path.includes(`${postId}.md`));
     if (post) {
-      // 찾은 포스트 불러오기
       viewDetail(post);
-    } else {
-      // id를 찾지 못한 경우 첫 번째 글 로드
-      viewDetail(posts.value[0]);
+      return;
     }
-  } else {
-    // id가 없는 경우 첫 번째 글 로드
-    viewDetail(posts.value[0]);
   }
+
+  // 기본 글 로드
+  viewDetail(posts.value[0]);
 });
 
-// 마크다운 로드 및 표시 함수
+// 마크다운 파일 불러오기
 async function viewDetail(post: Post): Promise<void> {
-  // 같은 글을 다시 클릭하면 아무것도 하지 않음
-  if (selected.value?.title === post.title && markdownContent.value) {
+  if (selected.value?.path === post.path && markdownContent.value) {
     return;
   }
-  
+
   selected.value = post;
   loading.value = true;
   error.value = '';
-  markdownContent.value = ''; // 기존 내용 초기화
-  
+  markdownContent.value = '';
+
   try {
-    console.log('파일 경로:', post.path);
-    // 캐시 방지를 위한 타임스탬프 추가
-    const res = await fetch(`${post.path}?t=${new Date().getTime()}`, { cache: "no-store" });
-    
+    const res = await fetch(`${post.path}?t=${Date.now()}`, { cache: 'no-store' });
     if (!res.ok) {
       throw new Error(`파일을 불러올 수 없습니다. (상태 코드: ${res.status})`);
     }
-    
+
     const rawText = await res.text();
-    console.log('마크다운 내용 길이:', rawText.length);
-    
+
     if (rawText.trim() === '') {
       throw new Error('마크다운 내용이 비어있습니다.');
     }
-    
+
     markdownContent.value = rawText;
   } catch (err) {
     console.error('파일 로딩 오류:', err);
@@ -158,7 +135,7 @@ async function viewDetail(post: Post): Promise<void> {
   }
 }
 
-// 소개 페이지로 이동
+// 뒤로가기
 function goToSample(): void {
   router.push('/Wave/sample');
 }

@@ -21,7 +21,7 @@
   </div>
 
   <div class="border-b border-black py-2 text-center">
-    <a href="https://tmm.im/p/44730" target="_blank" class="no-underline">선입금 / 통판 폼 (TMM) 5.5 14:00 ~ 5.12 12:00 →</a>
+    <a href="https://tmm.im/p/45544" target="_blank" class="no-underline">선입금 / 통판 폼 (TMM) 5.5 14:00 ~ 5.12 12:00 →</a>
   </div>
   <!-- 책 정보 -->
   <div class="space-y-2 px-4 py-10">

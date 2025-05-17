@@ -109,31 +109,13 @@
         "filePath": "/writing/bestar/12.md"
     },
     {
-        "id": "13",
-        "number": "13",
-        "title": "그리고 각자가 그 진실을 (1)",
-        "summary": "<이게아냐 2025> 신간 샘플",
-        "date": "2025-03-28",
+        "id": "20",
+        "number": "20",
+        "title": "야 한도윤...너 미쳤어?",
+        "summary": "한도윤, 오인하",
+        "date": "2025-05-17",
         "fileType": "md",
-        "filePath": "/writing/bestar/13.md"
-    },
-    {
-        "id": "14",
-        "number": "14",
-        "title": "그리고 각자가 그 진실을 (2)",
-        "summary": "",
-        "date": "2025-04-01",
-        "fileType": "md",
-        "filePath": "/writing/bestar/14.md"
-    },
-    {
-        "id": "15",
-        "number": "15",
-        "title": "그리고 각자가 그 진실을 (3)",
-        "summary": "",
-        "date": "2025-04-07",
-        "fileType": "md",
-        "filePath": "/writing/bestar/15.md"
+        "filePath": "/writing/bestar/20.md"
     }
   ]
 }
