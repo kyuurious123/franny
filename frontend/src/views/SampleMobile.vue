@@ -21,7 +21,7 @@
   </div>
 
   <div class="border-b border-black py-2 text-center">
-    <a href="https://tmm.im/p/44730" target="_blank" class="no-underline">선입금 / 통판 폼 (TMM) 4.20 22:00 ~ 5.9 12:00 →</a>
+    <a href="tmm.im/p/46094" target="_blank" class="no-underline">추가 통판 폼 (TMM) 5.18 ~ 5. 20 00:00 →</a>
   </div>
   <!-- 책 정보 -->
   <div class="px-4 py-8">
@@ -29,7 +29,7 @@
   </div>
   
   <div class="space-y-2 px-4 pb-10">
-    <p class="mb-4 text-sm text-gray-500">무선제본, 비규격(115*190), 180p↑ (변동O)</p>
+    <p class="mb-4 text-sm text-gray-500">무선제본, 비규격(115*190), 200p</p>
     <p class="leading-8 mb-8">SCOOP의 새로운 기획으로 여배우 배이현과 얽힌 사이비 종교 ‘영명교’의 취재를 이어가던 승연과 세일. 그러던 어느 날, 승연은 싸늘한 주검으로 돌아온다. 경찰은 자살이라 단정하지만, 세일은 수사에 석연치 않은 점을 느낀다. 이에 세일은 규혁과 함께 승연의 죽음에 얽힌 비밀을 파헤치기 시작한다. <br>그러나 파고들수록, 자신이 알지 못했던 승연의 또 다른 얼굴과 마주하게 되고, 세일은 진실에서 점점 더 멀어지는 느낌에 사로잡히는데…</p>
   </div>
 </div>

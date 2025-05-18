@@ -218,7 +218,7 @@ function goToSample(): void {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom, #E8F6FD, #FFFFFF);
+  background: linear-gradient(to bottom, #FDEEE8, #FFFFFF);
   z-index: -1; /* 내용보다 뒤에 배치 */
   pointer-events: none; /* 클릭 이벤트가 배경을 통과하게 함 */
 }

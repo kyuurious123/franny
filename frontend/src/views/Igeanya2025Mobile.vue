@@ -102,7 +102,7 @@ const posts = ref<Post[]>([
   { title: '인정', number: '04', path: './writing/bestar/16.md' },
   { title: '죽음', number: '05', path: './writing/bestar/17.md' },
   { title: '장례', number: '06', path: './writing/bestar/18.md' },
-  { title: '점화', number: '07', path: './writing/bestar/19.md' }
+  { title: '점화', number: '07', path: './writing/bestar/21.md' }
 
 ]);
 

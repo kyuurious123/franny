@@ -17,7 +17,7 @@
         <!-- 주요 콘텐츠 영역 (중앙 55%) -->
         <main class="content-area h-full overflow-scroll">
           <Transition name="fade-up" mode="out-in">
-            <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="15" />
+            <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="20" />
             <EnstarWritingDetail v-else-if="currentPath === '/enstar'" key="enstar-default" id="zombie-01" />
             <router-view v-else :key="$route.fullPath" />
           </Transition>

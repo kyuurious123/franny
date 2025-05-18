@@ -12,25 +12,7 @@
 
     <!-- Home 페이지인 경우 -->
     <div v-else-if="currentRoute === '/'" class="home h-full">
-
-      <!-- 모달 열기 버튼 -->
-      <div class="border-t mt-8 border-black">
-        <div class="py-3 bg-black text-white text-center">
-          <a @click="$emit('open-info-modal')" class="no-underline cursor-pointer text-white">
-            🏡 이게아냐2025 켜3a 부스 인포 →
-          </a>
-        </div>
-        
-        <div class="py-3 border-b border-black text-center">
-          <a class="no-underline cursor-pointer" @click="$router.push('/igeanya2025')"><그리고 각자가 그 진실을> 샘플 →</a>
-        </div>
-
-        <div class="py-3 border-b border-black text-center">
-          <a class="no-underline cursor-pointer" @click="$router.push('/Wave')"><다만 파도를 기다렸네> 샘플 →</a>
-        </div>
-      </div>
-     
-      <Memo />
+      <p class="p-8 text-2xl">이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
     </div>
 
 

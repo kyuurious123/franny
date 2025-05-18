@@ -1,21 +1,7 @@
 <template>
   <div class="home md:p-4">
-    <div class="mobile-only">
-      <div class="border-t mt-10 border-black mb-8">
-        <div class="py-3 bg-black text-white text-center">
-          <a @click="$emit('open-info-modal')" class="no-underline cursor-pointer text-white">
-            🏡 이게아냐2025 켜3a 부스 인포 →
-          </a>
-        </div>
-        
-        <div class="py-3 border-b border-black text-center">
-          <a class="no-underline cursor-pointer" @click="$router.push('/igeanya2025')"><그리고 각자가 그 진실을> 샘플 →</a>
-        </div>
-
-        <div class="py-3 border-b border-black text-center">
-          <a class="no-underline cursor-pointer" @click="$router.push('/Wave')"><다만 파도를 기다렸네> 샘플 →</a>
-        </div>
-      </div>
+    <div class="mobile-only mt-10">
+      <p class="p-4 text-2xl bg-[#3DFF7E]">이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
     </div>
     <section class="p-4 md:p-0">
       <h2 class="big-title">SHOW MUST GO ON</h2>
