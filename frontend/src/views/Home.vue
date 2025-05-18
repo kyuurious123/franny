@@ -1,7 +1,14 @@
 <template>
   <div class="home md:p-4">
-    <div class="mobile-only mt-10">
-      <p class="p-4 text-2xl bg-[#3DFF7E]">이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
+    <div class="mobile-only mt-10 p-4 bg-[#3DFF7E]">
+      <p>이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
+      <p class="mb-2">감상을 남겨주시면 제가 매우 기뻐함</p>
+      <a
+        href="https://spin-spin.com/SmZAKQznJ8Z2GYQ"
+        target="_blank"
+        rel="external noopener noreferrer"
+        @click.prevent="openExternalLink"
+        >스핀스핀 →</a>
     </div>
     <section class="p-4 md:p-0">
       <h2 class="big-title">SHOW MUST GO ON</h2>
@@ -42,6 +49,10 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
 import Memo from '../views/Memo.vue'
+
+const openExternalLink = () => {
+  window.open('https://spin-spin.com/SmZAKQznJ8Z2GYQ', '_blank');
+};
 
 // JSON 데이터를 객체에서 배열로 변환
 const bestarwritings = ref(Object.values(bestarWritingsData.bestarwritings || {}));

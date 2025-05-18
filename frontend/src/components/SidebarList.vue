@@ -11,8 +11,16 @@
     </div>
 
     <!-- Home 페이지인 경우 -->
-    <div v-else-if="currentRoute === '/'" class="home h-full">
-      <p class="p-8 text-2xl">이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
+    <div v-else-if="currentRoute === '/'" class="home h-full p-4">
+      <p class="italic text-2xl">이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
+      <p class="mb-2">감상을 남겨주시면 제가 매우 기뻐함</p>
+      <a
+        href="https://spin-spin.com/SmZAKQznJ8Z2GYQ"
+        target="_blank"
+        rel="external noopener noreferrer"
+        @click="openExternalLink"
+        class="border-b border-[#3DFF7E] no-underline">
+          스핀스핀 →</a>
     </div>
 
 
@@ -46,7 +54,6 @@ import { useRoute, useRouter } from 'vue-router';
 import BestarWritingList from '../views/BestarWritingList.vue';
 import EnstarWritingList from '../views/EnstarWritingList.vue';
 import mainSvg from '/src/assets/main.svg';
-import Memo from '../views/Memo.vue'
 
 // const showModal = ref(false)
 
@@ -72,60 +79,87 @@ export default defineComponent({
   components: {
     BestarWritingList,
     EnstarWritingList,
-    Memo
   },
+  
   setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const currentRoute = computed(() => route.path);
+  const route = useRoute();
+  const router = useRouter();
+  const currentRoute = computed(() => route.path);
 
-    const isHovered = ref(false);
+  const isHovered = ref(false);
 
-    const getSpanClass = (index: number) => {
-      return {
-        'span-fixed': true,
-        'invisible': isHovered.value && index !== 999 // 999는 focused 인덱스 예외 처리용 (더 안전하게 하려면 별도로 관리 가능)
-      };
-    };
-
-    const captureLinks = (event: Event) => {
-      const mouseEvent = event as MouseEvent;
-      const target = mouseEvent.target as HTMLElement;
-
-      if (target.tagName === 'A' || target.closest('a')) {
-        event.preventDefault();
-        const link = (target as HTMLAnchorElement).href || (target.closest('a') as HTMLAnchorElement).href;
-        if (link) {
-          const parts = link.split('/');
-          const id = parts[parts.length - 1];
-          let type = 'bestar';
-          if (link.includes('enstar')) type = 'enstar';
-          router.push(`/${type}/${id}`);
-        }
-      }
-    };
-
-    onMounted(() => {
-      const sidebarElement = document.querySelector('.sidebar-list');
-      if (sidebarElement) {
-        sidebarElement.addEventListener('click', captureLinks);
-      }
-
-      return () => {
-        if (sidebarElement) {
-          sidebarElement.removeEventListener('click', captureLinks);
-        }
-      };
-    });
-
+  const getSpanClass = (index: number) => {
     return {
-      currentRoute,
-      mainSvg,
-      isHovered,
-      captureLinks,
-      getSpanClass
+      'span-fixed': true,
+      'invisible': isHovered.value && index !== 999
     };
-  }
+  };
+
+  // 새로운 함수 추가 - 여기에 추가하세요
+  const openExternalLink = (e: Event) => {
+    e.preventDefault();
+    window.open('https://spin-spin.com/SmZAKQznJ8Z2GYQ', '_blank');
+  };
+
+  // 기존 captureLinks 함수 수정 - 이 함수를 아래와 같이 교체하세요
+  const captureLinks = (event: Event) => {
+    const mouseEvent = event as MouseEvent;
+    const target = mouseEvent.target as HTMLElement;
+
+    if (target.tagName === 'A' || target.closest('a')) {
+      const anchorElement = target.tagName === 'A' 
+        ? (target as HTMLAnchorElement) 
+        : (target.closest('a') as HTMLAnchorElement);
+      
+      // 외부 링크인지 확인
+      if (anchorElement.href && anchorElement.href.startsWith('https://spin-spin.com')) {
+        // 외부 링크는 기본 동작 유지 또는 window.open으로 처리
+        if (anchorElement.target === '_blank') {
+          return; // 기본 동작 유지 (새 창에서 열기)
+        } else {
+          event.preventDefault();
+          window.open(anchorElement.href, '_blank');
+        }
+        return;
+      }
+      
+      // 내부 링크 처리 (기존 코드)
+      event.preventDefault();
+      const link = anchorElement.href;
+      if (link) {
+        const parts = link.split('/');
+        const id = parts[parts.length - 1];
+        let type = 'bestar';
+        if (link.includes('enstar')) type = 'enstar';
+        router.push(`/${type}/${id}`);
+      }
+    }
+  };
+
+  onMounted(() => {
+    // 기존 코드 유지
+    const sidebarElement = document.querySelector('.sidebar-list');
+    if (sidebarElement) {
+      sidebarElement.addEventListener('click', captureLinks);
+    }
+
+    return () => {
+      if (sidebarElement) {
+        sidebarElement.removeEventListener('click', captureLinks);
+      }
+    };
+  });
+
+  // return 문에 openExternalLink 추가 - 여기에 추가하세요
+  return {
+    currentRoute,
+    mainSvg,
+    isHovered,
+    captureLinks,
+    getSpanClass,
+    openExternalLink // 이 줄 추가
+  };
+}
 });
 
 </script>
