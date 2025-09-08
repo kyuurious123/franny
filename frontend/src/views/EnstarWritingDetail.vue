@@ -1,5 +1,5 @@
 <template>
-  <div class="writing-detail">
+  <div class="writing-detail mt-10 md:mt-0">
     <div class="writing-detail__title">
       <p class="title">{{ writingTitle }}</p>
       <p class="summary">{{ writingSummary }}</p>

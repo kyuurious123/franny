@@ -10,6 +10,12 @@
       <EnstarWritingList @click.native.prevent="captureLinks" />
     </div>
 
+    
+    <!-- 현재 페이지가 DcWritingDetail 또는 DcWritingList인 경우 -->
+    <div v-else-if="currentRoute.includes('dc')" class="p-6 overflow-x-scroll h-full">
+      <DcWritingList @click.native.prevent="captureLinks" />
+    </div>
+
     <!-- Home 페이지인 경우 -->
     <div v-else-if="currentRoute === '/'" class="home relative h-full bg-[url(../assets/img2.png)] bg-cover bg-[#DE2F36] bg-right flex flex-col justify-end
 ">
@@ -47,6 +53,8 @@ import { defineComponent, computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import BestarWritingList from '../views/BestarWritingList.vue';
 import EnstarWritingList from '../views/EnstarWritingList.vue';
+import DcWritingList from '../views/DcWritingList.vue';
+
 import mainSvg from '/src/assets/main.svg';
 import titleText from '/src/assets/text.svg';
 
@@ -74,6 +82,7 @@ export default defineComponent({
   components: {
     BestarWritingList,
     EnstarWritingList,
+    DcWritingList,
   },
   
   setup() {
@@ -126,6 +135,7 @@ export default defineComponent({
         const id = parts[parts.length - 1];
         let type = 'bestar';
         if (link.includes('enstar')) type = 'enstar';
+        if (link.includes('dc')) type = 'dc';
         router.push(`/${type}/${id}`);
       }
     }

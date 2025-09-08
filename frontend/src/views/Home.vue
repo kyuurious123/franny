@@ -20,6 +20,12 @@
       </div>
     </section>
     <section class="home__desc p-4 md:p-0">
+      <span class="line-green">코난 최신글</span>
+      <span v-for="writing in latestDcWritings" :key="writing.id" class="lts-writing">
+          <router-link :to="`/dc/${writing.id}`">
+          <span class="lts-writing__title">{{ writing.title }}</span><span class="lts-writing__sum">{{ writing.summary }}</span>{{ formatDate(writing.date) }}
+          </router-link>
+      </span>
       <span class="line-green">베스타 최신글</span>
       <span v-for="writing in latestBestarWritings" :key="writing.id" class="lts-writing">
           <router-link :to="`/bestar/${writing.id}`">
@@ -41,7 +47,8 @@ import bannerImg from '/src/assets/franny-banner.png'
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
-import Memo from '../views/Memo.vue'
+import dcWritingsData from '../data/dcwritings.json';
+
 import titleText from '/src/assets/text.svg';
 
 const openExternalLink = () => {
@@ -51,6 +58,8 @@ const openExternalLink = () => {
 // JSON 데이터를 객체에서 배열로 변환
 const bestarwritings = ref(Object.values(bestarWritingsData.bestarwritings || {}));
 const enstarwritings = ref(Object.values(enstarWritingsData.enstarwritings || {}));
+const dcwritings = ref(Object.values(dcWritingsData.dcwritings || {}));
+
 
 // 최신 5개만 가져오기
 const latestBestarWritings = computed(() => {
@@ -63,6 +72,14 @@ const latestBestarWritings = computed(() => {
 // 최신 5개만 가져오기
 const latestEnstarWritings = computed(() => {
   return enstarwritings.value
+    .slice()
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) // 날짜 내림차순 정렬
+    .slice(0, 5);
+});
+
+
+const latestDcWritings = computed(() => {
+  return dcwritings.value
     .slice()
     .sort((a, b) => new Date(b.date) - new Date(a.date)) // 날짜 내림차순 정렬
     .slice(0, 5);

@@ -9,12 +9,17 @@
         </li>
         <li>
           <router-link to="/bestar">
-            <span class="text">BESTAR</span>
+            <span class="text">BS</span>
           </router-link>
         </li>
         <li>
           <router-link to="/enstar">
-            <span class="text">ENSTAR</span>
+            <span class="text">ES</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/dc">
+            <span class="text">DC</span>
           </router-link>
         </li>
         <li>
@@ -87,7 +92,6 @@ export default defineComponent({
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.9rem;
 }
 
 .nav-links a.router-link-active {

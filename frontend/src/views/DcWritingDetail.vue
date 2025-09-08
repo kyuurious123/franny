@@ -14,7 +14,7 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { marked } from 'marked';
-import bestarWritingsData from '../data/bestarwritings.json';
+import dcWritingsData from '../data/dcwritings.json';
 import CommentSection from '../components/CommentSection.vue';
 
 // Props 정의
@@ -47,7 +47,7 @@ const loadWritingData = () => {
     return;
   }
   
-  const writing = bestarWritingsData.bestarwritings.find(w => w.id === postId);
+  const writing = dcWritingsData.dcwritings.find(w => w.id === postId);
   console.log("찾은 writing 데이터:", writing);
 
   if (writing) {

@@ -1,12 +1,7 @@
 <template>
   <div class="app-container">
-    <!-- /igeanya2025 경로일 땐 전체 layout 생략 -->
-    <div v-if="isIgeanyaPage || isWavePage">
-      <router-view />
-    </div>
-
     <!-- 일반 페이지 (PC/모바일 분기) -->
-    <div v-else class="h-full">
+    <div class="h-full">
       <!-- PC용 레이아웃 -->
       <div v-if="!isMobile" class="pc-layout-container h-full">
         <!-- PC 헤더 영역 (좌측 15%) -->
@@ -19,6 +14,7 @@
           <Transition name="fade-up" mode="out-in">
             <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="20" />
             <EnstarWritingDetail v-else-if="currentPath === '/enstar'" key="enstar-default" id="zombie-01" />
+            <DcWritingDetail v-else-if="currentPath === '/dc'" key="dc-default" id="dc03" />
             <router-view v-else :key="$route.fullPath" />
           </Transition>
         </main>
@@ -55,6 +51,8 @@ import MobileHeader from './components/MobileHeader.vue'
 import SidebarList from './components/SidebarList.vue'
 import BestarWritingDetail from './views/BestarWritingDetail.vue'
 import EnstarWritingDetail from './views/EnstarWritingDetail.vue'
+import DcWritingDetail from './views/DcWritingDetail.vue'
+
 import InfoModal from './components/InfoModal.vue'
 
 
@@ -64,8 +62,6 @@ const route = useRoute()
 
 const isMobile = ref(false)
 const currentPath = computed(() => route.path)
-const isIgeanyaPage = computed(() => route.path.startsWith('/igeanya2025'))
-const isWavePage = computed(() => route.path.startsWith('/Wave'))
 
 
 const handleResize = () => {
