@@ -62,6 +62,12 @@ const routes: Array<RouteRecordRaw> = [
     props: true
   },
   {
+    path: '/bestar/:id',
+    name: 'BestarWritingDetail',
+    component: BestarWritingDetail,
+    props: true
+  },
+  {
     path: '/guest',
     name: 'Guest',
     component: Guest

@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-list h-full">
+  <div class="sidebar-list h-full !overflow-hidden">
     <!-- 현재 페이지가 BestarWritingDetail 또는 BestarWritingList인 경우 -->
     <div v-if="currentRoute.includes('bestar')" class="p-6 overflow-x-scroll h-full">
       <BestarWritingList @click.native.prevent="captureLinks" />
@@ -11,16 +11,10 @@
     </div>
 
     <!-- Home 페이지인 경우 -->
-    <div v-else-if="currentRoute === '/'" class="home h-full p-4">
-      <p class="italic text-2xl">이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
-      <p class="mb-2">감상을 남겨주시면 제가 매우 기뻐함</p>
-      <a
-        href="https://spin-spin.com/SmZAKQznJ8Z2GYQ"
-        target="_blank"
-        rel="external noopener noreferrer"
-        @click="openExternalLink"
-        class="border-b border-[#3DFF7E] no-underline">
-          스핀스핀 →</a>
+    <div v-else-if="currentRoute === '/'" class="home relative h-full bg-[url(../assets/img2.png)] bg-cover bg-[#DE2F36] bg-right flex flex-col justify-end
+">
+      <img :src="titleText" alt="" class="absolute top-[40%] right-[-10%] w-[70%]">
+      <p class="text-lg text-white pb-8 text-center">9/17 샘플 공개 예정</p>
     </div>
 
 
@@ -54,6 +48,7 @@ import { useRoute, useRouter } from 'vue-router';
 import BestarWritingList from '../views/BestarWritingList.vue';
 import EnstarWritingList from '../views/EnstarWritingList.vue';
 import mainSvg from '/src/assets/main.svg';
+import titleText from '/src/assets/text.svg';
 
 // const showModal = ref(false)
 
@@ -155,6 +150,7 @@ export default defineComponent({
     currentRoute,
     mainSvg,
     isHovered,
+    titleText,
     captureLinks,
     getSpanClass,
     openExternalLink // 이 줄 추가

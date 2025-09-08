@@ -1,29 +1,22 @@
 <template>
-  <div class="home md:p-4">
-    <div class="mobile-only mt-10 p-4 bg-[#3DFF7E]">
-      <p>이게아냐2025 행사 수고하셨습니다!!!!!!!!꺆</p>
-      <p class="mb-2">감상을 남겨주시면 제가 매우 기뻐함</p>
-      <a
-        href="https://spin-spin.com/SmZAKQznJ8Z2GYQ"
-        target="_blank"
-        rel="external noopener noreferrer"
-        @click.prevent="openExternalLink"
-        >스핀스핀 →</a>
+  <div class="home md:p-4 !overflow-hidden">
+    <div class="mobile-only mt-10 p-4 bg-[url(../assets/img2.png)] bg-cover bg-[#DE2F36] relative h-[450px] flex flex-col !justify-end">
+      <img :src="titleText" alt="" class="w-[70%] absolute bottom-[-22%] right-[-10%]">
+      <p class="text-sm text-white">9/17 샘플 공개 예정</p>
     </div>
     <section class="p-4 md:p-0">
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">
         <div>
-          <h3>프래니 @franny1220 / 파프리카 @ange2205ccb</h3>
+          <h3>뷁 @skittcn</h3>
           <div>
-            <p>베리드 스타즈 주력 <br> 가끔 앙스타 얘기 합니다. </p>
+            <p>??: 형제가사랑을안하면누가하지 형제끼리사이좋으라고부모님이가르쳣는데</p>
           </div>
           <div class="banner">
-            <p>banner 뿌립니다</p>
             <img class="banner-img" :src="bannerImg" alt="">
           </div>
         </div>
-        <img class="turtle" src="https://blog.kakaocdn.net/dn/n9a8S/btsMUy2wn0Y/V4Iib3gYLCkRbXZpdWOLkk/img.png" alt="">
+        <img class="w-[30%]" src="https://blog.kakaocdn.net/dna/cdTma2/btsQpC1OJDQ/AAAAAAAAAAAAAAAAAAAAAAJby_IQIj13kjjWVTqLDkqCet-lhP8VEZf-ldnTpHuf/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1759244399&allow_ip=&allow_referer=&signature=o3JBSwdRnEkNfbKboP4T51xLPGM%3D" alt="">
       </div>
     </section>
     <section class="home__desc p-4 md:p-0">
@@ -49,6 +42,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
 import Memo from '../views/Memo.vue'
+import titleText from '/src/assets/text.svg';
 
 const openExternalLink = () => {
   window.open('https://spin-spin.com/SmZAKQznJ8Z2GYQ', '_blank');
@@ -142,11 +136,6 @@ const formatDate = (dateString) => {
     margin-top: 2rem;
     padding-bottom: 1rem;
   }
-}
-
-.turtle {
-  width: 45%;
-  height: 100%;
 }
 
 .main-img {

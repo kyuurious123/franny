@@ -18,7 +18,7 @@
           </div>
           <!-- 책 정보 -->
           <div class="px-10 py-8">
-            <img :src="book1Title" alt="" class="w-[80%] m-auto">
+            <!-- <img :src="book1Title" alt="" class="w-[80%] m-auto"> -->
           </div>
           <div class="space-y-2 px-10 mb-8">
             <p class="mb-4 text-sm text-gray-500">무선제본, 비규격(115*190), 200p</p>
@@ -54,7 +54,6 @@
   <script setup lang="ts">
   import { ref, onMounted } from 'vue';
   import { marked } from 'marked';
-  import book1Title from '/src/assets/book1title.svg'
   import { useRoute } from 'vue-router';
 
   const route = useRoute();

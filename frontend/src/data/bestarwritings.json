@@ -110,12 +110,21 @@
     },
     {
         "id": "20",
-        "number": "20",
+        "number": "13",
         "title": "야 한도윤...너 미쳤어?",
         "summary": "한도윤, 오인하",
         "date": "2025-05-17",
         "fileType": "md",
         "filePath": "/writing/bestar/20.md"
+    },
+    {
+        "id": "22",
+        "number": "14",
+        "title": "다만 파도를 기다렸네",
+        "summary": "이규혁, 한도윤",
+        "date": "2025-05-18",
+        "fileType": "md",
+        "filePath": "/writing/bestar/22.md"
     }
   ]
 }

@@ -25,7 +25,7 @@
   </div>
   <!-- 책 정보 -->
   <div class="px-4 py-8">
-      <img :src="book1Title" alt="" class="w-[80%] m-auto">
+      <!-- <img :src="book1Title" alt="" class="w-[80%] m-auto"> -->
   </div>
   
   <div class="space-y-2 px-4 pb-10">
@@ -37,7 +37,6 @@
 </template>
   
 <script setup lang="ts">
-import book1Title from '/src/assets/book1title.svg'
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
