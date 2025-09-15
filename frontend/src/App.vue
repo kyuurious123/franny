@@ -1,7 +1,12 @@
 <template>
   <div class="app-container">
+    <!-- /igeanya2025 경로일 땐 전체 layout 생략 -->
+    <div v-if="isIgeanyaPage || isDfestaPage">
+      <router-view />
+    </div>
+
     <!-- 일반 페이지 (PC/모바일 분기) -->
-    <div class="h-full">
+    <div v-else class="h-full">
       <!-- PC용 레이아웃 -->
       <div v-if="!isMobile" class="pc-layout-container h-full">
         <!-- PC 헤더 영역 (좌측 15%) -->
@@ -14,31 +19,22 @@
           <Transition name="fade-up" mode="out-in">
             <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="20" />
             <EnstarWritingDetail v-else-if="currentPath === '/enstar'" key="enstar-default" id="zombie-01" />
-            <DcWritingDetail v-else-if="currentPath === '/dc'" key="dc-default" id="dc03" />
             <router-view v-else :key="$route.fullPath" />
           </Transition>
         </main>
 
         <!-- 사이드바 (우측 30%) -->
         <aside class="sidebar-area h-full">
-          <SidebarList @open-info-modal="showModal = true" />
+          <SidebarList />
         </aside>
       </div>
 
       <!-- 모바일 레이아웃 (기존과 동일) -->
       <div v-else class="mobile-layout-container">
         <MobileHeader />
-        <router-view v-slot="{ Component }">
-          <component
-            :is="Component"
-            @open-info-modal="showModal = true"
-          />
-        </router-view>
-
+        <router-view />
       </div>
     </div>
-
-    <InfoModal v-if="showModal" @close="showModal = false" />
 
   </div>
 </template>
@@ -51,17 +47,13 @@ import MobileHeader from './components/MobileHeader.vue'
 import SidebarList from './components/SidebarList.vue'
 import BestarWritingDetail from './views/BestarWritingDetail.vue'
 import EnstarWritingDetail from './views/EnstarWritingDetail.vue'
-import DcWritingDetail from './views/DcWritingDetail.vue'
-
-import InfoModal from './components/InfoModal.vue'
-
-
-const showModal = ref(false)
 
 const route = useRoute()
 
 const isMobile = ref(false)
 const currentPath = computed(() => route.path)
+const isIgeanyaPage = computed(() => route.path.startsWith('/igeanya2025'))
+const isDfestaPage = computed(() => route.path.startsWith('/dfesta'))
 
 
 const handleResize = () => {
