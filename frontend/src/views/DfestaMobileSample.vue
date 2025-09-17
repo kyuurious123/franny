@@ -1,47 +1,70 @@
-
 <template>
   <div class="relative z-1 text-neutral-900">
-    <!-- 헤더 영역 -->
-    <div class="p-4">
-      <a @click="goToSample" class="no-underline font-normal text-base hover:bg-transparent">
-        <span class="mr-1">←</span>뒤로
-      </a>
-    </div>
-    
-    <!-- 이벤트 목록 -->
-    <div class="p-4 mt-2 mb-10">
-      <ul class="text-xl font-[BookkMyungjo-Bd]">
-        <li
-          v-for="(post, index) in posts"
-          :key="index"
-          @click="viewDetail(post)"
-          class="cursor-pointer dfesta-title mb-4 bg-black text-black"
-          :class="{ 
-              '!bg-white': selected?.title === post.title,
-              'ml-20': index >= 4
-            }"
-        >
-        {{ post.title }}
-        </li>
-      </ul>
+    <!-- 메인 콘텐츠 영역 -->
+    <div class="content-area">
+      <!-- 헤더 영역 -->
+      <div class="p-4">
+        <a @click="goToSample" class="no-underline font-normal text-base hover:bg-transparent">
+          <span class="mr-1">←</span>뒤로
+        </a>
+      </div>
+      
+      <!-- 이벤트 목록 -->
+      <div class="p-4 mt-2 mb-10">
+        <ul class="text-xl font-[BookkMyungjo-Bd]">
+          <li
+            v-for="(post, index) in posts"
+            :key="index"
+            @click="viewDetail(post)"
+            class="cursor-pointer dfesta-title mb-4 bg-black text-black"
+            :class="{ 
+                '!bg-white': selected?.title === post.title,
+                'ml-20': index >= 4
+              }"
+          >
+          {{ post.title }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- 상세 내용 (목록 아래에 표시) -->
+      <div v-if="selected" class="mt-8 pb-10 p-4 text-neutral-900">
+        <div v-if="loading" class="text-center py-4">
+          불러오는 중...
+        </div>
+        <div v-else-if="error" class="text-red-500 py-4">
+          {{ error }}
+        </div>
+        <div 
+          v-else-if="renderedMarkdown" 
+          v-html="renderedMarkdown" 
+          class="prose max-w-none text-base leading-[1.8] indent-3 markdown-body"
+        ></div>
+        <div v-else class="text-neutral-500 py-4">
+          이벤트를 선택하면 내용이 여기에 표시됩니다.
+        </div>
+      </div>
     </div>
 
-    <!-- 상세 내용 (목록 아래에 표시) -->
-    <div v-if="selected" class="mt-8 pb-10 p-4 text-neutral-900">
-      <div v-if="loading" class="text-center py-4">
-        불러오는 중...
-      </div>
-      <div v-else-if="error" class="text-red-500 py-4">
-        {{ error }}
-      </div>
-      <div 
-        v-else-if="renderedMarkdown" 
-        v-html="renderedMarkdown" 
-        class="prose max-w-none text-base leading-[1.8] indent-3 markdown-body"
+    <!-- 모자이크 덮개 -->
+    <div 
+      v-show="isHidden" 
+      class="mosaic-cover"
+      :style="{ 
+        display: isHidden ? 'grid' : 'none',
+        gridTemplateColumns: `repeat(${cols}, 15px)`,
+        gridTemplateRows: `repeat(${rows}, 15px)`
+      }"
+    >
+      <div
+        v-for="(piece, index) in pieces"
+        :key="index"
+        class="mosaic-piece"
+        :style="{ 
+          opacity: piece.visible ? 1 : 0,
+          transform: piece.visible ? 'scale(1)' : 'scale(0)'
+        }"
       ></div>
-      <div v-else class="text-neutral-500 py-4">
-        이벤트를 선택하면 내용이 여기에 표시됩니다.
-      </div>
     </div>
   </div>
 </template>
@@ -70,10 +93,74 @@ const markdownContent = ref('');
 const loading = ref(false);
 const error = ref('');
 
+// 모자이크 관련 상태
+const isHidden = ref(true);
+const isRevealing = ref(false);
+const cols = ref(0);
+const rows = ref(0);
+const pieces = ref<Array<{ visible: boolean }>>([]);
+
 // 마크다운을 렌더링하는 computed 속성
 const renderedMarkdown = computed((): string => {
   return markdownContent.value ? (marked.parse(markdownContent.value) as string) : '';
 });
+
+// 모자이크 조각 초기화
+function initMosaic() {
+  const containerWidth = window.innerWidth;
+  const containerHeight = window.innerHeight;
+  
+  cols.value = Math.floor(containerWidth / 15);
+  rows.value = Math.floor(containerHeight / 15);
+  
+  const totalPieces = cols.value * rows.value;
+  pieces.value = Array.from({ length: totalPieces }, () => ({ visible: true }));
+  
+  console.log(`모바일 모자이크 초기화: ${cols.value}x${rows.value} = ${totalPieces}개 조각`);
+}
+
+// 콘텐츠 공개 애니메이션
+function revealContent() {
+  if (isRevealing.value) return;
+  
+  console.log('모바일 콘텐츠 공개 시작');
+  isRevealing.value = true;
+  
+  // 랜덤 순서로 조각 인덱스 생성
+  const indices = Array.from({ length: pieces.value.length }, (_, i) => i);
+  const shuffled = indices.sort(() => Math.random() - 0.5);
+  
+  const batchSize = 100; // 한번에 100개씩
+  const batchDelay = 50; // 50ms마다
+
+  for (let batch = 0; batch < shuffled.length; batch += batchSize) {
+    setTimeout(() => {
+      for (let i = batch; i < Math.min(batch + batchSize, shuffled.length); i++) {
+        pieces.value[shuffled[i]].visible = false;
+      }
+      
+      if (batch + batchSize >= shuffled.length) {
+        setTimeout(() => {
+          isHidden.value = false;
+          isRevealing.value = false;
+          console.log('모바일 공개 완료');
+        }, 200);
+      }
+    }, Math.floor(batch / batchSize) * batchDelay);
+  }
+}
+
+// 콘텐츠 숨기기
+function hideContent() {
+  console.log('모바일 콘텐츠 숨기기');
+  isHidden.value = true;
+  isRevealing.value = false;
+  
+  // 모든 조각 다시 표시
+  pieces.value.forEach(piece => {
+    piece.visible = true;
+  });
+}
 
 // URL 변경 감지
 watch(() => route.params.id, (newId) => {
@@ -85,20 +172,35 @@ watch(() => route.params.id, (newId) => {
   }
 });
 
-onMounted(() => {
+onMounted(async () => {
+  console.log('DfestaMobileSample 마운트');
+  
+  // 모자이크 초기화
+  initMosaic();
+
+  // 화면 크기 변경 대응
+  window.addEventListener('resize', () => {
+    initMosaic();
+  });
+
   // URL 파라미터에서 id를 가져옴
   const postId = route.params.id;
   
   if (postId) {
     const post = posts.value.find(p => p.number === postId);
     if (post) {
-      viewDetail(post);
+      await viewDetail(post);
     } else {
-      viewDetail(posts.value[0]);
+      await viewDetail(posts.value[0]);
     }
   } else {
-    viewDetail(posts.value[0]);
+    await viewDetail(posts.value[0]);
   }
+
+  // 페이지 로드 후 자동으로 모자이크 제거
+  setTimeout(() => {
+    revealContent();
+  }, 500); // 0.5초 후 자동 공개
 });
 
 // 마크다운 로드 및 표시 함수
@@ -163,5 +265,32 @@ function goToSample(): void {
 .markdown-body :deep(p) {
   margin-bottom: 0.75rem;
   text-indent: 0.5rem;
+}
+
+/* 콘텐츠 영역 */
+.content-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1;
+}
+
+/* 모자이크 덮개 */
+.mosaic-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  gap: 0;
+}
+
+.mosaic-piece {
+  background: #dc2626;
+  width: 15px;
+  height: 15px;
+  transition: opacity 0.05s ease-out, transform 0.05s ease-out;
 }
 </style>

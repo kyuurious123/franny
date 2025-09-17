@@ -1,7 +1,7 @@
 <template>
     <div class="flex h-screen text-neutral-900 bg-[#dc2626]">
       <!-- 좌측 영역 - 컨트롤 패널 -->
-      <div class="w-1/2 border-r border-black overflow-scroll bg-mozaik">
+      <div class="w-1/2 border-r border-black overflow-scroll">
         <header class="px-6 py-2">
           <button @click="$router.push('/')" class="bg-transparent text-black font-normal text-base hover:bg-transparent">← 홈으로</button>
         </header>
@@ -26,7 +26,7 @@
           <!-- 모자이크 컨트롤 -->
           <div class="p-8 border-t border-black">
             <div>
-                <p class="mb-4 text-sm">무선제본, 비규격(115*190), 120p(예상)</p>
+                <p class="mb-4 text-sm">무선제본, 비규격(115*190), 100p(예상)</p>
                 <p class="leading-8 mb-8">카루이자와의 쇼룸에서 일어난 작품 도난 사건을 담당하게 된 타카아키. 현장 조사를 포함해, 운영 기록과 회계 내역을 확인하는 과정에서 쇼룸이 범죄 조직의 자금 세탁에 이용되고 있음을 알게된다. 한편, 조직에 잠입해 있던 스카치는 상부로부터 쇼룸 오너와 자신의 형, 모로후시 타카아키를 제거하라는 지시를 받고 나가노로 향하는데…</p>
             </div>
           </div>
@@ -90,7 +90,6 @@ import { ref, onMounted, computed } from 'vue';
 import { marked } from 'marked';
 import { useRoute } from 'vue-router';
 import dfTitle from '/src/assets/dftitle.svg';
-import mozaik from '/src/assets/mozaik.svg';
 
 
 const route = useRoute();
@@ -241,9 +240,5 @@ onMounted(async () => {
 
 .prose {
   line-height: 1.8;
-}
-
-.bg-mozaik {
-    background-image: url('/src/assets/mozaik.svg')
 }
 </style>
