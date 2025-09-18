@@ -17,10 +17,10 @@
     </div>
 
     <!-- Home 페이지인 경우 -->
-    <div v-else-if="currentRoute === '/'" class="home relative h-full bg-[url(../assets/img2.png)] bg-cover bg-[#DE2F36] bg-right flex flex-col justify-end
-">
-      <img :src="titleText" alt="" class="absolute top-[40%] right-[-10%] w-[70%]">
-      <p class="text-lg text-white pb-8 text-center">9/17 샘플 공개 예정</p>
+    <div v-else-if="currentRoute === '/'" class="home relative h-full bg-[url(../assets/img2.png)] bg-cover bg-[#DE2F36] bg-right flex flex-col justify-end">
+      <!-- <img :src="titleText" alt="" class="absolute top-[40%] right-[-10%] w-[70%]">
+      <p class="text-lg text-white pb-8 text-center">9/17 샘플 공개 예정</p> -->
+      <HomeView />
     </div>
 
 
@@ -54,6 +54,7 @@ import { useRoute, useRouter } from 'vue-router';
 import BestarWritingList from '../views/BestarWritingList.vue';
 import EnstarWritingList from '../views/EnstarWritingList.vue';
 import DcWritingList from '../views/DcWritingList.vue';
+import HomeView from '../views/HomeView.vue';
 
 import mainSvg from '/src/assets/main.svg';
 import titleText from '/src/assets/text.svg';
@@ -83,6 +84,7 @@ export default defineComponent({
     BestarWritingList,
     EnstarWritingList,
     DcWritingList,
+    HomeView,
   },
   
   setup() {

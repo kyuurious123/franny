@@ -10,8 +10,8 @@
       </div>
       
       <!-- 이벤트 목록 -->
-      <div class="p-4 mt-2 mb-10">
-        <ul class="text-xl font-[BookkMyungjo-Bd]">
+      <div class="mt-2 mb-10">
+        <ul class="text-xl font-[BookkMyungjo-Bd] italic leading-[1.7] break-keep">
           <li
             v-for="(post, index) in posts"
             :key="index"
@@ -24,11 +24,15 @@
           >
           {{ post.title }}
           </li>
+          <li class="text-right text-neutral-300 line-through">
+            지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을.
+            <p class="text-sm">9/22 공개</p>
+          </li>
         </ul>
       </div>
 
       <!-- 상세 내용 (목록 아래에 표시) -->
-      <div v-if="selected" class="mt-8 pb-10 p-4 text-neutral-900">
+      <div v-if="selected" class="mt-10 pb-10 p-3 text-neutral-900">
         <div v-if="loading" class="text-center py-4">
           불러오는 중...
         </div>
@@ -84,8 +88,8 @@ interface Post {
 }
 
 const posts = ref<Post[]>([
-  { title: '"그 날, 타카아키의 손바닥에 마지막으로 새겨진 감각은 히로미츠의 부드러운 피부, 따뜻한 체온이었다."', path: './writing/dc/sample1.md' },
-  { title: '"지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 언제나 같은 자리에서 자신을 기다리고 있고 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을."', path: './writing/dc/sample2.md' }
+  { title: '그 날, 타카아키의 손바닥에 마지막으로 새겨진 감각은 히로미츠의 부드러운 피부, 따뜻한 체온이었다.', path: './writing/dc/sample1.md' },
+//   { title: '"지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 언제나 같은 자리에서 자신을 기다리고 있고 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을."', path: './writing/dc/sample2.md' }
 ]);
 
 const selected = ref<Post | null>(null);
@@ -263,7 +267,7 @@ function goToSample(): void {
 }
 
 .markdown-body :deep(p) {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   text-indent: 0.5rem;
 }
 

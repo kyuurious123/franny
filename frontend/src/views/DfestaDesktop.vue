@@ -13,6 +13,10 @@
                 <img src="https://blog.kakaocdn.net/dna/l4YJg/btsQzlM6y6y/AAAAAAAAAAAAAAAAAAAAAPiyvcbHqe97Pd5g2IQuaSgpx4eEiB24aXXBz6HGQB47/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1759244399&allow_ip=&allow_referer=&signature=CFg8I7xmlhiDgAjvhBTa4cJ1gC8%3D" class="m-auto w-[55%]">
                 <img :src="dfTitle" alt="" class="absolute bottom-[-7%] w-[50%] left-[20%]">
             </div>
+          </div>
+
+          <!-- 링크 영역 -->
+          <div class="flex border-t border-black py-4 justify-between">
             <button 
                 @click="revealContent"
                 :disabled="isRevealing"
@@ -20,14 +24,22 @@
               >
                 {{ isRevealing ? '샘플 →' : '샘플 →' }}
             </button>
+            <a href="">
+                선입금/통판 폼 (9/24 오픈)
+
+            </a>
+
           </div>
             
           
           <!-- 모자이크 컨트롤 -->
           <div class="p-8 border-t border-black">
             <div>
+                <div class="text-sm opacity-80 mb-2 italic">
+                표지 계란(<a href="https://x.com/egg_conan" target="_blank">@egg_conan</a>)님
+                </div>
                 <p class="mb-4 text-sm">무선제본, 비규격(115*190), 100p(예상)</p>
-                <p class="leading-8 mb-8">카루이자와의 쇼룸에서 일어난 작품 도난 사건을 담당하게 된 타카아키. 현장 조사를 포함해, 운영 기록과 회계 내역을 확인하는 과정에서 쇼룸이 범죄 조직의 자금 세탁에 이용되고 있음을 알게된다. 한편, 조직에 잠입해 있던 스카치는 상부로부터 쇼룸 오너와 자신의 형, 모로후시 타카아키를 제거하라는 지시를 받고 나가노로 향하는데…</p>
+                <p class="leading-8 mb-8">카루이자와의 쇼룸에서 일어난 작품 도난 사건을 담당하게 된 타카아키. 현장 조사를 포함해, 운영 기록과 회계 내역을 확인하는 과정에서 쇼룸이 범죄 조직의 자금 세탁에 이용되고 있음을 알게된다.<br />한편, 조직에 잠입해 있던 스카치는 상부로부터 쇼룸 오너와 자신의 형, 모로후시 타카아키를 제거하라는 지시를 받고 나가노로 향하는데…</p>
             </div>
           </div>
         </div>
@@ -37,9 +49,9 @@
       <div class="w-1/2 relative overflow-hidden">
         <!-- 숨겨진 컨텐츠 -->
         <div class="content-area">
-          <div class="p-10 h-full overflow-y-auto">
+          <div class="h-full overflow-y-auto">
             <!-- 이벤트 목록 -->
-            <ul class="text-2xl mb-20 font-[BookkMyungjo-Bd]">
+            <ul class="text-2xl mb-20 font-[BookkMyungjo-Bd] mt-10">
               <li
                 v-for="(post, index) in posts"
                 :key="index"
@@ -52,10 +64,14 @@
               >
                 {{ post.title }}
               </li>
+              <li class="text-right text-neutral-300 line-through">
+                지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을.
+                <p class="text-sm">9/22 공개</p>
+            </li>
             </ul>
 
             <!-- 선택된 컨텐츠 -->
-            <div v-if="selected" class="content-detail">
+            <div v-if="selected" class="content-detail px-10">
               <div v-html="htmlContent" class="prose max-w-none indent-2 leading-7 text-base dfesta-content text-neutral-800" />
             </div>
           </div>
@@ -96,7 +112,7 @@ const route = useRoute();
 
 const posts = ref([
   { title: '"그 날, 타카아키의 손바닥에 마지막으로 새겨진 감각은 히로미츠의 부드러운 피부, 따뜻한 체온이었다."', path: './writing/dc/sample1.md' },
-  { title: '"지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 언제나 같은 자리에서 자신을 기다리고 있고 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을."', path: './writing/dc/sample2.md' }
+//   { title: '"지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 언제나 같은 자리에서 자신을 기다리고 있고 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을."', path: './writing/dc/sample2.md' }
 ]);
 
 const selected = ref(posts.value[0]);
