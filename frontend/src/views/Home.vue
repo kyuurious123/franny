@@ -1,8 +1,7 @@
 <template>
   <div class="home md:p-4 !overflow-hidden">
-    <div class="mobile-only mt-10 p-4 bg-[url(../assets/img2.png)] bg-cover bg-[#DE2F36] relative h-[450px] flex flex-col !justify-end">
-      <img :src="titleText" alt="" class="w-[70%] absolute bottom-[-22%] right-[-10%]">
-      <p class="text-sm text-white">9/17 샘플 공개 예정</p>
+    <div class="mobile-only mt-10 h-[400px]">
+      <HomeView />
     </div>
     <section class="p-4 md:p-0">
       <h2 class="big-title">SHOW MUST GO ON</h2>
@@ -48,6 +47,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
 import dcWritingsData from '../data/dcwritings.json';
+import HomeView from './HomeView.vue'; // 10디페
 
 import titleText from '/src/assets/text.svg';
 

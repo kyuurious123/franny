@@ -1,12 +1,12 @@
 <template>
   <div class="home-random-text h-full bg-book">
     <!-- 5개의 span이 있는 div -->
-    <div class="space-y-4 p-6 backdrop-blur-sm h-full w-full">
+    <div class="md:space-y-4 md:p-6 p-4 backdrop-blur-sm h-full w-full">
       <span 
         v-for="(text, index) in displayTexts" 
         :key="`text-${index}-${textKey}`"
         :class="[
-          'p-2 text-4xl font-[BookkMyungjo-Bd] font-bold transition-all duration-500 ease-in-out leading-[1.3] break-keep m-3',
+          'p-2 md:text-4xl text-2xl font-[BookkMyungjo-Bd] font-bold transition-all duration-500 ease-in-out leading-[1.3] break-keep m-3',
           index % 2 === 0 
             ? 'bg-[#DE2F36] text-white' 
             : 'text-white italic'
