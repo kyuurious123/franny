@@ -1,6 +1,6 @@
 <template>
   <div class="home md:p-4 !overflow-hidden">
-    <div class="mobile-only mt-10 h-[400px]">
+    <div class="mobile-only mt-10 h-[400px] relative overflow-hidden">
       <HomeView />
     </div>
     <section class="p-4 md:p-0">

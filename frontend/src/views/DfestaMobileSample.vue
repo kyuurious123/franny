@@ -16,17 +16,13 @@
             v-for="(post, index) in posts"
             :key="index"
             @click="viewDetail(post)"
-            class="cursor-pointer dfesta-title mb-4 bg-black text-black"
+            class="cursor-pointer dfesta-title mb-4 text-black line-through italic"
             :class="{ 
-                '!bg-white': selected?.title === post.title,
+                '!no-underline': selected?.title === post.title,
                 'ml-20': index >= 4
               }"
           >
           {{ post.title }}
-          </li>
-          <li class="text-right text-neutral-300 line-through">
-            지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을.
-            <p class="text-sm">9/22 공개</p>
           </li>
         </ul>
       </div>
@@ -85,11 +81,12 @@ const route = useRoute();
 interface Post {
   title: string;
   path: string;
+  number: string;
 }
 
 const posts = ref<Post[]>([
-  { title: '그 날, 타카아키의 손바닥에 마지막으로 새겨진 감각은 히로미츠의 부드러운 피부, 따뜻한 체온이었다.', path: './writing/dc/sample1.md' },
-//   { title: '"지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 언제나 같은 자리에서 자신을 기다리고 있고 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을."', path: './writing/dc/sample2.md' }
+  { title: '그 날, 손바닥에 마지막으로 새겨진 감각은 히로미츠의 부드러운 피부, 따뜻한 체온이었다.', path: './writing/dc/sample1.md', number: '1' },
+  { title: '지옥에 갇혀본 자는 안다. 한번 지옥은 영원한 지옥. 그곳을 빠져나온 것처럼 언제든 다시 돌아갈 수도 있단 사실을.', path: './writing/dc/sample2.md', number: '2' }
 ]);
 
 const selected = ref<Post | null>(null);
@@ -152,18 +149,6 @@ function revealContent() {
       }
     }, Math.floor(batch / batchSize) * batchDelay);
   }
-}
-
-// 콘텐츠 숨기기
-function hideContent() {
-  console.log('모바일 콘텐츠 숨기기');
-  isHidden.value = true;
-  isRevealing.value = false;
-  
-  // 모든 조각 다시 표시
-  pieces.value.forEach(piece => {
-    piece.visible = true;
-  });
 }
 
 // URL 변경 감지

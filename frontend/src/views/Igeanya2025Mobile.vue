@@ -74,13 +74,13 @@ try {
 }
 
 const posts = ref<Post[]>([
-  { title: '시작', number: '01', path: './writing/bestar/13.md' },
-  { title: '견착', number: '02', path: './writing/bestar/14.md' },
-  { title: '침투', number: '03', path: './writing/bestar/15.md' },
-  { title: '인정', number: '04', path: './writing/bestar/16.md' },
-  { title: '죽음', number: '05', path: './writing/bestar/17.md' },
-  { title: '장례', number: '06', path: './writing/bestar/18.md' },
-  { title: '점화', number: '07', path: './writing/bestar/21.md' }
+  { title: '01. 시작', number: '01', path: './writing/bestar/13.md' },
+  { title: '02. 견착', number: '02', path: './writing/bestar/14.md' },
+  { title: '03. 침투', number: '03', path: './writing/bestar/15.md' },
+  { title: '04. 인정', number: '04', path: './writing/bestar/16.md' },
+  { title: '05. 죽음', number: '05', path: './writing/bestar/17.md' },
+  { title: '06. 장례', number: '06', path: './writing/bestar/18.md' },
+  { title: '07. 점화', number: '07', path: './writing/bestar/21.md' }
 
 ]);
 
@@ -93,17 +93,6 @@ const error = ref('');
 const renderedMarkdown = computed((): string => {
   return markdownContent.value ? (marked.parse(markdownContent.value) as string) : '';
 });
-
-// 현재 선택된 글의 인덱스
-const currentIndex = computed(() => {
-  if (!selected.value) return -1;
-  const selectedPost = selected.value as Post;
-  return posts.value.findIndex(post => post.title === selectedPost.title);
-});
-
-// 이전/다음 글 존재 여부
-const hasPrevious = computed(() => currentIndex.value > 0);
-const hasNext = computed(() => currentIndex.value < posts.value.length - 1);
 
 // URL 변경 감지
 watch(() => route.params.id, (newId) => {

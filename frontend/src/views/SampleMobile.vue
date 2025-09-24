@@ -7,7 +7,6 @@
     <a @click="$router.push('/')" class="no-underline font-normal text-base">← 홈으로</a>
   </header>
     <img src="https://blog.kakaocdn.net/dn/cjprU5/btsNi3IVkz9/K6TwmJd2YcIBbypbP3IzS0/img.png" alt="" class="w-[70%] m-auto">
-    <p class="text-center mt-2 text-neutral-500 italic text-sm mb-8">표지 계란님(@egg_bst)</p>
 
     <div class="text-center border-t border-black py-2">
       <a 

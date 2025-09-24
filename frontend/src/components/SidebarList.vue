@@ -17,7 +17,7 @@
     </div>
 
     <!-- Home 페이지인 경우 -->
-    <div v-else-if="currentRoute === '/'" class="home relative h-full bg-[url(../assets/img2.png)] bg-cover bg-[#DE2F36] bg-right flex flex-col justify-end">
+    <div v-else-if="currentRoute === '/'" class="home relative h-full">
       <!-- <img :src="titleText" alt="" class="absolute top-[40%] right-[-10%] w-[70%]">
       <p class="text-lg text-white pb-8 text-center">9/17 샘플 공개 예정</p> -->
       <HomeView />
