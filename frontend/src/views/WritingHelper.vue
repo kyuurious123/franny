@@ -20,7 +20,6 @@
               <textarea
                 :ref="el => setTextareaRef(box.id, el)"
                 v-model="box.content"
-                @input="handleTextChange(box.id)"
                 maxlength="100"
                 placeholder="내용을 입력하세요..."
                 :class="['w-full min-h-[120px] p-3 border rounded-lg text-base resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all', getTextareaStyle(box.content.length)]"
@@ -220,30 +219,7 @@
     });
   };
   
-  const handleTextChange = (id: number): void => {
-    const box = textBoxes.value.find(b => b.id === id);
-    if (!box) return;
-  
-    // 100자를 채웠을 때 자동으로 다음 박스 추가
-    if (box.content.length === 100) {
-      const currentIndex = textBoxes.value.findIndex(b => b.id === id);
-      const isLastBox = currentIndex === textBoxes.value.length - 1;
-      
-      if (isLastBox) {
-        setTimeout(() => {
-          addNewBox();
-        }, 300);
-      } else {
-        const nextBox = textBoxes.value[currentIndex + 1];
-        setTimeout(() => {
-          const nextTextarea = textareaRefs.value[nextBox.id];
-          if (nextTextarea) {
-            nextTextarea.focus();
-          }
-        }, 100);
-      }
-    }
-  };
+
   
   const getAllText = (): string => {
     return textBoxes.value
