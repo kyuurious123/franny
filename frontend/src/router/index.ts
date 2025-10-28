@@ -8,14 +8,7 @@ import BestarWritingDetail from '../views/BestarWritingDetail.vue'
 import EnstarWritingDetail from '../views/EnstarWritingDetail.vue'
 import DcWritingDetail from '../views/DcWritingDetail.vue'
 import Guest from '../views/Guest.vue'
-// 그각그 잠깐 추가
-import Igeanya2025 from '../views/Igeanya2025.vue';
-import IgeanyaSampleMobile from '../views/SampleMobile.vue';
-import Igeanya2025Mobile from '../views/Igeanya2025Mobile.vue';
-// Dfesta 관련 컴포넌트 추가
-import Dfesta from '../views/Dfesta.vue';
-import DfestaMobile from '../views/DfestaMobile.vue';
-import DfestaMobileSample from '../views/DfestaMobileSample.vue';
+import WritingHelper from '../views/WritingHelper.vue'
 
 
 // 배포 환경에 맞는 base URL 설정
@@ -91,57 +84,12 @@ const routes: Array<RouteRecordRaw> = [
     component: Guest
   },
 
-  // 그리고 각자가 진실 관련 라우터 설정
   {
-    path: '/igeanya2025',
-    component: Igeanya2025,
-    children: [
-      {
-        path: 'sample',
-        component: IgeanyaSampleMobile
-      },
-      {
-        path: 'list',
-        component: Igeanya2025Mobile
-      },
-      {
-        path: ':id',
-        component: Igeanya2025Mobile
-      },
-      {
-        // 기본 리다이렉트 - 모바일에서는 sample로 이동
-        path: '',
-        redirect: _ => {
-          // 모바일 체크는 컴포넌트에서 처리
-          return { path: '/igeanya2025/sample' }
-        }
-      }
-    ]
+    path: '/writinghelper',
+    name: 'WritingHelper',
+    component: WritingHelper,
   },
 
-  // DFESTA 관련 라우터 설정
-  {
-    path: '/dfesta',
-    component: Dfesta,
-    children: [
-      {
-        path: 'sample',
-        component: DfestaMobile
-      },
-      {
-        path: 'list/:id?',
-        component: DfestaMobileSample
-      },
-      {
-        // 기본 리다이렉트 - 모바일에서는 sample로 이동
-        path: '',
-        redirect: _ => {
-          // 모바일 체크는 컴포넌트에서 처리
-          return { path: '/dfesta/sample' }
-        }
-      }
-    ]
-  },
 
   // 404 페이지
   {

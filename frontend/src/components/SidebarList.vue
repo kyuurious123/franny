@@ -17,10 +17,13 @@
     </div>
 
     <!-- Home 페이지인 경우 -->
-    <div v-else-if="currentRoute === '/'" class="home relative h-full">
-      <!-- <img :src="titleText" alt="" class="absolute top-[40%] right-[-10%] w-[70%]">
-      <p class="text-lg text-white pb-8 text-center">9/17 샘플 공개 예정</p> -->
-      <HomeView />
+    <div v-else-if="currentRoute === '/'" class="home relative h-full p-8">
+      <div>
+        <p class="text-xl font-semibold text-center mb-4">오늘의 알쓸신잡 1</p>
+        <p class="text-center text-lg">명탐정 코난 척안의 잔상 4DX, ScreenX가 개봉하는</p>
+        <p class="font-bold text-lg text-pink-500 text-center">11월 12일은 주인장의 생일이다</p>
+      </div>
+      
     </div>
 
 
@@ -54,10 +57,8 @@ import { useRoute, useRouter } from 'vue-router';
 import BestarWritingList from '../views/BestarWritingList.vue';
 import EnstarWritingList from '../views/EnstarWritingList.vue';
 import DcWritingList from '../views/DcWritingList.vue';
-import HomeView from '../views/HomeView.vue';
 
 import mainSvg from '/src/assets/main.svg';
-import titleText from '/src/assets/text.svg';
 
 // const showModal = ref(false)
 
@@ -84,7 +85,6 @@ export default defineComponent({
     BestarWritingList,
     EnstarWritingList,
     DcWritingList,
-    HomeView,
   },
   
   setup() {
@@ -162,7 +162,6 @@ export default defineComponent({
     currentRoute,
     mainSvg,
     isHovered,
-    titleText,
     captureLinks,
     getSpanClass,
     openExternalLink // 이 줄 추가

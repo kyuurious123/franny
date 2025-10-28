@@ -50,16 +50,23 @@
             GUEST
           </router-link>
         </li>
+
+        <li>
+          <router-link 
+            to="/writinghelper" 
+            class="nav-link"
+            :class="{ 'active': currentRoute.includes('/writinghelper') }"
+          >
+            실험실🧑‍🔬
+          </router-link>
+        </li>
       </ul>
     </nav>
     <div class="sub-nav p-4">
       <p class="event-text">다음 참가 행사</p>
-      <p class="event-date">25</p><p class="event-date">9</p><p class="event-date">21</p>
-      <p class="event-name mb-4">戦国八陣虎之巻 2</p>
-      <p class="event-text">그 다음 참가 행사!!!!!</p>
-      <p class="event-date">25</p><p class="event-date">10</p><p class="event-date">11</p>
-      <p class="event-name mb-4">디페스타</p>
-      <p class="copyright">last updated 25-9-8</p>
+      <p class="event-date">25</p><p class="event-date">12</p><p class="event-date">13</p>
+      <p class="event-name mb-4">히로타카 교류회</p>
+      <p class="copyright">last updated 25-10-28</p>
       <p class="copyright">copyright (c) 프래니</p>
     </div>
   </div>

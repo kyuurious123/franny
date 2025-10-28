@@ -1,13 +1,10 @@
 <template>
   <div class="home md:p-4 !overflow-hidden">
-    <div class="mobile-only mt-10 h-[400px] relative overflow-hidden">
-      <HomeView />
-    </div>
-    <section class="p-4 md:p-0">
+    <section class="p-4 pt-[80px] md:p-0">
       <h2 class="big-title">SHOW MUST GO ON</h2>
       <div class="flex">
         <div>
-          <h3>뷁 @skittcn</h3>
+          <h3>➊⓿⓿ / 백 @skittcn</h3>
           <div>
             <p>??: 형제가사랑을안하면누가하지 형제끼리사이좋으라고부모님이가르쳣는데</p>
           </div>
@@ -15,7 +12,7 @@
             <img class="banner-img" :src="bannerImg" alt="">
           </div>
         </div>
-        <img class="w-[30%]" src="https://blog.kakaocdn.net/dna/cdTma2/btsQpC1OJDQ/AAAAAAAAAAAAAAAAAAAAAAJby_IQIj13kjjWVTqLDkqCet-lhP8VEZf-ldnTpHuf/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1759244399&allow_ip=&allow_referer=&signature=o3JBSwdRnEkNfbKboP4T51xLPGM%3D" alt="">
+        <img class="w-[30%] h-auto" src="https://blog.kakaocdn.net/dna/cdTma2/btsQpC1OJDQ/AAAAAAAAAAAAAAAAAAAAAAJby_IQIj13kjjWVTqLDkqCet-lhP8VEZf-ldnTpHuf/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1761922799&allow_ip=&allow_referer=&signature=5ETIoTZMCB1q3rTh3XGhMXnkO0M%3D" alt="">
       </div>
     </section>
     <section class="home__desc p-4 md:p-0">
@@ -47,9 +44,6 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import bestarWritingsData from '../data/bestarwritings.json';
 import enstarWritingsData from '../data/enstarwritings.json';
 import dcWritingsData from '../data/dcwritings.json';
-import HomeView from './HomeView.vue'; // 10디페
-
-import titleText from '/src/assets/text.svg';
 
 const openExternalLink = () => {
   window.open('https://spin-spin.com/SmZAKQznJ8Z2GYQ', '_blank');

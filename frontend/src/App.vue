@@ -1,12 +1,7 @@
 <template>
   <div class="app-container">
-    <!-- /igeanya2025 경로일 땐 전체 layout 생략 -->
-    <div v-if="isIgeanyaPage || isDfestaPage">
-      <router-view />
-    </div>
-
     <!-- 일반 페이지 (PC/모바일 분기) -->
-    <div v-else class="h-full">
+    <div class="h-full">
       <!-- PC용 레이아웃 -->
       <div v-if="!isMobile" class="pc-layout-container h-full">
         <!-- PC 헤더 영역 (좌측 15%) -->
@@ -14,17 +9,19 @@
           <DesktopHeader />
         </aside>
 
-        <!-- 주요 콘텐츠 영역 (중앙 55%) -->
-        <main class="content-area h-full overflow-scroll">
+        <!-- 주요 콘텐츠 영역 (WritingHelper일 때 85%, 일반 페이지일 때 55%) -->
+        <main :class="['content-area h-full overflow-scroll', { 'content-area-full': isWritingHelper }]">
           <Transition name="fade-up" mode="out-in">
             <BestarWritingDetail v-if="currentPath === '/bestar'" key="bestar-default" id="20" />
             <EnstarWritingDetail v-else-if="currentPath === '/enstar'" key="enstar-default" id="zombie-01" />
+            <DcWritingDetail v-else-if="currentPath === '/dc'" key="dc-default" id="dc05" />
+
             <router-view v-else :key="$route.fullPath" />
           </Transition>
         </main>
 
-        <!-- 사이드바 (우측 30%) -->
-        <aside class="sidebar-area h-full">
+        <!-- 사이드바 (우측 30%, WritingHelper일 때 숨김) -->
+        <aside v-if="!isWritingHelper" class="sidebar-area h-full">
           <SidebarList />
         </aside>
       </div>
@@ -47,13 +44,14 @@ import MobileHeader from './components/MobileHeader.vue'
 import SidebarList from './components/SidebarList.vue'
 import BestarWritingDetail from './views/BestarWritingDetail.vue'
 import EnstarWritingDetail from './views/EnstarWritingDetail.vue'
+import DcWritingDetail from './views/DcWritingDetail.vue'
+
 
 const route = useRoute()
 
 const isMobile = ref(false)
 const currentPath = computed(() => route.path)
-const isIgeanyaPage = computed(() => route.path.startsWith('/igeanya2025'))
-const isDfestaPage = computed(() => route.path.startsWith('/dfesta'))
+const isWritingHelper = computed(() => route.path.startsWith('/writinghelper'))
 
 
 const handleResize = () => {
@@ -93,6 +91,11 @@ onUnmounted(() => {
 .content-area {
   width: 55%;
   padding: 1rem;
+}
+
+/* WritingHelper일 때 콘텐츠 영역을 85%로 확장 */
+.content-area-full {
+  width: 85%;
 }
 
 .sidebar-area {
