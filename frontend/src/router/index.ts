@@ -11,9 +11,6 @@ import Guest from '../views/Guest.vue'
 import WritingHelper from '../views/WritingHelper.vue'
 
 
-// 배포 환경에 맞는 base URL 설정
-const base = import.meta.env.BASE_URL || '/';
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -99,7 +96,8 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(base),
+  // ✅ hash mode에서는 base 인자를 전달하지 않음
+  history: createWebHashHistory(),
   routes,
   scrollBehavior() {
     return { top: 0 }

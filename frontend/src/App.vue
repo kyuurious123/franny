@@ -90,7 +90,7 @@ onUnmounted(() => {
 
 .content-area {
   width: 55%;
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 
 /* WritingHelper일 때 콘텐츠 영역을 85%로 확장 */

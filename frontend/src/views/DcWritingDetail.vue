@@ -122,8 +122,9 @@ const renderedMarkdown = computed(() => {
 }
 
 .markdown-body {
-  line-height: 1.8;
-  word-wrap: break-word;
+  line-height: 1.85;
+  word-break: break-word;
+  font-size: 17px;
 }
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3 {
